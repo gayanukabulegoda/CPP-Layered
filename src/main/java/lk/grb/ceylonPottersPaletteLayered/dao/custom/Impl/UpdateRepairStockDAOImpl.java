@@ -11,6 +11,7 @@ public class UpdateRepairStockDAOImpl implements UpdateRepairStockDAO {
     ProductStockDAOImpl productStockDAOImpl = new ProductStockDAOImpl();
     RepairStockDAOImpl repairStockDAOImpl = new RepairStockDAOImpl();
 
+    @Override
     public boolean updateRepairStock(String product_Id, String qty) throws SQLException {
 
         Connection connection = null;

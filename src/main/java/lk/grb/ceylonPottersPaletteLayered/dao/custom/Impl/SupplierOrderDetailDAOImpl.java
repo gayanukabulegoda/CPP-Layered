@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class SupplierOrderDetailDAOImpl implements SupplierOrderDetailDAO {
-
+    @Override
     public boolean save(SupplierOrderDto supplierOrderDto) throws SQLException {
         String sql = "INSERT INTO supplier_Order_Detail VALUES (?,?,?)";
         PreparedStatement statement = DbConnection.getInstance().getConnection().prepareStatement(sql);
@@ -29,6 +29,7 @@ public class SupplierOrderDetailDAOImpl implements SupplierOrderDetailDAO {
         return true;
     }
 
+    @Override
     public SupplierOrderDto getData(String id) throws SQLException {
         ResultSet set = SQLUtil.execute("SELECT * FROM supplier_Order_Detail WHERE supplier_Order_Id=?", id);
 
@@ -44,6 +45,7 @@ public class SupplierOrderDetailDAOImpl implements SupplierOrderDetailDAO {
         return supplierOrderDto;
     }
 
+    @Override
     public ArrayList<String[]> getDataAsAnArray(String id) throws SQLException {
         ResultSet set = SQLUtil.execute("SELECT * FROM supplier_Order_Detail WHERE supplier_Order_Id=?", id);
 

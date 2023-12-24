@@ -13,16 +13,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface EmployeeAttendanceDAO extends CrudUtil<Attendance> {
-    boolean save(EmployeeAttendanceDto employeeAttendanceDto) throws SQLException;
-
-    boolean update(EmployeeAttendanceDto employeeAttendanceDto) throws SQLException;
-
-    boolean delete(String id) throws SQLException;
-
-    EmployeeAttendanceDto getData(String id) throws SQLException;
-
-    ArrayList<String> getAllAttendanceId() throws SQLException;
-
     ArrayList<String> getSelectedAllAttendanceId(String id) throws SQLException;
 
     String workedDayCount(String id) throws SQLException;

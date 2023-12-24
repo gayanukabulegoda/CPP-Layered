@@ -12,17 +12,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface ItemStockDAO extends CrudUtil<ItemStock> {
-    boolean save(ItemStockDto itemStockDto) throws SQLException;
-
-    boolean updateFromPopUp(ItemStockDto itemStockDto) throws SQLException;
-
-    ItemStockDto getData(String id) throws SQLException;
+    boolean updateFromPopUp(ItemStock entity) throws SQLException;
 
     boolean update(ArrayList<String[]> arrayList) throws SQLException;
-
-    boolean delete(String id) throws SQLException;
-
-    ArrayList<String> getAllItemId() throws SQLException;
 
     String getDescription(String id) throws SQLException;
 

@@ -8,12 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface CustomerOrderDAO extends CrudUtil<CustomerOrder> {
-    boolean save(CustomerOrderDto customerOrderDto) throws SQLException;
-
-    CustomerOrderDto getData(String id) throws SQLException;
-
-    ArrayList<String> getAllCustomerOrderId() throws SQLException;
-
     ArrayList<String> getAllCustomerOrderIdS() throws SQLException;
 
     ArrayList<String> getSelectedAllCustomerOrderId(String id) throws SQLException;

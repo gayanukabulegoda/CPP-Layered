@@ -12,16 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface EmployeeDAO extends CrudUtil<Employee> {
-    boolean save(EmployeeDto employeeDTO) throws SQLException;
-
-    EmployeeDto getData(String id) throws SQLException;
-
-    boolean update(EmployeeDto employeeDTO) throws SQLException;
-
-    boolean delete(String id) throws SQLException;
-
-    ArrayList<String> getAllEmployeeId() throws SQLException;
-
     String getEmployeeName(String id) throws SQLException;
 
     String getEmployeeRole(String id) throws SQLException;

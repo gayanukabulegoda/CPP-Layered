@@ -10,14 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface EmployeeSalaryDAO extends CrudUtil<Salary> {
-    boolean save(EmployeeSalaryDto employeeSalaryDto) throws SQLException;
-
-    boolean update(EmployeeSalaryDto employeeSalaryDto) throws SQLException;
-
-    EmployeeSalaryDto getData(String id) throws SQLException;
-
-    ArrayList<String> getAllSalaryId() throws SQLException;
-
     ArrayList<String> getSelectedAllSalaryId(String id) throws SQLException;
 
     ArrayList<String> getAllEmployeeId() throws SQLException;

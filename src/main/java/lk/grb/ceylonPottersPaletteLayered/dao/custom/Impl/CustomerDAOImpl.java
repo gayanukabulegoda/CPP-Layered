@@ -61,7 +61,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public ArrayList<String> getAllCustomerId() throws SQLException {
+    public ArrayList<String> getAllId() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT customer_Id FROM customer ORDER BY LENGTH(customer_Id),customer_Id");
         ArrayList<String> list = new ArrayList<>();
 

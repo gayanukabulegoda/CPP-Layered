@@ -12,16 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface SupplierDAO extends CrudUtil<Supplier> {
-    boolean save(SupplierDto supplierDto) throws SQLException;
-
-    SupplierDto getData(String id) throws SQLException;
-
-    boolean update(SupplierDto supplierDTO) throws SQLException;
-
-    boolean delete(String id) throws SQLException;
-
-    ArrayList<String> getAllSupplierId() throws SQLException;
-
     String getSupplierName(String id) throws SQLException;
 
     String getSupplierCount() throws SQLException;

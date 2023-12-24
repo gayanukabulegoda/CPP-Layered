@@ -15,46 +15,46 @@ import java.util.ArrayList;
 
 public class SupplierDAOImpl implements SupplierDAO {
     @Override
-    public boolean save(SupplierDto supplierDto) throws SQLException {
+    public boolean save(Supplier entity) throws SQLException {
         return SQLUtil.execute("INSERT INTO supplier VALUES (?,?,?,?,?,?,?)",
-                supplierDto.getSupplier_Id(),
-                supplierDto.getName(),
-                supplierDto.getEmail(),
-                supplierDto.getContact_No(),
-                supplierDto.getTime(),
-                supplierDto.getDate(),
-                supplierDto.getUser_Name());
+                entity.getSupplier_Id(),
+                entity.getName(),
+                entity.getEmail(),
+                entity.getContact_No(),
+                entity.getTime(),
+                entity.getDate(),
+                entity.getUser_Name());
     }
 
     @Override
-    public SupplierDto getData(String id) throws SQLException {
+    public Supplier getData(String id) throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM supplier WHERE supplier_Id=?", id);
 
-        SupplierDto supplierDTO = new SupplierDto();
+        Supplier entity = new Supplier();
 
         if(resultSet.next()){
-            supplierDTO.setSupplier_Id(resultSet.getString(1));
-            supplierDTO.setName(resultSet.getString(2));
-            supplierDTO.setEmail(resultSet.getString(3));
-            supplierDTO.setContact_No(resultSet.getString(4));
-            supplierDTO.setTime(resultSet.getString(5));
-            supplierDTO.setDate(resultSet.getString(6));
-            supplierDTO.setUser_Name(resultSet.getString(7));
+            entity.setSupplier_Id(resultSet.getString(1));
+            entity.setName(resultSet.getString(2));
+            entity.setEmail(resultSet.getString(3));
+            entity.setContact_No(resultSet.getString(4));
+            entity.setTime(resultSet.getString(5));
+            entity.setDate(resultSet.getString(6));
+            entity.setUser_Name(resultSet.getString(7));
         }
-        return supplierDTO;
+        return entity;
     }
 
     @Override
-    public boolean update(SupplierDto supplierDTO) throws SQLException {
+    public boolean update(Supplier entity) throws SQLException {
         return SQLUtil.execute("UPDATE supplier SET " +
                         "name=?," +
                         "email=?," +
                         "contact_No=? " +
                         "WHERE supplier_Id=?",
-                supplierDTO.getName(),
-                supplierDTO.getEmail(),
-                supplierDTO.getContact_No(),
-                supplierDTO.getSupplier_Id()
+                entity.getName(),
+                entity.getEmail(),
+                entity.getContact_No(),
+                entity.getSupplier_Id()
         );
     }
 
@@ -64,7 +64,7 @@ public class SupplierDAOImpl implements SupplierDAO {
     }
 
     @Override
-    public ArrayList<String> getAllSupplierId() throws SQLException {
+    public ArrayList<String> getAllId() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT supplier_Id FROM supplier ORDER BY LENGTH(supplier_Id),supplier_Id");
         ArrayList<String> list = new ArrayList<>();
 

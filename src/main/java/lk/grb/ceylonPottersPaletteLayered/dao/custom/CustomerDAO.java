@@ -12,16 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface CustomerDAO extends CrudUtil<Customer> {
-    boolean save(CustomerDto customerDTO) throws SQLException;
-
-    CustomerDto getData(String id) throws SQLException;
-
-    boolean update(CustomerDto customerDTO) throws SQLException;
-
-    boolean delete(String id) throws SQLException;
-
-    ArrayList<String> getAllCustomerId() throws SQLException;
-
     String getCustomerName(String id) throws SQLException;
 
     String getCustomerCount() throws SQLException;

@@ -11,8 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public interface RepairStockDAO extends CrudUtil<RepairStock> {
-    RepairStockDto getData(String id) throws SQLException;
-
     boolean update(String id, String qty) throws SQLException;
 
     boolean updateDecrement(String id, String qty) throws SQLException;

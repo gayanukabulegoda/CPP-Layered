@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface CrudUtil<T> extends SuperDAO {
-    boolean save(EmployeeDto employeeDTO) throws SQLException;
+    boolean save(T dto) throws SQLException;
 
-    EmployeeDto getData(String id) throws SQLException;
+    T getData(String id) throws SQLException;
 
-    boolean update(EmployeeDto employeeDTO) throws SQLException;
+    boolean update(T dto) throws SQLException;
 
     boolean delete(String id) throws SQLException;
 
