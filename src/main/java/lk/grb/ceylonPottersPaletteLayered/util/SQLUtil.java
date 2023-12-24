@@ -1,6 +1,6 @@
 package lk.grb.ceylonPottersPaletteLayered.util;
 
-import lk.grb.ceylonPottersPalette.db.DbConnection;
+import lk.grb.ceylonPottersPaletteLayered.db.DbConnection;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

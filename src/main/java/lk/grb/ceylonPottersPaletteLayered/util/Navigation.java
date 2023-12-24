@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import lk.grb.ceylonPottersPalette.controller.GlobalFormController;
+import lk.grb.ceylonPottersPaletteLayered.controller.GlobalFormController;
 
 import java.io.IOException;
 
