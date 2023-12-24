@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="572.0" prefWidth="929.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.grb.ceylonPottersPalette.controller.OTPVerifyFormController">
+   <children>
+      <ImageView fitHeight="579.0" fitWidth="936.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assests/img/OTPVerifyPage.png" />
+         </image>
+      </ImageView>
+      <Pane fx:id="btnBackPane" layoutX="579.0" layoutY="387.0" prefHeight="42.0" prefWidth="54.0" style="-fx-background-radius: 12; -fx-background-color: white; -fx-border-color: C56E33; -fx-border-radius: 12; -fx-border-width: 2;" />
+      <ImageView fx:id="btnBackImg" fitHeight="24.0" fitWidth="24.0" layoutX="594.0" layoutY="396.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assests/icon/logoutIcon.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="txtOTP" layoutX="579.0" layoutY="322.0" onKeyPressed="#txtOTPOnKeyPressed" onMouseClicked="#txtOtpOnMouseClicked" prefHeight="42.0" prefWidth="216.0" promptText=" OTP" style="-fx-background-radius: 12;">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <JFXButton fx:id="btnVerify" alignment="CENTER" buttonType="RAISED" layoutX="652.0" layoutY="387.0" onAction="#btnVerifyOnAction" onMouseEntered="#btnVerifyOnMouseEntered" onMouseExited="#btnVerifyOnMouseExited" prefHeight="42.0" prefWidth="142.0" style="-fx-background-radius: 12; -fx-background-color: C56E33;" text="VERIFY" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton alignment="CENTER" layoutX="579.0" layoutY="387.0" onAction="#btnBackOnAction" onMouseEntered="#btnBackOnMouseEntered" onMouseExited="#btnBackOnMouseExited" prefHeight="42.0" prefWidth="54.0" style="-fx-background-radius: 12;" text=" " textFill="#c56e33">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="lblOtpAlert" layoutX="590.0" layoutY="363.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Pane fx:id="backPane" layoutX="9.0" layoutY="8.0" prefHeight="37.0" prefWidth="115.0" style="-fx-background-color: FFE1E1; -fx-background-radius: 20;" visible="false">
+         <children>
+            <Label layoutX="57.0" layoutY="10.0" text="Back" textFill="#885d40">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <ImageView fx:id="imgBackBtn" fitHeight="42.0" fitWidth="42.0" layoutX="7.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assests/img/backIconImg.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="imgBaCkBtn" layoutX="7.0" layoutY="5.0" minHeight="42.0" onAction="#btnBackIconOnAction" onMouseEntered="#btnBackIconOnMouseEntered" onMouseExited="#btnBackIconOnMouseExited" prefWidth="42.0" style="-fx-background-radius: 100;" text=" " />
+   </children>
+</AnchorPane>

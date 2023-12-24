@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="53.0" prefWidth="1479.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.grb.ceylonPottersPalette.controller.RepairedStockBarFormController">
+   <children>
+      <HBox alignment="CENTER_LEFT" layoutX="41.0" prefHeight="56.0" prefWidth="1405.0" spacing="10.0" style="-fx-background-color: white;">
+         <children>
+            <Text fx:id="id" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="245.21586060523987">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="description" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" wrappingWidth="363.7287139892578">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="qtyToRepair" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="QTY to Repair" wrappingWidth="298.5479888319969">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="category" layoutX="793.0" layoutY="44.0" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="Category" wrappingWidth="234.94734954833984">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="imgUpdate" fitHeight="39.0" fitWidth="113.0" onMouseClicked="#imgUpdateOnMouseClicked" onMouseEntered="#imgUpdateOnMouseEntered" onMouseExited="#imgUpdateOnMouseExited" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/img/btnRepairedUpdate.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgRepaired" fitHeight="39.0" fitWidth="113.0" layoutX="1271.0" layoutY="19.0" onMouseClicked="#imgRepairedOnMouseClicked" onMouseEntered="#imgRepairedOnMouseEntered" onMouseExited="#imgRepairedOnMouseExited" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/img/btnRepairedProducts.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

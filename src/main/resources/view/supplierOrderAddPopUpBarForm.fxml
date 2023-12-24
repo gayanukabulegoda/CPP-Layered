@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="56.0" prefWidth="888.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.grb.ceylonPottersPalette.controller.SupplierOrderAddPopUpBarFormController">
+   <children>
+      <HBox alignment="CENTER_LEFT" layoutX="24.0" prefHeight="56.0" prefWidth="781.0" spacing="10.0" style="-fx-background-color: white;">
+         <children>
+            <Text fx:id="id" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="132.4882071018219">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="description" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" wrappingWidth="163.72794342041016">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="unitPrice" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="UnitPrice" wrappingWidth="154.00228881835938">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="qty" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="QTY" wrappingWidth="119.49256134033203">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="total" layoutX="327.0" layoutY="44.0" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="Total" wrappingWidth="180.36599731445312">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="deleteImg" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#deleteOnMouseClick" onMouseEntered="#deleteOnMouseEntered" onMouseExited="#deleteOnMouseExited" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/icon/deleteIcon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

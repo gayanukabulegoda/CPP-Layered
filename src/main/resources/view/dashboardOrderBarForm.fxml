@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<Pane minHeight="60.0" minWidth="240.0" prefHeight="60.0" prefWidth="250.0" style="-fx-border-color: AE7C5A; -fx-border-width: 1; -fx-border-radius: 12;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.grb.ceylonPottersPalette.controller.DashboardOrderBarFormController">
+   <children>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="14.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assests/img/logoFlowerBrown.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="217.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assests/icon/customerOrderBtnIcon.png" />
+         </image>
+      </ImageView>
+      <Line endX="-174.0" endY="157.0" layoutX="383.0" layoutY="-103.0" startX="-174.362548828125" startY="109.81982421875" stroke="#885d40" strokeLineCap="ROUND" strokeWidth="2.0" />
+      <Label fx:id="lblOrderId" layoutX="60.0" layoutY="13.0" text="O001" textFill="#885d40">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="60.0" layoutY="37.0" text="Total Purchases:  " textFill="#885d40">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTime" layoutX="121.0" layoutY="22.0" text="13 : 42" textFill="#885d40">
+         <font>
+            <Font size="8.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="212.0" layoutY="5.0" onAction="#btnCustomerOrdersOnAction" prefHeight="50.0" prefWidth="34.0" style="-fx-background-radius: 12;" text=" " />
+      <Label fx:id="lblTotalPrice" layoutX="145.0" layoutY="37.0" text="1000LKR" textFill="#885d40">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

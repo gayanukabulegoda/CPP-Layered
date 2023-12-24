@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="56.0" prefWidth="888.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.grb.ceylonPottersPalette.controller.CustomerOrderViewPopUpBarFormController">
+   <children>
+      <HBox alignment="CENTER_LEFT" layoutX="24.0" prefHeight="56.0" prefWidth="781.0" spacing="10.0" style="-fx-background-color: white;">
+         <children>
+            <Text fx:id="id" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="170.67015290260315">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="description" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" wrappingWidth="194.6371841430664">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="unitPrice" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="UnitPrice" wrappingWidth="193.09335327148438">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="qty" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="QTY" wrappingWidth="124.03803253173828">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="total" layoutX="327.0" layoutY="44.0" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="Total" wrappingWidth="126.72940063476562">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

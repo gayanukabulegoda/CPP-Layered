@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="472.0" prefWidth="627.0" style="-fx-background-radius: 12; -fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.grb.ceylonPottersPalette.controller.DeleteUserFormController">
+   <children>
+      <Pane fx:id="userDataPane" layoutX="90.0" layoutY="161.0" prefHeight="190.0" prefWidth="459.0" style="-fx-border-radius: 12; -fx-border-color: E8E8E8;">
+         <children>
+            <Label layoutX="57.0" layoutY="106.0" text="Employee ID  -  " textFill="#727374">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="57.0" layoutY="144.0" text="Role  -  " textAlignment="CENTER" textFill="#727374">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="57.0" layoutY="30.0" text="Username  -" textFill="#727374">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="57.0" layoutY="68.0" text="Name  -  " textFill="#727374">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblUsername" layoutX="152.0" layoutY="30.0" text="Username" textFill="#727374">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblEmployeeName" layoutX="122.0" layoutY="68.0" text="Employee name" textFill="#727374">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblEmployeeId" layoutX="169.0" layoutY="106.0" text="Employee ID" textFill="#727374">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblRole" layoutX="113.0" layoutY="144.0" text="Role" textAlignment="CENTER" textFill="#727374">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnConfirm" layoutX="362.0" layoutY="11.0" onAction="#confirmBtnOnAction" prefHeight="33.0" prefWidth="86.0" style="-fx-border-color: silver; -fx-border-radius: 12;" text="Confirm" textFill="#727374" />
+            <Label fx:id="lblConfirmAlert" layoutX="372.0" layoutY="43.0" textFill="RED">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="48.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assests/img/deleteUserPopUpImg.png" />
+         </image>
+      </ImageView>
+      <Line endX="541.0931396484375" endY="-7.62939453125E-6" layoutX="44.0" layoutY="128.0" stroke="#ae7c5a" strokeLineCap="ROUND" />
+      <Label layoutX="132.0" layoutY="67.0" text="Delete Account">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <Pane fx:id="closeIconPane" layoutX="519.0" layoutY="54.0" prefHeight="48.0" prefWidth="48.0">
+         <children>
+            <ImageView fx:id="imgCloseIcon" fitHeight="24.0" fitWidth="24.0" layoutX="12.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/icon/closeIcon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane fx:id="deleteBtnPane" layoutX="320.0" layoutY="381.0" prefHeight="54.0" prefWidth="259.0" style="-fx-background-color: C56E33; -fx-background-radius: 12;">
+         <children>
+            <Label layoutX="50.0" layoutY="17.0" text="DELETE ACCOUNT" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="cancelBtnPane" layoutX="48.0" layoutY="383.0" prefHeight="54.0" prefWidth="259.0" style="-fx-background-radius: 12;">
+         <children>
+            <Label fx:id="lblCancel" layoutX="94.0" layoutY="17.0" text="CANCEL" textFill="#c56e33">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <JFXButton layoutX="49.0" layoutY="383.0" onAction="#btnCancelOnAction" onMouseEntered="#btnCancelOnMouseEntered" onMouseExited="#btnCancelOnMouseExited" prefHeight="54.0" prefWidth="259.0" style="-fx-background-radius: 12;" text=" " />
+      <JFXButton layoutX="519.0" layoutY="54.0" onAction="#btnCloseIconOnAction" onMouseEntered="#btnCloseIconOnMouseEntered" onMouseExited="#btnCloseIconOnMouseExited" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 12;" text=" " />
+      <JFXButton layoutX="320.0" layoutY="381.0" onAction="#btnDeleteOnAction" onMouseEntered="#btnDeleteOnMouseEntered" onMouseExited="#btnDeleteOnMouseExited" prefHeight="54.0" prefWidth="259.0" style="-fx-background-radius: 12;" text=" " />
+      <Label fx:id="lblUnsuccessfulAlert" layoutX="106.0" layoutY="352.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="53.0" prefWidth="1479.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.grb.ceylonPottersPalette.controller.EmployeeManageBarFormController">
+   <children>
+      <HBox alignment="CENTER_LEFT" layoutX="41.0" prefHeight="56.0" prefWidth="1405.0" spacing="10.0" style="-fx-background-color: white;">
+         <children>
+            <Text fx:id="id" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="190.6701910495758">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="name" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="211.90994262695312">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="role" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="Role" wrappingWidth="240.45825958251953">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="email" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="303.09364318847656">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="contact_No" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="Mobile" wrappingWidth="289.4932327270508">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="updateImg" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#updateOnMouseClick" onMouseEntered="#updateOnMouseEntered" onMouseExited="#updateOnMouseExited" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/icon/editIcon.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="deleteImg" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#deleteOnMouseClick" onMouseEntered="#deleteOnMouseEntered" onMouseExited="#deleteOnMouseExited" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/icon/deleteIcon.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="viewImg" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#viewDetailsOnMouseClick" onMouseEntered="#viewOnMouseEntered" onMouseExited="#viewOnMouseExited" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/icon/viewIcon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

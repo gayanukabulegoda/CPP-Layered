@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="490.0" prefWidth="627.0" style="-fx-background-radius: 12; -fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.grb.ceylonPottersPalette.controller.EmployeeSalaryViewPopUpFormController">
+   <children>
+      <Pane layoutX="29.0" layoutY="136.0" prefHeight="246.0" prefWidth="569.0" style="-fx-background-color: white; -fx-background-radius: 16; -fx-border-color: E8E8E8; -fx-border-width: 1; -fx-border-radius: 16;">
+         <children>
+            <Label fx:id="lblEmployeeId" layoutX="37.0" layoutY="51.0" text="Employee ID" textFill="#727374" />
+            <Line endX="100.0" layoutX="133.0" layoutY="69.0" startX="-100.0" stroke="#727374" />
+            <Label layoutX="35.0" layoutY="21.0" text="Employee ID :" textFill="#727374" />
+            <Label fx:id="lblSalary" layoutX="37.0" layoutY="127.0" text="Salary" textFill="#727374" />
+            <Line endX="100.0" layoutX="132.0" layoutY="220.0" startX="-100.0" stroke="#727374" />
+            <Label layoutX="35.0" layoutY="99.0" text="Salary :" textFill="#727374" />
+            <Label fx:id="lblBonus" layoutX="37.0" layoutY="202.0" text="Bonus" textFill="#727374" />
+            <Line endX="100.0" layoutX="132.0" layoutY="145.0" startX="-100.0" stroke="#727374" />
+            <Label layoutX="34.0" layoutY="174.0" text="Bonus" textFill="#727374" />
+            <Label fx:id="lblTotalPayment" layoutX="338.0" layoutY="53.0" text="Total Payment" textFill="#727374" />
+            <Line endX="100.0" layoutX="434.0" layoutY="71.0" startX="-100.0" stroke="#727374" />
+            <Label layoutX="336.0" layoutY="23.0" text="Total Payment :" textFill="#727374" />
+            <Label fx:id="lblPaymentDate" layoutX="338.0" layoutY="129.0" text="Payment Date" textFill="#727374" />
+            <Line endX="100.0" layoutX="433.0" layoutY="222.0" startX="-100.0" stroke="#727374" />
+            <Label layoutX="336.0" layoutY="101.0" text="Payment Date :" textFill="#727374" />
+            <Label fx:id="lblPaymentTime" layoutX="338.0" layoutY="204.0" text="Payment Time" textFill="#727374" />
+            <Line endX="100.0" layoutX="433.0" layoutY="147.0" startX="-100.0" stroke="#727374" />
+            <Label layoutX="335.0" layoutY="177.0" text="Payment Time :" textFill="#727374" />
+            <Line endX="248.72842407226562" endY="22.909744262695312" layoutX="36.0" layoutY="-8.0" startX="248.72842407226562" startY="238.27410888671875" stroke="#e8e8e8" strokeLineCap="ROUND" />
+         </children>
+      </Pane>
+      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="48.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assests/img/EmployeeAddPopUpImg.png" />
+         </image>
+      </ImageView>
+      <Line endX="541.0931396484375" endY="-7.62939453125E-6" layoutX="44.0" layoutY="128.0" stroke="#ae7c5a" strokeLineCap="ROUND" />
+      <Label layoutX="132.0" layoutY="67.0" text="View Salary">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <Pane fx:id="closeIconPane" layoutX="519.0" layoutY="54.0" prefHeight="48.0" prefWidth="48.0">
+         <children>
+            <ImageView fx:id="imgCloseIcon" fitHeight="24.0" fitWidth="24.0" layoutX="12.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/icon/closeIcon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <JFXButton layoutX="519.0" layoutY="54.0" onAction="#btnCloseIconOnAction" onMouseEntered="#btnCloseIconOnMouseEntered" onMouseExited="#btnCloseIconOnMouseExited" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 12;" text=" " />
+      <Pane fx:id="btnClosePane" layoutX="140.0" layoutY="410.0" prefHeight="54.0" prefWidth="349.0" style="-fx-background-color: C56E33; -fx-background-radius: 12;">
+         <children>
+            <Label layoutX="146.0" layoutY="17.0" text="CLOSE" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <JFXButton layoutX="140.0" layoutY="409.0" onAction="#btnCloseOnAction" onMouseEntered="#btnCloseOnMouseEntered" onMouseExited="#btnCloseOnMouseExited" prefHeight="54.0" prefWidth="349.0" style="-fx-background-radius: 12;" text=" " />
+   </children>
+</AnchorPane>

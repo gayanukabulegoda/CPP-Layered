@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1523.0" style="-fx-background-color: E8E8E8;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.grb.ceylonPottersPalette.controller.EmployeeSalaryFormController">
+   <children>
+      <AnchorPane layoutX="22.0" layoutY="92.0" prefHeight="770.0" prefWidth="1488.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+         <children>
+            <HBox alignment="CENTER_LEFT" layoutX="65.0" layoutY="10.0" prefHeight="79.0" prefWidth="1405.0">
+               <children>
+                  <Label prefHeight="20.0" prefWidth="296.0" text="ID">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="40.0" prefHeight="20.0" prefWidth="345.0" text="Name">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="296.0" layoutY="40.0" prefHeight="20.0" prefWidth="358.0" text="Payment">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="137.0" layoutY="40.0" prefHeight="20.0" prefWidth="285.0" text="Date">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="519.0" layoutY="40.0" prefHeight="20.0" prefWidth="81.0" text="Action">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Line endX="1342.459716796875" endY="1.0" layoutX="128.0" layoutY="78.0" startX="-112.90805053710938" startY="1.0" />
+            <ScrollPane layoutX="4.0" layoutY="84.0" prefHeight="693.0" prefWidth="1482.0" style="-fx-background-radius: 20; -fx-border-color: white; -fx-border-width: 1; -fx-border-radius: 12; -fx-background-color: white;">
+               <content>
+                  <VBox fx:id="vBoxEmployeeSalary" prefHeight="689.0" prefWidth="1479.0" style="-fx-background-color: white;" />
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+      <Pane fx:id="searchBarPane" layoutX="1159.0" layoutY="25.0" prefHeight="46.0" prefWidth="300.0" style="-fx-background-color: white; -fx-background-radius: 12;">
+         <children>
+            <TextField fx:id="txtSearch" layoutX="40.0" layoutY="2.0" onAction="#txtSearchOnAction" onMouseClicked="#txtSearchOnMouseClicked" prefHeight="42.0" prefWidth="254.0" promptText="Search by Contact No" style="-fx-background-color: white; -fx-background-radius: 12;">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+         </children>
+      </Pane>
+      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="1174.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assests/icon/searchIcon.png" />
+         </image>
+      </ImageView>
+      <Pane fx:id="addSalaryPane" layoutX="973.0" layoutY="25.0" prefHeight="46.0" prefWidth="179.0" style="-fx-background-color: white; -fx-background-radius: 12;">
+         <children>
+            <Label fx:id="lblAddSalary" layoutX="45.0" layoutY="13.0" text=" Add Salary" textFill="#3d3e3e">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="imgAdd" fitHeight="24.0" fitWidth="24.0" layoutX="13.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/icon/addIcon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <JFXButton layoutX="973.0" layoutY="25.0" onAction="#btnAddSalaryOnAction" onMouseEntered="#btnAddSalaryOnMouseEntered" onMouseExited="#btnAddSalaryOnMouseExited" prefHeight="46.0" prefWidth="179.0" style="-fx-background-radius: 12;" text=" ">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Pane layoutX="34.0" layoutY="29.0" prefHeight="38.0" prefWidth="244.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+         <children>
+            <Label layoutX="48.0" layoutY="9.0" text="Employee Manage" textFill="#885d40">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <JFXButton alignment="CENTER" layoutX="34.0" layoutY="29.0" onAction="#btnEmployeeManageOnAction" prefHeight="38.0" prefWidth="244.0" style="-fx-background-radius: 25;" text=" " textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Pane layoutX="291.0" layoutY="29.0" prefHeight="38.0" prefWidth="244.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+         <children>
+            <Label layoutX="34.0" layoutY="9.0" text="Employee Attendance" textFill="#885d40">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <JFXButton alignment="CENTER" layoutX="291.0" layoutY="29.0" onAction="#btnEmployeeAttendanceOnAction" prefHeight="38.0" prefWidth="244.0" style="-fx-background-radius: 25;" text=" " textFill="#885d40">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Pane layoutX="548.0" layoutY="29.0" prefHeight="38.0" prefWidth="244.0" style="-fx-background-radius: 25;" styleClass="manage-attendance-salary-btn" stylesheets="@../style/EmployeeFormStyle.css">
+         <children>
+            <Label layoutX="55.0" layoutY="9.0" text="Employee Salary" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <JFXButton alignment="CENTER" layoutX="548.0" layoutY="29.0" prefHeight="38.0" prefWidth="244.0" style="-fx-background-radius: 25;" text=" " textFill="#885d40">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Pane fx:id="btnRefreshPane" layoutX="1466.0" layoutY="25.0" prefHeight="46.0" prefWidth="46.0" style="-fx-background-color: white; -fx-background-radius: 12;">
+         <children>
+            <ImageView fx:id="imgRefresh" fitHeight="24.0" fitWidth="24.0" layoutX="11.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/icon/refreshTableIcon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <JFXButton layoutX="1466.0" layoutY="25.0" onAction="#btnRefreshTableOnAction" onMouseEntered="#btnRefreshTableOnMouseEntered" onMouseExited="#btnRefreshTableOnMouseExited" prefHeight="46.0" prefWidth="46.0" style="-fx-background-radius: 12;" text=" ">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Label fx:id="lblSearchAlert" layoutX="1178.0" layoutY="73.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

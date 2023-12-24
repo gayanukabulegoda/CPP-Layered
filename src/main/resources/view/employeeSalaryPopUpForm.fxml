@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="538.0" prefWidth="627.0" style="-fx-background-radius: 12; -fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.grb.ceylonPottersPalette.controller.EmployeeSalaryPopUpFormController">
+   <children>
+      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="48.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assests/img/EmployeeAddPopUpImg.png" />
+         </image>
+      </ImageView>
+      <Line endX="541.0931396484375" endY="-7.62939453125E-6" layoutX="44.0" layoutY="128.0" stroke="#ae7c5a" strokeLineCap="ROUND" />
+      <Label layoutX="132.0" layoutY="67.0" text="Add Salary">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <Pane fx:id="closeIconPane" layoutX="519.0" layoutY="54.0" prefHeight="48.0" prefWidth="48.0">
+         <children>
+            <ImageView fx:id="imgCloseIcon" fitHeight="24.0" fitWidth="24.0" layoutX="12.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/icon/closeIcon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane fx:id="AddBtnPane" layoutX="320.0" layoutY="448.0" prefHeight="54.0" prefWidth="259.0" style="-fx-background-color: C56E33; -fx-background-radius: 12;">
+         <children>
+            <Label layoutX="110.0" layoutY="17.0" text="ADD" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="cancelBtnPane" layoutX="48.0" layoutY="448.0" prefHeight="54.0" prefWidth="259.0" style="-fx-background-radius: 12;">
+         <children>
+            <Label fx:id="lblCancel" layoutX="94.0" layoutY="17.0" text="CANCEL" textFill="#c56e33">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <JFXButton layoutX="48.0" layoutY="448.0" onAction="#btnCancelOnAction" onMouseEntered="#btnCancelOnMouseEntered" onMouseExited="#btnCancelOnMouseExited" prefHeight="54.0" prefWidth="259.0" style="-fx-background-radius: 12;" text=" " />
+      <JFXButton layoutX="320.0" layoutY="448.0" onAction="#btnAddOnAction" onMouseClicked="#btnAddOnMouseEntered" onMouseEntered="#btnAddOnMouseEntered" onMouseExited="#btnAddOnMouseExited" prefHeight="54.0" prefWidth="259.0" style="-fx-background-radius: 12;" text=" " />
+      <TextField fx:id="txtSalary" layoutX="54.0" layoutY="239.0" onAction="#txtSalaryOnAction" onKeyPressed="#txtSalaryOnKeyPressed" onMouseClicked="#txtSalaryOnMouseClicked" prefHeight="42.0" prefWidth="218.0" promptText="Salary" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: E8E8E8; -fx-border-width: 1; -fx-border-radius: 12;">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtBonus" editable="false" layoutX="54.0" layoutY="311.0" onAction="#txtBonusOnAction" onKeyPressed="#txtBonusOnKeyPressed" onMouseClicked="#txtBonusOnMouseClicked" prefHeight="42.0" prefWidth="218.0" promptText="Bonus" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: E8E8E8; -fx-border-width: 1; -fx-border-radius: 12;">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <JFXComboBox fx:id="cmbEmployeeId" focusColor="#e8e8e8" layoutX="54.0" layoutY="167.0" onAction="#cmbEmployeeIdOnAction" onKeyPressed="#cmbEmployeeIdOnKeyPressed" onMouseClicked="#cmbEmployeeIdOnMouseClicked" prefHeight="42.0" prefWidth="218.0" promptText="   Employee ID" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: E8E8E8; -fx-border-width: 1; -fx-border-radius: 12;" unFocusColor="#e8e8e8" />
+      <Label fx:id="lblEmployeeName" layoutX="317.0" layoutY="179.0" text="Employee Name" textFill="#909090">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Line endX="147.1839599609375" layoutX="415.0" layoutY="202.0" startX="-100.0" stroke="#727374" />
+      <Label fx:id="lblWorkedDays" layoutX="317.0" layoutY="238.0" text="Worked Days" textFill="#909090">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Line endX="147.1839599609375" layoutX="415.0" layoutY="261.0" startX="-100.0" stroke="#727374" />
+      <Label layoutX="365.0" layoutY="312.0" text="Total Amount" textFill="#909090">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Line endX="147.1839599609375" layoutX="416.0" layoutY="389.0" startX="-100.0" stroke="#727374" />
+      <Label fx:id="lblTotalAmount" layoutX="346.0" layoutY="356.0" textFill="#909090">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="479.0" layoutY="356.0" text="LKR" textFill="#909090">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="519.0" layoutY="54.0" onAction="#btnCloseIconONAction" onMouseEntered="#btnCloseIconOnMouseEntered" onMouseExited="#btnCloseIconOnMouseExited" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 12;" text=" " />
+      <Label fx:id="lblCmbEmployeeIdAlert" layoutX="63.0" layoutY="210.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblSalaryAlert" layoutX="63.0" layoutY="280.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblBonusAlert" layoutX="63.0" layoutY="351.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

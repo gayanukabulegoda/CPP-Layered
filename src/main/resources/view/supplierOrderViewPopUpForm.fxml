@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="729.0" prefWidth="1269.0" style="-fx-background-color: white; -fx-background-radius: 16;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.grb.ceylonPottersPalette.controller.SupplierOrderViewPopUpFormController">
+   <children>
+      <Pane layoutX="954.0" layoutY="25.0" prefHeight="680.0" prefWidth="294.0" style="-fx-background-color: white; -fx-background-radius: 16; -fx-border-color: E8E8E8; -fx-border-width: 1; -fx-border-radius: 16;">
+         <children>
+            <Label layoutX="86.0" layoutY="35.0" text="ORDER DETAILS" textFill="#151619">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblOrderId" layoutX="31.0" layoutY="135.0" text="Order ID" textFill="#727374" />
+            <Line endX="100.0" layoutX="129.0" layoutY="156.5" startX="-100.0" stroke="#727374" />
+            <Label fx:id="lblOrderDate" layoutX="31.0" layoutY="231.0" text="Order Date" textFill="#727374" />
+            <Line endX="100.0" layoutX="129.0" layoutY="253.0" startX="-100.0" stroke="#727374" />
+            <Label fx:id="lblOrderTime" layoutX="31.0" layoutY="328.0" text="Order Time" textFill="#727374" />
+            <Line endX="100.0" layoutX="129.0" layoutY="350.0" startX="-100.0" stroke="#727374" />
+            <Line endX="100.0" layoutX="147.0" layoutY="668.0" startX="-100.0" stroke="#ae7c5a" />
+            <Label fx:id="lblSupplierId" layoutX="31.0" layoutY="425.0" text="Supplier ID" textFill="#727374" />
+            <Line endX="100.0" layoutX="129.0" layoutY="447.0" startX="-100.0" stroke="#727374" />
+            <Label layoutX="31.0" layoutY="102.0" text="Order ID :" textFill="#727374" />
+            <Label layoutX="31.0" layoutY="198.0" text="Order Date :" textFill="#727374" />
+            <Label layoutX="31.0" layoutY="296.0" text="Order Time :" textFill="#727374" />
+            <Label layoutX="31.0" layoutY="394.0" text="Supplier ID :" textFill="#727374" />
+            <Label fx:id="lblSupplierName" layoutX="31.0" layoutY="523.0" text="Supplier Name" textFill="#727374" />
+            <Line endX="100.0" layoutX="129.0" layoutY="545.0" startX="-100.0" stroke="#727374" />
+            <Label layoutX="31.0" layoutY="492.0" text="Supplier Name :" textFill="#727374" />
+            <ImageView fx:id="imgFlower2" fitHeight="33.0" fitWidth="30.0" layoutX="96.0" layoutY="628.0" pickOnBounds="true" preserveRatio="true" rotate="27.5">
+               <image>
+                  <Image url="@../assests/img/logoFlowerBrown.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgFlower1" fitHeight="33.0" fitWidth="30.0" layoutX="130.0" layoutY="628.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/img/logoFlowerBrown.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgFlower3" fitHeight="33.0" fitWidth="30.0" layoutX="164.0" layoutY="628.0" pickOnBounds="true" preserveRatio="true" rotate="-31.6">
+               <image>
+                  <Image url="@../assests/img/logoFlowerBrown.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutX="26.0" layoutY="25.0" prefHeight="680.0" prefWidth="915.0" style="-fx-background-color: white; -fx-background-radius: 16; -fx-border-color: E8E8E8; -fx-border-width: 1; -fx-border-radius: 16;">
+         <children>
+            <Line endX="755.1853637695312" endY="0.9999923706054688" layoutX="146.0" layoutY="56.0" startX="-132.0906982421875" startY="0.9999923706054688" stroke="#b8b8b8" />
+            <Label layoutX="42.0" layoutY="24.0" prefHeight="20.0" prefWidth="121.0" text="Item ID">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="214.0" layoutY="24.0" text="Description">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="421.0" layoutY="24.0" text="Unit Price">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="630.0" layoutY="24.0" text="QTY">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="776.0" layoutY="24.0" text="Total">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <ScrollPane layoutX="13.0" layoutY="60.0" prefHeight="495.0" prefWidth="888.0" style="-fx-background-color: white;">
+               <content>
+                  <VBox fx:id="vBoxSupplierOrder" prefHeight="492.0" prefWidth="885.0" style="-fx-background-color: white;" />
+               </content>
+            </ScrollPane>
+            <Label layoutX="28.0" layoutY="584.0" text="Net Total :" textFill="#151619">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblNetTotal" layoutX="28.0" layoutY="622.0" textFill="#151619">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="166.0" layoutY="622.0" text="LKR" textFill="#151619">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Pane fx:id="btnClosePane" layoutX="470.0" layoutY="600.0" prefHeight="54.0" prefWidth="349.0" style="-fx-background-color: C56E33; -fx-background-radius: 12;">
+               <children>
+                  <Label layoutX="146.0" layoutY="17.0" text="CLOSE" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <JFXButton layoutX="470.0" layoutY="599.0" onAction="#btnCloseOnAction" onMouseEntered="#btnCloseOnMouseEntered" onMouseExited="#btnCloseOnMouseExited" prefHeight="54.0" prefWidth="349.0" style="-fx-background-radius: 12;" text=" " />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

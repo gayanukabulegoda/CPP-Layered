@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="53.0" prefWidth="1479.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.grb.ceylonPottersPalette.controller.EmployeeSalaryBarFormController">
+   <children>
+      <HBox alignment="CENTER_LEFT" layoutX="41.0" prefHeight="56.0" prefWidth="1405.0" spacing="10.0" style="-fx-background-color: white;">
+         <children>
+            <Text fx:id="id" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="265.21598267555237">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="name" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="351.91041564941406">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="payment" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment" wrappingWidth="343.09376525878906">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="date" opacity="0.68" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" wrappingWidth="300.4022521972656">
+               <font>
+                  <Font name="SansSerif Regular" size="16.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="updateImg" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#updateOnMouseClick" onMouseEntered="#updateOnMouseEntered" onMouseExited="#updateOnMouseExited" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/icon/editIcon.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="viewImg" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#viewDetailsOnMouseClick" onMouseEntered="#viewOnMouseEntered" onMouseExited="#viewOnMouseExited" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/icon/viewIcon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

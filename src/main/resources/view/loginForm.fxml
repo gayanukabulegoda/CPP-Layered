@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="572.0" prefWidth="929.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.grb.ceylonPottersPalette.controller.LoginFormController">
+   <children>
+      <ImageView fitHeight="579.0" fitWidth="936.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assests/img/LoginPage.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="txtUsername" layoutX="560.0" layoutY="272.0" onKeyPressed="#txtUsernameOnKeyPressed" onMouseClicked="#txtUserNameOnMouseClicked" prefHeight="42.0" prefWidth="267.0" promptText="  Username" style="-fx-background-radius: 12;" styleClass="text-field">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="txtPassword" layoutX="560.0" layoutY="331.0" onKeyPressed="#txtPasswordOnKeyPressed" onMouseClicked="#txtPasswordOnMouseClicked" prefHeight="43.0" prefWidth="267.0" promptText="  Password" style="-fx-background-radius: 12;">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+         <font>
+            <Font size="15.0" />
+         </font>
+      </PasswordField>
+      <JFXButton fx:id="btnLogIn" alignment="CENTER" buttonType="RAISED" layoutX="561.0" layoutY="421.0" onAction="#btnLogInOnAction" onMouseEntered="#btnLogInOnMouseEntered" onMouseExited="#btnLogInOnMouseExited" prefHeight="42.0" prefWidth="267.0" style="-fx-background-radius: 12; -fx-background-color: C56E33;" text="LOGIN" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <Hyperlink fx:id="hyperForgotPassword" contentDisplay="CENTER" layoutX="558.0" layoutY="386.0" onAction="#hyperForgotPasswordOnAction" onMouseEntered="#hyperForgotPasswordOnMouseEntered" onMouseExited="#hyperForgotPasswordOnMouseExited" text="Forgot Password ?" textFill="#6a6b6b" />
+      <Hyperlink fx:id="hyperSignUp" layoutX="760.0" layoutY="518.0" onAction="#hyperSignUpOnAction" onMouseEntered="#hyperSignUpOnMouseEntered" onMouseExited="#hyperSignUpOnMouseExited" text="Sign Up" textFill="#151619" />
+      <Text fill="#3d3e3e" layoutX="564.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don’t have an account?  Let’s" />
+      <Label fx:id="lblUserNameAlert" layoutX="570.0" layoutY="314.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPasswordAlert" layoutX="570.0" layoutY="373.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Pane fx:id="powerOffPane" layoutX="9.0" layoutY="8.0" prefHeight="37.0" prefWidth="146.0" style="-fx-background-color: FFE1E1; -fx-background-radius: 20;" visible="false">
+         <children>
+            <Label layoutX="50.0" layoutY="10.0" text="Power Off" textFill="#885d40">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <ImageView fx:id="imgPowerOff" fitHeight="42.0" fitWidth="42.0" layoutX="7.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assests/icon/powerOffIcon.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="7.0" layoutY="5.0" minHeight="42.0" onAction="#btnPowerOffOnAction" onMouseEntered="#btnPowerOffOnMouseEntered" onMouseExited="#btnPowerOffOnMouseExited" prefWidth="42.0" style="-fx-background-radius: 100;" text=" " />
+   </children>
+</AnchorPane>
