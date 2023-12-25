@@ -3,8 +3,8 @@ package lk.grb.ceylonPottersPaletteLayered.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import lk.grb.ceylonPottersPalette.dto.CustomerOrderDto;
-import lk.grb.ceylonPottersPalette.model.CustomerOrderModel;
+import lk.grb.ceylonPottersPaletteLayered.dto.CustomerOrderDto;
+import lk.grb.ceylonPottersPaletteLayered.model.CustomerOrderModel;
 
 import java.io.IOException;
 import java.sql.SQLException;

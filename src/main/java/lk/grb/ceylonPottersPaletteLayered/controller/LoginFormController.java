@@ -14,10 +14,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-import lk.grb.ceylonPottersPalette.model.UserModel;
-import lk.grb.ceylonPottersPalette.util.Navigation;
-import lk.grb.ceylonPottersPalette.util.RegExPatterns;
-import lk.grb.ceylonPottersPalette.util.StyleUtil;
+import lk.grb.ceylonPottersPaletteLayered.model.UserModel;
+import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
+import lk.grb.ceylonPottersPaletteLayered.util.RegExPatterns;
+import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
 import java.io.IOException;
 import java.sql.SQLException;

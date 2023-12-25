@@ -13,10 +13,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-import lk.grb.ceylonPottersPalette.util.Navigation;
-import lk.grb.ceylonPottersPalette.util.RegExPatterns;
-import lk.grb.ceylonPottersPalette.util.SendEmail;
-import lk.grb.ceylonPottersPalette.util.StyleUtil;
+import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
+import lk.grb.ceylonPottersPaletteLayered.util.RegExPatterns;
+import lk.grb.ceylonPottersPaletteLayered.util.SendEmail;
+import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
 import javax.mail.MessagingException;
 import java.io.IOException;

@@ -15,12 +15,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import lk.grb.ceylonPottersPalette.dto.SupplierOrderDto;
-import lk.grb.ceylonPottersPalette.model.ItemStockModel;
-import lk.grb.ceylonPottersPalette.model.PlaceSupplierOrderModel;
-import lk.grb.ceylonPottersPalette.model.SupplierModel;
-import lk.grb.ceylonPottersPalette.model.SupplierOrderModel;
-import lk.grb.ceylonPottersPalette.util.*;
+import lk.grb.ceylonPottersPaletteLayered.dto.SupplierOrderDto;
+import lk.grb.ceylonPottersPaletteLayered.model.ItemStockModel;
+import lk.grb.ceylonPottersPaletteLayered.model.PlaceSupplierOrderModel;
+import lk.grb.ceylonPottersPaletteLayered.model.SupplierModel;
+import lk.grb.ceylonPottersPaletteLayered.model.SupplierOrderModel;
+import lk.grb.ceylonPottersPaletteLayered.util.*;
 
 import java.io.IOException;
 import java.net.URL;

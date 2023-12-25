@@ -6,9 +6,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import lk.grb.ceylonPottersPalette.model.*;
-import lk.grb.ceylonPottersPalette.util.Navigation;
-import lk.grb.ceylonPottersPalette.util.StyleUtil;
+import lk.grb.ceylonPottersPaletteLayered.model.*;
+import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
+import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
 import java.sql.SQLException;
 

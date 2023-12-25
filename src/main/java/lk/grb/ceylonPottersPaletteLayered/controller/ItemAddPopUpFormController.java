@@ -9,12 +9,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import lk.grb.ceylonPottersPalette.dto.ItemStockDto;
-import lk.grb.ceylonPottersPalette.model.ItemStockModel;
-import lk.grb.ceylonPottersPalette.util.Navigation;
-import lk.grb.ceylonPottersPalette.util.NewId;
-import lk.grb.ceylonPottersPalette.util.RegExPatterns;
-import lk.grb.ceylonPottersPalette.util.StyleUtil;
+import lk.grb.ceylonPottersPaletteLayered.dto.ItemStockDto;
+import lk.grb.ceylonPottersPaletteLayered.model.ItemStockModel;
+import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
+import lk.grb.ceylonPottersPaletteLayered.util.NewId;
+import lk.grb.ceylonPottersPaletteLayered.util.RegExPatterns;
+import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

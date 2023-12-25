@@ -7,10 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import lk.grb.ceylonPottersPalette.dto.ItemStockDto;
-import lk.grb.ceylonPottersPalette.model.ItemStockModel;
-import lk.grb.ceylonPottersPalette.util.Navigation;
-import lk.grb.ceylonPottersPalette.util.StyleUtil;
+import lk.grb.ceylonPottersPaletteLayered.dto.ItemStockDto;
+import lk.grb.ceylonPottersPaletteLayered.model.ItemStockModel;
+import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
+import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
 import java.net.URL;
 import java.sql.SQLException;

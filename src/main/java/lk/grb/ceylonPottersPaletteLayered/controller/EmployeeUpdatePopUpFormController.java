@@ -11,11 +11,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import lk.grb.ceylonPottersPalette.dto.EmployeeDto;
-import lk.grb.ceylonPottersPalette.model.EmployeeModel;
-import lk.grb.ceylonPottersPalette.util.Navigation;
-import lk.grb.ceylonPottersPalette.util.RegExPatterns;
-import lk.grb.ceylonPottersPalette.util.StyleUtil;
+import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeDto;
+import lk.grb.ceylonPottersPaletteLayered.model.EmployeeModel;
+import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
+import lk.grb.ceylonPottersPaletteLayered.util.RegExPatterns;
+import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
 import java.net.URL;
 import java.sql.SQLException;

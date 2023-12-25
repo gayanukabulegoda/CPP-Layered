@@ -12,10 +12,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import lk.grb.ceylonPottersPalette.dto.EmployeeDto;
-import lk.grb.ceylonPottersPalette.model.EmployeeModel;
-import lk.grb.ceylonPottersPalette.qr.QrGenerator;
-import lk.grb.ceylonPottersPalette.util.*;
+import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeDto;
+import lk.grb.ceylonPottersPaletteLayered.model.EmployeeModel;
+import lk.grb.ceylonPottersPaletteLayered.qr.QrGenerator;
+import lk.grb.ceylonPottersPaletteLayered.util.*;
 
 import java.io.IOException;
 import java.net.URL;

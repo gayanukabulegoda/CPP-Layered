@@ -11,9 +11,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-import lk.grb.ceylonPottersPalette.model.UserModel;
-import lk.grb.ceylonPottersPalette.util.DateTimeUtil;
-import lk.grb.ceylonPottersPalette.util.Navigation;
+import lk.grb.ceylonPottersPaletteLayered.model.UserModel;
+import lk.grb.ceylonPottersPaletteLayered.util.DateTimeUtil;
+import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lombok.SneakyThrows;
 
 import java.io.IOException;

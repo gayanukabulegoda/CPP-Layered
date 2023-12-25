@@ -4,8 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import lk.grb.ceylonPottersPalette.model.ProductStockModel;
-import lk.grb.ceylonPottersPalette.util.StyleUtil;
+import lk.grb.ceylonPottersPaletteLayered.model.ProductStockModel;
+import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
 import java.sql.SQLException;
 import java.util.Arrays;

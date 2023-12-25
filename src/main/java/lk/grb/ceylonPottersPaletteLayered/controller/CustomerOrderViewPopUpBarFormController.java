@@ -2,7 +2,7 @@ package lk.grb.ceylonPottersPaletteLayered.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
-import lk.grb.ceylonPottersPalette.model.ProductStockModel;
+import lk.grb.ceylonPottersPaletteLayered.model.ProductStockModel;
 
 import java.sql.SQLException;
 

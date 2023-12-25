@@ -10,9 +10,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import lk.grb.ceylonPottersPalette.dto.UserDto;
-import lk.grb.ceylonPottersPalette.model.UserModel;
-import lk.grb.ceylonPottersPalette.util.*;
+import lk.grb.ceylonPottersPaletteLayered.dto.UserDto;
+import lk.grb.ceylonPottersPaletteLayered.model.UserModel;
+import lk.grb.ceylonPottersPaletteLayered.util.*;
 
 import java.sql.SQLException;
 
