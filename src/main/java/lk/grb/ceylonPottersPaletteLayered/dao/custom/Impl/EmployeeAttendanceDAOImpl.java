@@ -3,6 +3,7 @@ package lk.grb.ceylonPottersPaletteLayered.dao.custom.Impl;
 import lk.grb.ceylonPottersPaletteLayered.dao.custom.EmployeeAttendanceDAO;
 import lk.grb.ceylonPottersPaletteLayered.db.DbConnection;
 import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeAttendanceDto;
+import lk.grb.ceylonPottersPaletteLayered.entity.Attendance;
 import lk.grb.ceylonPottersPaletteLayered.util.SQLUtil;
 
 import java.sql.Connection;
@@ -13,22 +14,22 @@ import java.util.ArrayList;
 
 public class EmployeeAttendanceDAOImpl implements EmployeeAttendanceDAO {
     @Override
-    public boolean save(EmployeeAttendanceDto employeeAttendanceDto) throws SQLException {
+    public boolean save(Attendance entity) throws SQLException {
         return SQLUtil.execute("INSERT INTO attendance VALUES (?,?,?,?)",
-                employeeAttendanceDto.getAttendance_Id(),
-                employeeAttendanceDto.getEmployee_Id(),
-                employeeAttendanceDto.getDate(),
-                employeeAttendanceDto.getTime());
+                entity.getAttendance_Id(),
+                entity.getEmployee_Id(),
+                entity.getDate(),
+                entity.getTime());
     }
 
     @Override
-    public boolean update(EmployeeAttendanceDto employeeAttendanceDto) throws SQLException {
+    public boolean update(Attendance entity) throws SQLException {
 
         return SQLUtil.execute("UPDATE attendance SET " +
                         "employee_Id=?" +
                         "WHERE attendance_Id=?",
-                employeeAttendanceDto.getEmployee_Id(),
-                employeeAttendanceDto.getAttendance_Id()
+                entity.getEmployee_Id(),
+                entity.getAttendance_Id()
         );
     }
 
@@ -38,21 +39,21 @@ public class EmployeeAttendanceDAOImpl implements EmployeeAttendanceDAO {
     }
 
     @Override
-    public EmployeeAttendanceDto getData(String id) throws SQLException {
+    public Attendance getData(String id) throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM attendance WHERE attendance_Id=?", id);
 
-        EmployeeAttendanceDto employeeAttendanceDto = new EmployeeAttendanceDto();
+        Attendance entity = new Attendance();
 
         if(resultSet.next()){
-            employeeAttendanceDto.setEmployee_Id(resultSet.getString(2));
-            employeeAttendanceDto.setDate(resultSet.getString(3));
-            employeeAttendanceDto.setTime(resultSet.getString(4));
+            entity.setEmployee_Id(resultSet.getString(2));
+            entity.setDate(resultSet.getString(3));
+            entity.setTime(resultSet.getString(4));
         }
-        return employeeAttendanceDto;
+        return entity;
     }
 
     @Override
-    public ArrayList<String> getAllAttendanceId() throws SQLException {
+    public ArrayList<String> getAllId() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT attendance_Id FROM attendance ORDER BY date desc, time desc");
         ArrayList<String> list = new ArrayList<>();
 

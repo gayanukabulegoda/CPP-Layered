@@ -3,6 +3,7 @@ package lk.grb.ceylonPottersPaletteLayered.dao.custom.Impl;
 import lk.grb.ceylonPottersPaletteLayered.dao.custom.SupplierOrderDetailDAO;
 import lk.grb.ceylonPottersPaletteLayered.db.DbConnection;
 import lk.grb.ceylonPottersPaletteLayered.dto.SupplierOrderDto;
+import lk.grb.ceylonPottersPaletteLayered.entity.SupplierOrder;
 import lk.grb.ceylonPottersPaletteLayered.util.SQLUtil;
 
 import java.sql.PreparedStatement;
@@ -12,14 +13,14 @@ import java.util.ArrayList;
 
 public class SupplierOrderDetailDAOImpl implements SupplierOrderDetailDAO {
     @Override
-    public boolean save(SupplierOrderDto supplierOrderDto) throws SQLException {
+    public boolean save(SupplierOrder entity) throws SQLException {
         String sql = "INSERT INTO supplier_Order_Detail VALUES (?,?,?)";
         PreparedStatement statement = DbConnection.getInstance().getConnection().prepareStatement(sql);
 
-        for (int i = 0; i < supplierOrderDto.getOrderList().size(); i++) {
-            statement.setString(1, supplierOrderDto.getSupplier_Order_Id());
-            statement.setString(2,supplierOrderDto.getOrderList().get(i)[0]);
-            statement.setInt(3, Integer.parseInt(supplierOrderDto.getOrderList().get(i)[1]));
+        for (int i = 0; i < entity.getOrderList().size(); i++) {
+            statement.setString(1, entity.getSupplier_Order_Id());
+            statement.setString(2,entity.getOrderList().get(i)[0]);
+            statement.setInt(3, Integer.parseInt(entity.getOrderList().get(i)[1]));
 
             int values = statement.executeUpdate();
             if (values == 0) {
@@ -30,19 +31,19 @@ public class SupplierOrderDetailDAOImpl implements SupplierOrderDetailDAO {
     }
 
     @Override
-    public SupplierOrderDto getData(String id) throws SQLException {
+    public SupplierOrder getData(String id) throws SQLException {
         ResultSet set = SQLUtil.execute("SELECT * FROM supplier_Order_Detail WHERE supplier_Order_Id=?", id);
 
-        SupplierOrderDto supplierOrderDto = new SupplierOrderDto();
+        SupplierOrder entity = new SupplierOrder();
 
         if (set.next()) {
-            supplierOrderDto.setSupplier_Order_Id(set.getString(1));
-            supplierOrderDto.setSupplier_Id(set.getString(2));
-            supplierOrderDto.setTotal_Price(Double.parseDouble(set.getString(3)));
-            supplierOrderDto.setDate(set.getString(4));
-            supplierOrderDto.setTime(set.getString(5));
+            entity.setSupplier_Order_Id(set.getString(1));
+            entity.setSupplier_Id(set.getString(2));
+            entity.setTotal_Price(Double.parseDouble(set.getString(3)));
+            entity.setDate(set.getString(4));
+            entity.setTime(set.getString(5));
         }
-        return supplierOrderDto;
+        return entity;
     }
 
     @Override

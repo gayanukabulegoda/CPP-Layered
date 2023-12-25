@@ -2,6 +2,7 @@ package lk.grb.ceylonPottersPaletteLayered.dao.custom.Impl;
 
 import lk.grb.ceylonPottersPaletteLayered.dao.custom.EmployeeSalaryDAO;
 import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeSalaryDto;
+import lk.grb.ceylonPottersPaletteLayered.entity.Salary;
 import lk.grb.ceylonPottersPaletteLayered.util.SQLUtil;
 
 import java.sql.ResultSet;
@@ -10,20 +11,20 @@ import java.util.ArrayList;
 
 public class EmployeeSalaryDAOImpl implements EmployeeSalaryDAO {
     @Override
-    public boolean save(EmployeeSalaryDto employeeSalaryDto) throws SQLException {
+    public boolean save(Salary entity) throws SQLException {
         return SQLUtil.execute("INSERT INTO salary VALUES (?,?,?,?,?,?,?,?)",
-                employeeSalaryDto.getSalary_Id(),
-                employeeSalaryDto.getEmployee_Id(),
-                employeeSalaryDto.getWorked_Day_Count(),
-                employeeSalaryDto.getSalary(),
-                employeeSalaryDto.getBonus(),
-                employeeSalaryDto.getTotal_Payment(),
-                employeeSalaryDto.getDate(),
-                employeeSalaryDto.getTime());
+                entity.getSalary_Id(),
+                entity.getEmployee_Id(),
+                entity.getWorked_Day_Count(),
+                entity.getSalary(),
+                entity.getBonus(),
+                entity.getTotal_Payment(),
+                entity.getDate(),
+                entity.getTime());
     }
 
     @Override
-    public boolean update(EmployeeSalaryDto employeeSalaryDto) throws SQLException {
+    public boolean update(Salary entity) throws SQLException {
 
         return SQLUtil.execute("UPDATE salary SET " +
                         "employee_Id=?," +
@@ -32,36 +33,36 @@ public class EmployeeSalaryDAOImpl implements EmployeeSalaryDAO {
                         "bonus=?," +
                         "total_Payment=?" +
                         "WHERE salary_Id=?",
-                employeeSalaryDto.getEmployee_Id(),
-                employeeSalaryDto.getWorked_Day_Count(),
-                employeeSalaryDto.getSalary(),
-                employeeSalaryDto.getBonus(),
-                employeeSalaryDto.getTotal_Payment(),
-                employeeSalaryDto.getSalary_Id()
+                entity.getEmployee_Id(),
+                entity.getWorked_Day_Count(),
+                entity.getSalary(),
+                entity.getBonus(),
+                entity.getTotal_Payment(),
+                entity.getSalary_Id()
         );
     }
 
     @Override
-    public EmployeeSalaryDto getData(String id) throws SQLException {
+    public Salary getData(String id) throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM salary WHERE salary_Id=?", id);
 
-        EmployeeSalaryDto employeeSalaryDto = new EmployeeSalaryDto();
+        Salary entity = new Salary();
 
         if(resultSet.next()){
-            employeeSalaryDto.setSalary_Id(resultSet.getString(1));
-            employeeSalaryDto.setEmployee_Id(resultSet.getString(2));
-            employeeSalaryDto.setWorked_Day_Count(resultSet.getInt(3));
-            employeeSalaryDto.setSalary(resultSet.getDouble(4));
-            employeeSalaryDto.setBonus(resultSet.getDouble(5));
-            employeeSalaryDto.setTotal_Payment(resultSet.getDouble(6));
-            employeeSalaryDto.setDate(resultSet.getString(7));
-            employeeSalaryDto.setTime(resultSet.getString(8));
+            entity.setSalary_Id(resultSet.getString(1));
+            entity.setEmployee_Id(resultSet.getString(2));
+            entity.setWorked_Day_Count(resultSet.getInt(3));
+            entity.setSalary(resultSet.getDouble(4));
+            entity.setBonus(resultSet.getDouble(5));
+            entity.setTotal_Payment(resultSet.getDouble(6));
+            entity.setDate(resultSet.getString(7));
+            entity.setTime(resultSet.getString(8));
         }
-        return employeeSalaryDto;
+        return entity;
     }
 
     @Override
-    public ArrayList<String> getAllSalaryId() throws SQLException {
+    public ArrayList<String> getAllId() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT salary_Id FROM salary ORDER BY salary_Id desc");
         ArrayList<String> list = new ArrayList<>();
 
@@ -111,5 +112,10 @@ public class EmployeeSalaryDAOImpl implements EmployeeSalaryDAO {
             return resultSet.getString(1);
         }
         return null;
+    }
+
+    @Override
+    public boolean delete(String id) throws SQLException {
+        return false;
     }
 }

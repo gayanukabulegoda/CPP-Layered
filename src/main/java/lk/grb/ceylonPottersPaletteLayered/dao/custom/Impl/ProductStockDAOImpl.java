@@ -3,6 +3,7 @@ package lk.grb.ceylonPottersPaletteLayered.dao.custom.Impl;
 import lk.grb.ceylonPottersPaletteLayered.dao.custom.ProductStockDAO;
 import lk.grb.ceylonPottersPaletteLayered.db.DbConnection;
 import lk.grb.ceylonPottersPaletteLayered.dto.ProductStockDto;
+import lk.grb.ceylonPottersPaletteLayered.entity.ProductStock;
 import lk.grb.ceylonPottersPaletteLayered.util.SQLUtil;
 
 import java.sql.PreparedStatement;
@@ -12,47 +13,47 @@ import java.util.ArrayList;
 
 public class ProductStockDAOImpl implements ProductStockDAO {
     @Override
-    public boolean save(ProductStockDto productStockDTO) throws SQLException {
+    public boolean save(ProductStock entity) throws SQLException {
         return SQLUtil.execute("INSERT INTO product_Stock VALUES (?,?,?,?,?,?)",
-                productStockDTO.getProduct_Id(),
-                productStockDTO.getDescription(),
-                productStockDTO.getQty_On_Hand(),
-                productStockDTO.getUnit_Price(),
-                productStockDTO.getCategory(),
-                productStockDTO.getQty());
+                entity.getProduct_Id(),
+                entity.getDescription(),
+                entity.getQty_On_Hand(),
+                entity.getUnit_Price(),
+                entity.getCategory(),
+                entity.getQty());
     }
 
     @Override
-    public boolean updateFromPopUp(ProductStockDto productStockDto) throws SQLException {
+    public boolean updateFromPopUp(ProductStock entity) throws SQLException {
         return SQLUtil.execute("UPDATE product_Stock SET " +
                         "description=?," +
                         "qty_On_Hand=?," +
                         "unit_Price=?," +
                         "category=? " +
                         "WHERE product_Id=?",
-                productStockDto.getDescription(),
-                productStockDto.getQty_On_Hand(),
-                productStockDto.getUnit_Price(),
-                productStockDto.getCategory(),
-                productStockDto.getProduct_Id()
+                entity.getDescription(),
+                entity.getQty_On_Hand(),
+                entity.getUnit_Price(),
+                entity.getCategory(),
+                entity.getProduct_Id()
         );
     }
 
     @Override
-    public ProductStockDto getData(String id) throws SQLException {
+    public ProductStock getData(String id) throws SQLException {
         ResultSet set = SQLUtil.execute("SELECT * FROM product_Stock WHERE product_Id=?", id);
 
-        ProductStockDto productStockDTO = new ProductStockDto();
+        ProductStock entity = new ProductStock();
 
         if (set.next()) {
-            productStockDTO.setProduct_Id(set.getString(1));
-            productStockDTO.setDescription(set.getString(2));
-            productStockDTO.setQty_On_Hand(Integer.parseInt(set.getString(3)));
-            productStockDTO.setUnit_Price(Double.parseDouble(set.getString(4)));
-            productStockDTO.setCategory(set.getString(5));
-            productStockDTO.setQty(Integer.parseInt(set.getString(6)));
+            entity.setProduct_Id(set.getString(1));
+            entity.setDescription(set.getString(2));
+            entity.setQty_On_Hand(Integer.parseInt(set.getString(3)));
+            entity.setUnit_Price(Double.parseDouble(set.getString(4)));
+            entity.setCategory(set.getString(5));
+            entity.setQty(Integer.parseInt(set.getString(6)));
         }
-        return productStockDTO;
+        return entity;
     }
 
     @Override
@@ -111,7 +112,7 @@ public class ProductStockDAOImpl implements ProductStockDAO {
     }
 
     @Override
-    public ArrayList<String> getAllProductId() throws SQLException {
+    public ArrayList<String> getAllId() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT product_Id FROM product_Stock ORDER BY LENGTH(product_Id),product_Id");
         ArrayList<String> list = new ArrayList<>();
 
@@ -194,5 +195,10 @@ public class ProductStockDAOImpl implements ProductStockDAO {
             return resultSet.getString(1);
         }
         return null;
+    }
+
+    @Override
+    public boolean update(ProductStock dto) throws SQLException {
+        return false;
     }
 }

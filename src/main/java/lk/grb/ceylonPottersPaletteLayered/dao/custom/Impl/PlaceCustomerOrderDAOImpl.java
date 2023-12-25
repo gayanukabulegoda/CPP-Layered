@@ -3,6 +3,7 @@ package lk.grb.ceylonPottersPaletteLayered.dao.custom.Impl;
 import lk.grb.ceylonPottersPaletteLayered.dao.custom.PlaceCustomerOrderDAO;
 import lk.grb.ceylonPottersPaletteLayered.db.DbConnection;
 import lk.grb.ceylonPottersPaletteLayered.dto.CustomerOrderDto;
+import lk.grb.ceylonPottersPaletteLayered.entity.CustomerOrder;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -14,7 +15,7 @@ public class PlaceCustomerOrderDAOImpl implements PlaceCustomerOrderDAO {
     CustomerOrderDetailDAOImpl customerOrderDetailDAOImpl = new CustomerOrderDetailDAOImpl();
 
     @Override
-    public boolean placeCustomerOrder(CustomerOrderDto customerOrderDto) {
+    public boolean placeCustomerOrder(CustomerOrder entity) {
 
         boolean isSaved = false;
         Connection connection = null;
@@ -23,13 +24,13 @@ public class PlaceCustomerOrderDAOImpl implements PlaceCustomerOrderDAO {
             connection = DbConnection.getInstance().getConnection();
             connection.setAutoCommit(false);
 
-            boolean save = customerOrderDAOImpl.save(customerOrderDto);
+            boolean save = customerOrderDAOImpl.save(entity);
 
             if (save) {
-                boolean update = productStockDAOImpl.update(customerOrderDto.getOrderList());
+                boolean update = productStockDAOImpl.update(entity.getOrderList());
 
                 if (update) {
-                    boolean saveCusOrder = customerOrderDetailDAOImpl.save(customerOrderDto);
+                    boolean saveCusOrder = customerOrderDetailDAOImpl.save(entity);
 
                     if (saveCusOrder) {
                         connection.commit();

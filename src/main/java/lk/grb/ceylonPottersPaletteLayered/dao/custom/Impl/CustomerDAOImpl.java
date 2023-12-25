@@ -3,6 +3,7 @@ package lk.grb.ceylonPottersPaletteLayered.dao.custom.Impl;
 import lk.grb.ceylonPottersPaletteLayered.dao.custom.CustomerDAO;
 import lk.grb.ceylonPottersPaletteLayered.db.DbConnection;
 import lk.grb.ceylonPottersPaletteLayered.dto.CustomerDto;
+import lk.grb.ceylonPottersPaletteLayered.entity.Customer;
 import lk.grb.ceylonPottersPaletteLayered.util.SQLUtil;
 
 import java.sql.PreparedStatement;
@@ -12,46 +13,46 @@ import java.util.ArrayList;
 
 public class CustomerDAOImpl implements CustomerDAO {
     @Override
-    public boolean save(CustomerDto customerDTO) throws SQLException {
+    public boolean save(Customer entity) throws SQLException {
         return SQLUtil.execute("INSERT INTO customer VALUES (?,?,?,?,?,?,?)",
-                customerDTO.getCustomer_Id(),
-                customerDTO.getName(),
-                customerDTO.getContact_No(),
-                customerDTO.getEmail(),
-                customerDTO.getDate(),
-                customerDTO.getTime(),
-                customerDTO.getUser_Name());
+                entity.getCustomer_Id(),
+                entity.getName(),
+                entity.getContact_No(),
+                entity.getEmail(),
+                entity.getDate(),
+                entity.getTime(),
+                entity.getUser_Name());
     }
 
     @Override
-    public CustomerDto getData(String id) throws SQLException {
+    public Customer getData(String id) throws SQLException {
         ResultSet set = SQLUtil.execute("SELECT * FROM customer WHERE customer_Id=?", id);
 
-        CustomerDto customerDTO = new CustomerDto();
+        Customer entity = new Customer();
 
         if (set.next()) {
-            customerDTO.setCustomer_Id(set.getString(1));
-            customerDTO.setName(set.getString(2));
-            customerDTO.setContact_No(set.getString(3));
-            customerDTO.setEmail(set.getString(4));
-            customerDTO.setDate(set.getString(5));
-            customerDTO.setTime(set.getString(6));
-            customerDTO.setUser_Name(set.getString(7));
+            entity.setCustomer_Id(set.getString(1));
+            entity.setName(set.getString(2));
+            entity.setContact_No(set.getString(3));
+            entity.setEmail(set.getString(4));
+            entity.setDate(set.getString(5));
+            entity.setTime(set.getString(6));
+            entity.setUser_Name(set.getString(7));
         }
-        return customerDTO;
+        return entity;
     }
 
     @Override
-    public boolean update(CustomerDto customerDTO) throws SQLException {
+    public boolean update(Customer entity) throws SQLException {
         return SQLUtil.execute("UPDATE customer SET " +
                         "name=?," +
                         "email=?," +
                         "contact_No=? " +
                         "WHERE customer_Id=?",
-                customerDTO.getName(),
-                customerDTO.getEmail(),
-                customerDTO.getContact_No(),
-                customerDTO.getCustomer_Id()
+                entity.getName(),
+                entity.getEmail(),
+                entity.getContact_No(),
+                entity.getCustomer_Id()
         );
     }
 

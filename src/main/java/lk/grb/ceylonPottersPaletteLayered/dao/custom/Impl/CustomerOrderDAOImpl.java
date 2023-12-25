@@ -2,6 +2,8 @@ package lk.grb.ceylonPottersPaletteLayered.dao.custom.Impl;
 
 import lk.grb.ceylonPottersPaletteLayered.dao.custom.CustomerOrderDAO;
 import lk.grb.ceylonPottersPaletteLayered.dto.CustomerOrderDto;
+import lk.grb.ceylonPottersPaletteLayered.entity.Customer;
+import lk.grb.ceylonPottersPaletteLayered.entity.CustomerOrder;
 import lk.grb.ceylonPottersPaletteLayered.util.SQLUtil;
 
 import java.sql.ResultSet;
@@ -10,33 +12,33 @@ import java.util.ArrayList;
 
 public class CustomerOrderDAOImpl implements CustomerOrderDAO {
     @Override
-    public boolean save(CustomerOrderDto customerOrderDto) throws SQLException {
+    public boolean save(CustomerOrder entity) throws SQLException {
         return SQLUtil.execute("INSERT INTO customer_Order VALUES (?,?,?,?,?)",
-                customerOrderDto.getCustomer_Order_Id(),
-                customerOrderDto.getCustomer_Id(),
-                customerOrderDto.getTotal_Price(),
-                customerOrderDto.getDate(),
-                customerOrderDto.getTime());
+                entity.getCustomer_Order_Id(),
+                entity.getCustomer_Id(),
+                entity.getTotal_Price(),
+                entity.getDate(),
+                entity.getTime());
     }
 
     @Override
-    public CustomerOrderDto getData(String id) throws SQLException {
+    public CustomerOrder getData(String id) throws SQLException {
         ResultSet set = SQLUtil.execute("SELECT * FROM customer_Order WHERE customer_Order_Id=?", id);
 
-        CustomerOrderDto customerOrderDto = new CustomerOrderDto();
+        CustomerOrder entity = new CustomerOrder();
 
         if (set.next()) {
-            customerOrderDto.setCustomer_Order_Id(set.getString(1));
-            customerOrderDto.setCustomer_Id(set.getString(2));
-            customerOrderDto.setTotal_Price(Double.parseDouble(set.getString(3)));
-            customerOrderDto.setDate(set.getString(4));
-            customerOrderDto.setTime(set.getString(5));
+            entity.setCustomer_Order_Id(set.getString(1));
+            entity.setCustomer_Id(set.getString(2));
+            entity.setTotal_Price(Double.parseDouble(set.getString(3)));
+            entity.setDate(set.getString(4));
+            entity.setTime(set.getString(5));
         }
-        return customerOrderDto;
+        return entity;
     }
 
     @Override
-    public ArrayList<String> getAllCustomerOrderId() throws SQLException {
+    public ArrayList<String> getAllId() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT customer_Order_Id FROM customer_Order ORDER BY LENGTH(customer_Order_Id),customer_Order_Id");
         ArrayList<String> list = new ArrayList<>();
 
@@ -112,5 +114,15 @@ public class CustomerOrderDAOImpl implements CustomerOrderDAO {
             return resultSet.getDouble(1);
         }
         return 0.0;
+    }
+
+    @Override
+    public boolean update(CustomerOrder dto) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String id) throws SQLException {
+        return false;
     }
 }

@@ -2,7 +2,7 @@ package lk.grb.ceylonPottersPaletteLayered.dao.custom.Impl;
 
 import lk.grb.ceylonPottersPaletteLayered.dao.custom.ItemStockDAO;
 import lk.grb.ceylonPottersPaletteLayered.db.DbConnection;
-import lk.grb.ceylonPottersPaletteLayered.dto.ItemStockDto;
+import lk.grb.ceylonPottersPaletteLayered.entity.ItemStock;
 import lk.grb.ceylonPottersPaletteLayered.util.SQLUtil;
 
 import java.sql.PreparedStatement;
@@ -12,41 +12,41 @@ import java.util.ArrayList;
 
 public class ItemStockDAOImpl implements ItemStockDAO {
     @Override
-    public boolean save(ItemStockDto itemStockDto) throws SQLException {
+    public boolean save(ItemStock entity) throws SQLException {
         return SQLUtil.execute("INSERT INTO item_Stock VALUES (?,?,?,?)",
-                itemStockDto.getItem_Id(),
-                itemStockDto.getDescription(),
-                itemStockDto.getUnit_Price(),
-                itemStockDto.getQty_On_Hand());
+                entity.getItem_Id(),
+                entity.getDescription(),
+                entity.getUnit_Price(),
+                entity.getQty_On_Hand());
     }
 
     @Override
-    public boolean updateFromPopUp(ItemStockDto itemStockDto) throws SQLException {
+    public boolean updateFromPopUp(ItemStock entity) throws SQLException {
         return SQLUtil.execute("UPDATE item_Stock SET " +
                         "description=?," +
                         "qty_On_Hand=?," +
                         "unit_Price=?" +
                         "WHERE item_Id=?",
-                itemStockDto.getDescription(),
-                itemStockDto.getQty_On_Hand(),
-                itemStockDto.getUnit_Price(),
-                itemStockDto.getItem_Id()
+                entity.getDescription(),
+                entity.getQty_On_Hand(),
+                entity.getUnit_Price(),
+                entity.getItem_Id()
         );
     }
 
     @Override
-    public ItemStockDto getData(String id) throws SQLException {
+    public ItemStock getData(String id) throws SQLException {
         ResultSet set = SQLUtil.execute("SELECT * FROM item_Stock WHERE item_Id=?", id);
 
-        ItemStockDto itemStockDto = new ItemStockDto();
+        ItemStock entity = new ItemStock();
 
         if (set.next()) {
-            itemStockDto.setItem_Id(set.getString(1));
-            itemStockDto.setDescription(set.getString(2));
-            itemStockDto.setUnit_Price(Integer.parseInt(set.getString(3)));
-            itemStockDto.setQty_On_Hand(Integer.parseInt(set.getString(4)));
+            entity.setItem_Id(set.getString(1));
+            entity.setDescription(set.getString(2));
+            entity.setUnit_Price(Integer.parseInt(set.getString(3)));
+            entity.setQty_On_Hand(Integer.parseInt(set.getString(4)));
         }
-        return itemStockDto;
+        return entity;
     }
 
     @Override
@@ -72,7 +72,7 @@ public class ItemStockDAOImpl implements ItemStockDAO {
     }
 
     @Override
-    public ArrayList<String> getAllItemId() throws SQLException {
+    public ArrayList<String> getAllId() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT item_Id FROM item_Stock ORDER BY LENGTH(item_Id),item_Id");
         ArrayList<String> list = new ArrayList<>();
 
@@ -153,5 +153,10 @@ public class ItemStockDAOImpl implements ItemStockDAO {
             return resultSet.getString(1);
         }
         return null;
+    }
+
+    @Override
+    public boolean update(ItemStock dto) throws SQLException {
+        return false;
     }
 }
