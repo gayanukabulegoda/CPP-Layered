@@ -2,24 +2,27 @@ package lk.grb.ceylonPottersPaletteLayered.bo.custom;
 
 import lk.grb.ceylonPottersPaletteLayered.bo.SuperBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeAttendanceDto;
+import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeDto;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface AttendanceBO extends SuperBO {
-    boolean saveAttendance(EmployeeAttendanceDto dto) throws SQLException;
-
     EmployeeAttendanceDto getAttendanceData(String id) throws SQLException;
 
-    boolean updateAttendance(EmployeeAttendanceDto dto) throws SQLException;
+    EmployeeDto getEmployeeData(String id) throws SQLException;
 
-    boolean deleteAttendance(String id) throws SQLException;
+    ArrayList<String> getAllEmployeeId() throws SQLException;
 
-    ArrayList<String> getAllAttendanceId() throws SQLException;
+    String getEmployeeContactNo(String id) throws SQLException;
 
     ArrayList<String> getSelectedAllAttendanceId(String id) throws SQLException;
 
-    String workedDayCount(String id) throws SQLException;
+    ArrayList<String> getAllAttendanceId() throws SQLException;
 
-    String getTodayAttendance() throws SQLException;
+    boolean saveAttendance(EmployeeAttendanceDto dto) throws SQLException;
+
+    String getEmployeeName(String id) throws SQLException;
+
+    boolean updateAttendance(EmployeeAttendanceDto dto) throws SQLException;
 }

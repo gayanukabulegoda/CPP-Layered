@@ -13,13 +13,7 @@ public interface CustomerBO extends SuperBO {
 
     boolean updateCustomer(CustomerDto dto) throws SQLException;
 
-    boolean deleteCustomer(String id) throws SQLException;
-
     ArrayList<String> getAllCustomerId() throws SQLException;
-
-    String getCustomerName(String id) throws SQLException;
-
-    String getCustomerCount() throws SQLException;
 
     String getCustomerContactNo(String id) throws SQLException;
 }
