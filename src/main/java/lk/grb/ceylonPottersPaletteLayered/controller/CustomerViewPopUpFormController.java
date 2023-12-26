@@ -7,8 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.CustomerBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.CustomerDto;
-import lk.grb.ceylonPottersPaletteLayered.model.CustomerModel;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -47,7 +48,9 @@ public class CustomerViewPopUpFormController implements Initializable {
 
     public static String customerId;
 
-    CustomerModel customerModel = new CustomerModel();
+    CustomerBO customerBO =
+            (CustomerBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.CUSTOMER);
 
     @FXML
     void btnCloseIconOnAction(ActionEvent event) {
@@ -81,7 +84,7 @@ public class CustomerViewPopUpFormController implements Initializable {
 
     public void setData() throws SQLException {
 
-        CustomerDto customerDto = customerModel.getData(customerId);
+        CustomerDto customerDto = customerBO.getCustomerData(customerId);
 
         lblCustomerId.setText(customerDto.getCustomer_Id());
         lblCustomerName.setText(customerDto.getName());

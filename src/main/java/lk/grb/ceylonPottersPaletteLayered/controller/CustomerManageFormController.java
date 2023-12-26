@@ -11,7 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import lk.grb.ceylonPottersPaletteLayered.model.CustomerModel;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.CustomerBO;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -47,7 +48,9 @@ public class CustomerManageFormController implements Initializable {
 
     private static CustomerManageFormController controller;
 
-    CustomerModel customerModel = new CustomerModel();
+    CustomerBO customerBO =
+            (CustomerBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.CUSTOMER);
 
     public CustomerManageFormController() {
         controller = this;
@@ -87,10 +90,10 @@ public class CustomerManageFormController implements Initializable {
             return;
         }
 
-        ArrayList<String> allCustomerId = customerModel.getAllCustomerId();
+        ArrayList<String> allCustomerId = customerBO.getAllCustomerId();
 
         for (int i = 0; i < allCustomerId.size(); i++) {
-            if (txtSearch.getText().equals(customerModel.getCustomerContactNo(allCustomerId.get(i)))) {
+            if (txtSearch.getText().equals(customerBO.getCustomerContactNo(allCustomerId.get(i)))) {
                 CustomerViewPopUpFormController.customerId = allCustomerId.get(i);
                 Navigation.imgPopUpBackground("customerViewPopUpForm.fxml");
                 lblSearchAlert.setText(" ");
@@ -110,8 +113,7 @@ public class CustomerManageFormController implements Initializable {
     public void allCustomerId() throws SQLException {
 
         vBoxCustomerManage.getChildren().clear();
-        CustomerModel customerModel = new CustomerModel();
-        ArrayList<String> list = customerModel.getAllCustomerId();
+        ArrayList<String> list = customerBO.getAllCustomerId();
 
         for (int i = 0; i < list.size(); i++) {
            loadDataTable(list.get(i));

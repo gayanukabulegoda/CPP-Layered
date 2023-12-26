@@ -14,10 +14,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.CustomerOrderBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.CustomerOrderDto;
-import lk.grb.ceylonPottersPaletteLayered.model.CustomerModel;
-import lk.grb.ceylonPottersPaletteLayered.model.CustomerOrderDetailModel;
-import lk.grb.ceylonPottersPaletteLayered.model.CustomerOrderModel;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -65,9 +64,9 @@ public class CustomerOrderViewPopUpFormController implements Initializable {
     public static String customerOrderId;
     public static String customerId;
 
-    CustomerOrderModel customerOrderModel = new CustomerOrderModel();
-    CustomerModel customerModel = new CustomerModel();
-    CustomerOrderDetailModel customerOrderDetailModel = new CustomerOrderDetailModel();
+    CustomerOrderBO customerOrderBO =
+            (CustomerOrderBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.CUSTOMER_ORDER);
 
     @FXML
     void btnCloseOnAction(ActionEvent event) {
@@ -137,9 +136,9 @@ public class CustomerOrderViewPopUpFormController implements Initializable {
 
     public void setData() throws SQLException {
 
-        CustomerOrderDto customerOrderDto = customerOrderModel.getData(customerOrderId);
-        String customerName = customerModel.getCustomerName(customerId);
-        ArrayList<String[]> list = customerOrderDetailModel.getData(customerOrderId);
+        CustomerOrderDto customerOrderDto = customerOrderBO.getCustomerOrderData(customerOrderId);
+        String customerName = customerOrderBO.getCustomerName(customerId);
+        ArrayList<String[]> list = customerOrderBO.getCustomerOrderDetailData(customerOrderId);
 
         lblOrderId.setText(customerOrderDto.getCustomer_Order_Id());
         lblOrderDate.setText(customerOrderDto.getDate());

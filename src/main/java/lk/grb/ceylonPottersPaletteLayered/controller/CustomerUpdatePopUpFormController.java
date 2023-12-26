@@ -10,8 +10,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.CustomerBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.CustomerDto;
-import lk.grb.ceylonPottersPaletteLayered.model.CustomerModel;
 import lk.grb.ceylonPottersPaletteLayered.util.*;
 
 import java.net.URL;
@@ -55,7 +56,9 @@ public class CustomerUpdatePopUpFormController implements Initializable {
 
     public static String customerId;
 
-    CustomerModel customerModel = new CustomerModel();
+    CustomerBO customerBO =
+            (CustomerBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.CUSTOMER);
 
     @FXML
     void btnCancelOnAction(ActionEvent event) {
@@ -82,7 +85,7 @@ public class CustomerUpdatePopUpFormController implements Initializable {
             customerDto.setTime(customerDto.getTime());
             customerDto.setUser_Name(customerDto.getUser_Name());
 
-            boolean updated = customerModel.update(customerDto);
+            boolean updated = customerBO.updateCustomer(customerDto);
 
             if (updated) {
                 Navigation.closePane();
@@ -94,7 +97,7 @@ public class CustomerUpdatePopUpFormController implements Initializable {
     public void setData() {
         try {
 
-            CustomerDto customerDto = customerModel.getData(customerId);
+            CustomerDto customerDto = customerBO.getCustomerData(customerId);
 
             txtCustomerName.setText(customerDto.getName());
             txtContactNo.setText(customerDto.getContact_No());

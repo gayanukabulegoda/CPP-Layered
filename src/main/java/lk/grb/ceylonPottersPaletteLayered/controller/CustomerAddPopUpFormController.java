@@ -9,8 +9,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.CustomerBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.CustomerDto;
-import lk.grb.ceylonPottersPaletteLayered.model.CustomerModel;
 import lk.grb.ceylonPottersPaletteLayered.util.*;
 
 import java.sql.SQLException;
@@ -51,13 +52,15 @@ public class CustomerAddPopUpFormController {
     @FXML
     private Label lblCustomerNameAlert;
 
-    CustomerModel customerModel = new CustomerModel();
+    CustomerBO customerBO =
+            (CustomerBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.CUSTOMER);
 
     @FXML
     void btnAddOnAction() throws SQLException {
         CustomerDto customerDto = new CustomerDto();
 
-        ArrayList<String> list = customerModel.getAllCustomerId();
+        ArrayList<String> list = customerBO.getAllCustomerId();
 
         if (validateCustomer()) {
 
@@ -69,7 +72,7 @@ public class CustomerAddPopUpFormController {
             customerDto.setDate(DateTimeUtil.dateNow());
             customerDto.setUser_Name(GlobalFormController.user);
 
-            boolean saved = customerModel.save(customerDto);
+            boolean saved = customerBO.saveCustomer(customerDto);
 
             if (saved) {
                 Navigation.closePane();

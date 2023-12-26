@@ -2,7 +2,8 @@ package lk.grb.ceylonPottersPaletteLayered.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
-import lk.grb.ceylonPottersPaletteLayered.model.ProductStockModel;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.CustomerOrderBO;
 
 import java.sql.SQLException;
 
@@ -23,11 +24,13 @@ public class CustomerOrderViewPopUpBarFormController {
     @FXML
     private Text unitPrice;
 
-    ProductStockModel productStockModel = new ProductStockModel();
+    CustomerOrderBO customerOrderBO =
+            (CustomerOrderBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.CUSTOMER_ORDER);
 
     public void setData(String[] element) {
         try {
-            String[] descriptionAndUnitPrice = productStockModel.descAndUnitPriceGet(element[0]);
+            String[] descriptionAndUnitPrice = customerOrderBO.productDescAndUnitPriceGet(element[0]);
 
             this.id.setText(element[0]);
             description.setText(descriptionAndUnitPrice[0]);

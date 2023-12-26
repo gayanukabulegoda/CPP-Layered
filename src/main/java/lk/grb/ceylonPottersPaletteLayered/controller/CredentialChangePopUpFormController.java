@@ -10,8 +10,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.UserBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.UserDto;
-import lk.grb.ceylonPottersPaletteLayered.model.UserModel;
 import lk.grb.ceylonPottersPaletteLayered.util.*;
 
 import java.sql.SQLException;
@@ -54,7 +55,7 @@ public class CredentialChangePopUpFormController {
     @FXML
     private Label lblNewPwAlert;
 
-    UserModel userModel = new UserModel();
+    UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
 
     @FXML
     void btnCancelOnAction(ActionEvent event) {
@@ -76,7 +77,7 @@ public class CredentialChangePopUpFormController {
             userDto.setPassword(txtConfirmPassword.getText());
 
             LoginFormController.password = txtConfirmPassword.getText();
-            boolean updated = userModel.update(userDto);
+            boolean updated = userBO.updateUser(userDto);
 
             if (updated) {
                 Navigation.closePane();

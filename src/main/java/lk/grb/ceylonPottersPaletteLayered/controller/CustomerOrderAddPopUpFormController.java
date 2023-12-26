@@ -15,8 +15,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.CustomerOrderBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.CustomerOrderDto;
-import lk.grb.ceylonPottersPaletteLayered.model.*;
 import lk.grb.ceylonPottersPaletteLayered.util.*;
 
 import java.io.IOException;
@@ -87,16 +88,16 @@ public class CustomerOrderAddPopUpFormController implements Initializable {
     @FXML
     private Label lblQtyAlert;
 
-    CustomerOrderModel customerOrderModel = new CustomerOrderModel();
-    CustomerModel customerModel = new CustomerModel();
-    ProductStockModel productStockModel = new ProductStockModel();
-    PlaceCustomerOrderModel placeCustomerOrderModel = new PlaceCustomerOrderModel();
+    CustomerOrderBO customerOrderBO =
+            (CustomerOrderBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.CUSTOMER_ORDER);
+
     public static ArrayList<String[]> productList;
     ArrayList<String> idList;
 
     {
         try {
-            idList = customerOrderModel.getAllCustomerOrderId();
+            idList = customerOrderBO.getAllCustomerOrderId();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -250,7 +251,7 @@ public class CustomerOrderAddPopUpFormController implements Initializable {
         customerOrderDto.setTime(DateTimeUtil.timeNow());
         customerOrderDto.setOrderList(productList);
 
-        boolean isSaved = placeCustomerOrderModel.placeCustomerOrder(customerOrderDto);
+        boolean isSaved = customerOrderBO.placeCustomerOrder(customerOrderDto);
 
         if (isSaved) {
             Navigation.closeOrderPopUpPane();
@@ -263,11 +264,11 @@ public class CustomerOrderAddPopUpFormController implements Initializable {
 
     @FXML
     void cmbCustomerIdOnAction(ActionEvent event) throws SQLException {
-        lblCustomerName.setText(customerModel.getCustomerName(cmbCustomerId.getSelectionModel().getSelectedItem()));
+        lblCustomerName.setText(customerOrderBO.getCustomerName(cmbCustomerId.getSelectionModel().getSelectedItem()));
     }
 
     public void setCustomerDataInComboBox() throws SQLException {
-        ArrayList<String> roles = customerModel.getAllCustomerId();
+        ArrayList<String> roles = customerOrderBO.getAllCustomerId();
         cmbCustomerId.getItems().addAll(roles);
     }
 
@@ -275,17 +276,17 @@ public class CustomerOrderAddPopUpFormController implements Initializable {
     void cmbProductIdOnAction(ActionEvent event) throws SQLException {
         for (int i = 0; i < productList.size(); i++) {
             if(cmbProductId.getSelectionModel().getSelectedItem().equals(productList.get(i)[0])){
-                int qty = Integer.parseInt(productStockModel.getQtyOnHand(productList.get(i)[0]));
+                int qty = Integer.parseInt(customerOrderBO.getProductQtyOnHand(productList.get(i)[0]));
                 int orderedQty = Integer.parseInt(productList.get(i)[1]);
                 lblQtyOnHand.setText(String.valueOf(qty - orderedQty));
-                lblUnitPrice.setText(productStockModel.getUnitPrice(productList.get(i)[0]));
-                lblDescription.setText(productStockModel.getDescription(productList.get(i)[0]));
+                lblUnitPrice.setText(customerOrderBO.getProductUnitPrice(productList.get(i)[0]));
+                lblDescription.setText(customerOrderBO.getProductDescription(productList.get(i)[0]));
                 return;
             }
         }
-        lblDescription.setText(productStockModel.getDescription(cmbProductId.getSelectionModel().getSelectedItem()));
-        lblUnitPrice.setText(productStockModel.getUnitPrice(cmbProductId.getSelectionModel().getSelectedItem()));
-        lblQtyOnHand.setText(productStockModel.getQtyOnHand(cmbProductId.getSelectionModel().getSelectedItem()));
+        lblDescription.setText(customerOrderBO.getProductDescription(cmbProductId.getSelectionModel().getSelectedItem()));
+        lblUnitPrice.setText(customerOrderBO.getProductUnitPrice(cmbProductId.getSelectionModel().getSelectedItem()));
+        lblQtyOnHand.setText(customerOrderBO.getProductQtyOnHand(cmbProductId.getSelectionModel().getSelectedItem()));
     }
 
     @FXML
@@ -329,7 +330,7 @@ public class CustomerOrderAddPopUpFormController implements Initializable {
     }
 
     public void setProductDataInComboBox() throws SQLException {
-        ArrayList<String> roles = productStockModel.getAllProductId();
+        ArrayList<String> roles = customerOrderBO.getAllProductId();
         cmbProductId.getItems().addAll(roles);
     }
 

@@ -11,8 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import lk.grb.ceylonPottersPaletteLayered.model.CustomerModel;
-import lk.grb.ceylonPottersPaletteLayered.model.CustomerOrderModel;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.CustomerOrderBO;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -61,6 +61,10 @@ public class CustomerOrderManageFormController implements Initializable {
     public static  CustomerOrderManageFormController getInstance() {
         return controller;
     }
+
+    CustomerOrderBO customerOrderBO =
+            (CustomerOrderBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.CUSTOMER_ORDER);
 
     @FXML
     void btnAddOrderOnAction(ActionEvent event) throws IOException {
@@ -116,14 +120,12 @@ public class CustomerOrderManageFormController implements Initializable {
             return;
         }
 
-        CustomerOrderModel customerOrderModel = new CustomerOrderModel();
-        CustomerModel customerModel = new CustomerModel();
-        ArrayList<String> allCustomerOrderId = customerOrderModel.getAllCustomerOrderId();
+        ArrayList<String> allCustomerOrderId = customerOrderBO.getAllCustomerOrderId();
 
         for (int i = 0; i < allCustomerOrderId.size(); i++) {
             if (txtSearch.getText().equals(allCustomerOrderId.get(i))) {
                 CustomerOrderViewPopUpFormController.customerOrderId = txtSearch.getText();
-                CustomerOrderViewPopUpFormController.customerId = customerOrderModel.getCustomerIdForOrder(txtSearch.getText());
+                CustomerOrderViewPopUpFormController.customerId = customerOrderBO.getCustomerIdForOrder(txtSearch.getText());
                 Navigation.imgPopUpBackground("customerOrderViewPopUpForm.fxml");
                 lblSearchAlert.setText(" ");
                 StyleUtil.searchBarTransparent(searchBarPane);
@@ -131,10 +133,10 @@ public class CustomerOrderManageFormController implements Initializable {
                 return;
             }
 
-            ArrayList<String> customerIds = customerOrderModel.getCustomerId(allCustomerOrderId.get(i));
+            ArrayList<String> customerIds = customerOrderBO.getCustomerId(allCustomerOrderId.get(i));
 
             for (int j = 0; j < customerIds.size(); j++) {
-                if (txtSearch.getText().equals(customerModel.getCustomerContactNo(customerIds.get(j)))) {
+                if (txtSearch.getText().equals(customerOrderBO.getCustomerContactNo(customerIds.get(j)))) {
                     allSelectedCustomerOrderId(customerIds.get(j));
                     lblSearchAlert.setText(" ");
                     StyleUtil.searchBarTransparent(searchBarPane);
@@ -158,8 +160,7 @@ public class CustomerOrderManageFormController implements Initializable {
     public void allSelectedCustomerOrderId(String id) throws SQLException {
 
         vBoxCustomerOrders.getChildren().clear();
-        CustomerOrderModel customerOrderModel = new CustomerOrderModel();
-        ArrayList<String> list = customerOrderModel.getSelectedAllCustomerOrderId(id);
+        ArrayList<String> list = customerOrderBO.getSelectedAllCustomerOrderId(id);
 
         for (int i = 0; i < list.size(); i++) {
             loadDataTable(list.get(i));
@@ -169,8 +170,7 @@ public class CustomerOrderManageFormController implements Initializable {
     public void allCustomerOrderId() throws SQLException {
 
         vBoxCustomerOrders.getChildren().clear();
-        CustomerOrderModel customerOrderModel = new CustomerOrderModel();
-        ArrayList<String> list = customerOrderModel.getAllCustomerOrderId();
+        ArrayList<String> list = customerOrderBO.getAllCustomerOrderId();
 
         for (int i = 0; i < list.size(); i++) {
             loadDataTable(list.get(i));

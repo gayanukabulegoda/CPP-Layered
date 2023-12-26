@@ -4,8 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.CustomerBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.CustomerDto;
-import lk.grb.ceylonPottersPaletteLayered.model.CustomerModel;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -35,7 +36,9 @@ public class CustomerManageBarFormController {
     @FXML
     private ImageView viewImg;
 
-    CustomerModel customerModel = new CustomerModel();
+    CustomerBO customerBO =
+            (CustomerBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.CUSTOMER);
 
     @FXML
     void deleteOnMouseClick(MouseEvent event) throws IOException {
@@ -87,7 +90,7 @@ public class CustomerManageBarFormController {
 
     public void setData(String id) {
         try {
-            CustomerDto customerDto = customerModel.getData(id);
+            CustomerDto customerDto = customerBO.getCustomerData(id);
 
             this.id.setText(customerDto.getCustomer_Id());
             name.setText(customerDto.getName());

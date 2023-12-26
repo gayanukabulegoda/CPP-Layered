@@ -6,7 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import lk.grb.ceylonPottersPaletteLayered.model.*;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.ConfirmationPopUpBO;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -31,12 +32,9 @@ public class ConfirmationPopUpFormController {
 
     private static String id;
 
-    EmployeeModel employeeModel = new EmployeeModel();
-    EmployeeAttendanceModel employeeAttendanceModel = new EmployeeAttendanceModel();
-    SupplierModel supplierModel = new SupplierModel();
-    CustomerModel customerModel = new CustomerModel();
-    ProductStockModel productStockModel = new ProductStockModel();
-    ItemStockModel itemStockModel = new ItemStockModel();
+    ConfirmationPopUpBO confirmationPopUpBO =
+            (ConfirmationPopUpBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.CONFIRMATION_POPUP);
 
     public static void setId(String id) {
         ConfirmationPopUpFormController.id = id;
@@ -55,22 +53,22 @@ public class ConfirmationPopUpFormController {
     @FXML
     void btnConfirmOnAction(ActionEvent event) throws SQLException {
         if (id.startsWith("E")) {
-            employeeModel.delete(id);
+            confirmationPopUpBO.deleteEmployee(id);
             EmployeeManageFormController.getInstance().allEmployeeId();
         } else if (id.startsWith("S")) {
-            supplierModel.delete(id);
+            confirmationPopUpBO.deleteSupplier(id);
             SupplierManageFormController.getInstance().allSupplierId();
         } else if (id.startsWith("C")) {
-            customerModel.delete(id);
+            confirmationPopUpBO.deleteCustomer(id);
             CustomerManageFormController.getInstance().allCustomerId();
         } else if (id.startsWith("A")) {
-            employeeAttendanceModel.delete(id);
+            confirmationPopUpBO.deleteAttendance(id);
             EmployeeAttendanceFormController.getInstance().allAttendanceId();
         } else if (id.startsWith("P")) {
-            productStockModel.delete(id);
+            confirmationPopUpBO.deleteProductStock(id);
             ProductStockFormController.getInstance().allProductId();
         } else if (id.startsWith("I")) {
-            itemStockModel.delete(id);
+            confirmationPopUpBO.deleteItemStock(id);
             ItemStockFormController.getInstance().allItemId();
         }
         Navigation.closePane();

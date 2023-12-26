@@ -4,11 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.CustomerOrderBO;
 import lk.grb.ceylonPottersPaletteLayered.db.DbConnection;
 import lk.grb.ceylonPottersPaletteLayered.dto.CustomerDto;
 import lk.grb.ceylonPottersPaletteLayered.dto.CustomerOrderDto;
-import lk.grb.ceylonPottersPaletteLayered.model.CustomerModel;
-import lk.grb.ceylonPottersPaletteLayered.model.CustomerOrderModel;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 import net.sf.jasperreports.engine.*;
@@ -45,8 +45,9 @@ public class CustomerOrderManageBarFormController {
     @FXML
     private ImageView reportImg;
 
-    CustomerModel customerModel = new CustomerModel();
-    CustomerOrderModel customerOrderModel = new CustomerOrderModel();
+    CustomerOrderBO customerOrderBO =
+            (CustomerOrderBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.CUSTOMER_ORDER);
 
     @FXML
     void viewDetailsOnMouseClick(MouseEvent event) throws IOException {
@@ -67,8 +68,8 @@ public class CustomerOrderManageBarFormController {
 
     @FXML
     void reportOnMouseClick(MouseEvent event) throws SQLException, JRException {
-        CustomerOrderDto customerOrderDto = customerOrderModel.getData(id.getText());
-        CustomerDto customerDto = customerModel.getData(customerOrderDto.getCustomer_Id());
+        CustomerOrderDto customerOrderDto = customerOrderBO.getCustomerOrderData(id.getText());
+        CustomerDto customerDto = customerOrderBO.getCustomerData(customerOrderDto.getCustomer_Id());
 
         HashMap<String, Object> hashMap = new HashMap<>();
 
@@ -119,7 +120,7 @@ public class CustomerOrderManageBarFormController {
 
     public void setData(String id) {
         try {
-            CustomerOrderDto customerOrderDto = customerOrderModel.getData(id);
+            CustomerOrderDto customerOrderDto = customerOrderBO.getCustomerOrderData(id);
 
             this.id.setText(customerOrderDto.getCustomer_Order_Id());
             customerId.setText(customerOrderDto.getCustomer_Id());
