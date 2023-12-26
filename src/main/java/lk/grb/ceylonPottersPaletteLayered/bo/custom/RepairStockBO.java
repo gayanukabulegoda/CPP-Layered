@@ -7,7 +7,7 @@ import lk.grb.ceylonPottersPaletteLayered.dto.RepairStockDto;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface RepairedStockBO extends SuperBO {
+public interface RepairStockBO extends SuperBO {
     RepairStockDto getRepairStockData(String id) throws SQLException;
 
     ProductStockDto getProductStockData(String id) throws SQLException;
