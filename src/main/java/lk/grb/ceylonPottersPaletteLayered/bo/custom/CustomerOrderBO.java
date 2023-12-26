@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface CustomerOrderBO extends SuperBO {
-    String[] descAndUnitPriceGet(String id) throws SQLException;
+    String[] productDescAndUnitPriceGet(String id) throws SQLException;
 
     ArrayList<String> getAllCustomerOrderId() throws SQLException;
 

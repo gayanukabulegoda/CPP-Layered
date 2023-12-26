@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface SupplierOrderBO extends SuperBO {
-    String[] descAndUnitPriceGet(String id) throws SQLException;
+    String[] ItemDescAndUnitPriceGet(String id) throws SQLException;
 
     ArrayList<String> getAllSupplierId() throws SQLException;
 
@@ -38,5 +38,5 @@ public interface SupplierOrderBO extends SuperBO {
 
     ArrayList<String> getSelectedAllSupplierOrderId(String id) throws SQLException;
 
-    ArrayList<String[]> getDataAsAnArray(String id) throws SQLException;
+    ArrayList<String[]> getSupplierOrderDataAsAnArray(String id) throws SQLException;
 }
