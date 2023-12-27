@@ -19,7 +19,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import lk.grb.ceylonPottersPaletteLayered.model.*;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.DashboardBO;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -85,14 +86,9 @@ public class DashboardFormController implements Initializable {
     @FXML
     private PieChart pieChart;
 
-    ProductStockModel productStockModel = new ProductStockModel();
-    ItemStockModel itemStockModel = new ItemStockModel();
-    EmployeeAttendanceModel employeeAttendanceModel = new EmployeeAttendanceModel();
-    CustomerOrderModel customerOrderModel = new CustomerOrderModel();
-    CustomerModel customerModel = new CustomerModel();
-    SupplierModel supplierModel = new SupplierModel();
-    SupplierOrderModel supplierOrderModel = new SupplierOrderModel();
-    EmployeeSalaryModel employeeSalaryModel = new EmployeeSalaryModel();
+    DashboardBO dashboardBO =
+            (DashboardBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.DASHBOARD);
 
     @FXML
     void btnChangeCredentialsOnAction(ActionEvent event) throws IOException {
@@ -192,8 +188,7 @@ public class DashboardFormController implements Initializable {
     public void allOrderId() throws SQLException {
 
         vBoxOrders.getChildren().clear();
-        CustomerOrderModel customerOrderModel1 = new CustomerOrderModel();
-        ArrayList<String> list = customerOrderModel1.getAllCustomerOrderIdS();
+        ArrayList<String> list = dashboardBO.getAllCustomerOrderIdS();
 
         for (int i = 0; i < list.size(); i++) {
             loadDataTable(list.get(i));
@@ -246,8 +241,8 @@ public class DashboardFormController implements Initializable {
 
         // Create sample data for the pie chart
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Total Income", customerOrderModel.getOrderTotal()),
-                new PieChart.Data("Total Expenses", (supplierOrderModel.getOrderTotal() + employeeSalaryModel.getSalaryTotal()))
+                new PieChart.Data("Total Income", dashboardBO.getCustomerOrderTotal()),
+                new PieChart.Data("Total Expenses", (dashboardBO.getSupplierOrderTotal() + dashboardBO.getSalaryTotal()))
         );
 
         // Create a pie chart with the data
@@ -267,10 +262,10 @@ public class DashboardFormController implements Initializable {
         int qtyTotal = 0;
 
         try {
-            ArrayList<String> allProductId = productStockModel.getAllProductId();
+            ArrayList<String> allProductId = dashboardBO.getAllProductId();
 
             for (int i = 0; i < allProductId.size(); i++) {
-                qtyTotal += Integer.parseInt(productStockModel.getQtyTotal(allProductId.get(i)));
+                qtyTotal += Integer.parseInt(dashboardBO.getProductQtyTotal(allProductId.get(i)));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -278,19 +273,19 @@ public class DashboardFormController implements Initializable {
         lblProductTotal.setText(String.valueOf(qtyTotal));
 
         try {
-            lblAttendance.setText("0" + employeeAttendanceModel.getTodayAttendance());
+            lblAttendance.setText("0" + dashboardBO.getTodayAttendance());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
         try {
-            lblClayStock.setText(itemStockModel.getAvailableClayStock() + "kg");
+            lblClayStock.setText(dashboardBO.getAvailableClayStock() + "kg");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
         try {
-            lblTodaySales.setText("0" + customerOrderModel.getTodaySales());
+            lblTodaySales.setText("0" + dashboardBO.getTodaySales());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -302,13 +297,13 @@ public class DashboardFormController implements Initializable {
         }
 
         try {
-            lblCustomerNo.setText("00" + customerModel.getCustomerCount());
+            lblCustomerNo.setText("00" + dashboardBO.getCustomerCount());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
         try {
-            lblSupplierNo.setText("00" + supplierModel.getSupplierCount());
+            lblSupplierNo.setText("00" + dashboardBO.getSupplierCount());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

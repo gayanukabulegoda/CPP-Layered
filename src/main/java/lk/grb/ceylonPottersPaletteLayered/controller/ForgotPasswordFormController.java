@@ -12,7 +12,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-import lk.grb.ceylonPottersPaletteLayered.model.UserModel;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.UserBO;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.RegExPatterns;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
@@ -37,7 +38,7 @@ public class ForgotPasswordFormController {
     @FXML
     private ImageView imgBackBtn;
 
-    UserModel userModel = new UserModel();
+    UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
 
     @FXML
     void btnBackOnAction(ActionEvent event) throws IOException {
@@ -49,9 +50,9 @@ public class ForgotPasswordFormController {
     void btnResetPasswordOnAction(ActionEvent event) throws IOException, SQLException {
 
         if(validateUserName()) {
-            String employeeId = userModel.getEmployeeId(txtUsername.getText());
+            String employeeId = userBO.getEmployeeId(txtUsername.getText());
 
-            if (userModel.getUserName(employeeId).equals(txtUsername.getText())) {
+            if (userBO.getUserName(employeeId).equals(txtUsername.getText())) {
 
                 OTPVerifyFormController.employeeId = employeeId;
 

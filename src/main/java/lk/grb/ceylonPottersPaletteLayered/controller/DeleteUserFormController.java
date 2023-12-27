@@ -8,9 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.UserBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeDto;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeModel;
-import lk.grb.ceylonPottersPaletteLayered.model.UserModel;
 import lk.grb.ceylonPottersPaletteLayered.qr.QrReader;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.SendEmail;
@@ -64,8 +64,7 @@ public class DeleteUserFormController implements Initializable {
     @FXML
     private Label lblUnsuccessfulAlert;
 
-    UserModel userModel = new UserModel();
-    EmployeeModel employeeModel = new EmployeeModel();
+    UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
 
     @FXML
     void btnCancelOnAction(ActionEvent event) {
@@ -131,13 +130,13 @@ public class DeleteUserFormController implements Initializable {
 
         if(lblEmployeeId.getText().equals(String.valueOf(id))) {
 
-            boolean delete = userModel.delete(GlobalFormController.user);
+            boolean delete = userBO.deleteUser(GlobalFormController.user);
             if (delete) {
                 Navigation.close(event);
                 Navigation.switchNavigation("loginForm.fxml", event);
 
                 SendEmail sendEmail = new SendEmail();
-                EmployeeDto employeeDto = employeeModel.getData(lblEmployeeId.getText());
+                EmployeeDto employeeDto = userBO.getEmployeeData(lblEmployeeId.getText());
 
                 String subject = "Account Deleted";
                 String body = "Hello " + employeeDto.getFirst_Name() +" "+ employeeDto.getLast_Name() +
@@ -173,19 +172,19 @@ public class DeleteUserFormController implements Initializable {
         lblUsername.setText(GlobalFormController.user);
 
         try {
-            lblEmployeeId.setText(userModel.getEmployeeId(GlobalFormController.user));
+            lblEmployeeId.setText(userBO.getEmployeeId(GlobalFormController.user));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
         try {
-            lblEmployeeName.setText(employeeModel.getEmployeeName(lblEmployeeId.getText()));
+            lblEmployeeName.setText(userBO.getEmployeeName(lblEmployeeId.getText()));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
         try {
-            lblRole.setText(employeeModel.getEmployeeRole(lblEmployeeId.getText()));
+            lblRole.setText(userBO.getEmployeeRole(lblEmployeeId.getText()));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

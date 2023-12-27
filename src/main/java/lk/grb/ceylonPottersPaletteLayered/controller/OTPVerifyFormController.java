@@ -13,8 +13,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.UserBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeDto;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeModel;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.RegExPatterns;
 import lk.grb.ceylonPottersPaletteLayered.util.SendEmail;
@@ -52,7 +53,8 @@ public class OTPVerifyFormController implements Initializable {
 
     public static String otp;
     public static String employeeId;
-    EmployeeModel employeeModel = new EmployeeModel();
+
+    UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
 
     @FXML
     void btnBackIconOnAction(ActionEvent event) throws IOException {
@@ -167,7 +169,7 @@ public class OTPVerifyFormController implements Initializable {
         SendEmail sendEmail = new SendEmail();
 
         try {
-            EmployeeDto employeeDto = employeeModel.getData(employeeId);
+            EmployeeDto employeeDto = userBO.getEmployeeData(employeeId);
             String email = employeeDto.getEmail();
             String subject = "OTP Verification";
             String body = "OTP : " + otp;

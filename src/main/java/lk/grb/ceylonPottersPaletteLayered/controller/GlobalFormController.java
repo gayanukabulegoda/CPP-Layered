@@ -11,7 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-import lk.grb.ceylonPottersPaletteLayered.model.UserModel;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.UserBO;
 import lk.grb.ceylonPottersPaletteLayered.util.DateTimeUtil;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lombok.SneakyThrows;
@@ -122,6 +123,8 @@ public class GlobalFormController implements Initializable {
     public static GlobalFormController getInstance() {
         return controller;
     }
+
+    UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
 
     private void buttonUnSelected() {
         dashboardButtonSelected = false;
@@ -357,7 +360,7 @@ public class GlobalFormController implements Initializable {
         dashboardButtonSelected = true;
         btnSelected(paneBtnDashboard, lblDashboard, imgDashboard, "dashboardIcon2.png");
 
-        lblUser.setText(UserModel.getRole(user));
+        lblUser.setText(userBO.getUserRole(user));
 
         try {
             Navigation.switchPaging(pagingPane, "dashboardForm.fxml");

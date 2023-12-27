@@ -13,8 +13,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeModel;
-import lk.grb.ceylonPottersPaletteLayered.model.UserModel;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.UserBO;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.RegExPatterns;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
@@ -42,8 +42,7 @@ public class SignUpEmployeeConfirmFormController {
     @FXML
     private ImageView imgBackBtn;
 
-    EmployeeModel employeeModel = new EmployeeModel();
-    UserModel userModel = new UserModel();
+    UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
 
     @FXML
     void btnBackOnAction(ActionEvent event) throws IOException {
@@ -53,8 +52,8 @@ public class SignUpEmployeeConfirmFormController {
     @FXML
     void btnConfirmOnAction(ActionEvent event) throws IOException, SQLException {
         if(validateEmployeeId()) {
-            if (employeeModel.getEmployeeName(txtEmployeeId.getText()) != null) {
-                if (userModel.getUserName(txtEmployeeId.getText()).equals("null")) {
+            if (userBO.getEmployeeName(txtEmployeeId.getText()) != null) {
+                if (userBO.getUserName(txtEmployeeId.getText()).equals("null")) {
                     SignUpOTPVerifyFormController.employeeId = txtEmployeeId.getText();
 
                     Navigation.close(event);

@@ -13,6 +13,8 @@ public interface DashboardBO extends SuperBO {
 
     double getSupplierOrderTotal() throws SQLException;
 
+    double getSalaryTotal() throws SQLException;
+
     ArrayList<String> getAllProductId() throws SQLException;
 
     String getProductQtyTotal(String id) throws SQLException;

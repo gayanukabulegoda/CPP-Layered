@@ -12,8 +12,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.UserBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.UserDto;
-import lk.grb.ceylonPottersPaletteLayered.model.UserModel;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.RegExPatterns;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
@@ -44,7 +45,7 @@ public class ResetPasswordFromController {
     @FXML
     private Pane backPane;
 
-    UserModel userModel = new UserModel();
+    UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
 
     @FXML
     void btnResetPasswordOnAction(ActionEvent event) throws IOException, SQLException {
@@ -53,9 +54,9 @@ public class ResetPasswordFromController {
             UserDto userDto = new UserDto();
 
             userDto.setPassword(txtConfirmPassword.getText());
-            userDto.setUser_Name(userModel.getUserName(OTPVerifyFormController.employeeId));
+            userDto.setUser_Name(userBO.getUserName(OTPVerifyFormController.employeeId));
 
-            if (userModel.update(userDto)) {
+            if (userBO.updateUser(userDto)) {
                 Navigation.close(event);
                 Navigation.switchNavigation("loginForm.fxml", event);
             } else {

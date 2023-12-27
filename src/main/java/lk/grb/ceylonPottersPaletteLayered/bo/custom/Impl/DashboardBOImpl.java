@@ -39,6 +39,10 @@ public class DashboardBOImpl implements DashboardBO {
             (SupplierDAO) DAOFactory.getDaoFactory().
                     getDAO(DAOFactory.DAOTypes.SUPPLIER);
 
+    EmployeeSalaryDAO employeeSalaryDAO =
+            (EmployeeSalaryDAO) DAOFactory.getDaoFactory().
+                    getDAO(DAOFactory.DAOTypes.EMPLOYEE_SALARY);
+
     @Override
     public ArrayList<String> getAllCustomerOrderIdS() throws SQLException {
         return customerOrderDAO.getAllCustomerOrderIdS();
@@ -52,6 +56,11 @@ public class DashboardBOImpl implements DashboardBO {
     @Override
     public double getSupplierOrderTotal() throws SQLException {
         return supplierOrderDAO.getOrderTotal();
+    }
+
+    @Override
+    public double getSalaryTotal() throws SQLException {
+        return employeeSalaryDAO.getSalaryTotal();
     }
 
     @Override

@@ -14,7 +14,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-import lk.grb.ceylonPottersPaletteLayered.model.UserModel;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.UserBO;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.RegExPatterns;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
@@ -53,13 +54,13 @@ public class LoginFormController {
 
     public static String password;
 
-    UserModel userModel = new UserModel();
+    UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
 
     @FXML
     void btnLogInOnAction(ActionEvent event) {
         if(validateCredentials()) {
             try {
-                String username = userModel.checkUsernameAndPassword(txtUsername.getText(), txtPassword.getText());
+                String username = userBO.checkUsernameAndPassword(txtUsername.getText(), txtPassword.getText());
 
                 if (username.equals(txtUsername.getText())) {
                     GlobalFormController.user = txtUsername.getText();
