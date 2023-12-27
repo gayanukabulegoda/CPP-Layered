@@ -7,8 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.SupplierBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.SupplierDto;
-import lk.grb.ceylonPottersPaletteLayered.model.SupplierModel;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -47,7 +48,9 @@ public class SupplierViewPopUpFormController implements Initializable {
 
     public static String supplierId;
 
-    SupplierModel supplierModel = new SupplierModel();
+    SupplierBO supplierBO =
+            (SupplierBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.SUPPLIER);
 
     @FXML
     void btnCloseIconOnAction(ActionEvent event) {
@@ -81,7 +84,7 @@ public class SupplierViewPopUpFormController implements Initializable {
 
     public void setData() throws SQLException {
 
-        SupplierDto supplierDto = supplierModel.getData(supplierId);
+        SupplierDto supplierDto = supplierBO.getSupplierData(supplierId);
 
         lblSupplierId.setText(supplierDto.getSupplier_Id());
         lblSupplierName.setText(supplierDto.getName());

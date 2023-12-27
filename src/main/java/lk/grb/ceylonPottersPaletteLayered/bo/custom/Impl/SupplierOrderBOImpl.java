@@ -34,7 +34,7 @@ public class SupplierOrderBOImpl implements SupplierOrderBO {
                     getDAO(DAOFactory.DAOTypes.PLACE_SUPPLIER_ORDER);
 
     @Override
-    public String[] ItemDescAndUnitPriceGet(String id) throws SQLException {
+    public String[] itemDescAndUnitPriceGet(String id) throws SQLException {
         return itemStockDAO.descAndUnitPriceGet(id);
     }
 

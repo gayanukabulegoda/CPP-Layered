@@ -4,11 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.SupplierOrderBO;
 import lk.grb.ceylonPottersPaletteLayered.db.DbConnection;
 import lk.grb.ceylonPottersPaletteLayered.dto.SupplierDto;
 import lk.grb.ceylonPottersPaletteLayered.dto.SupplierOrderDto;
-import lk.grb.ceylonPottersPaletteLayered.model.SupplierModel;
-import lk.grb.ceylonPottersPaletteLayered.model.SupplierOrderModel;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 import net.sf.jasperreports.engine.*;
@@ -45,8 +45,9 @@ public class SupplierOrderManageBarFormController {
     @FXML
     private ImageView reportImg;
 
-    SupplierOrderModel supplierOrderModel = new SupplierOrderModel();
-    SupplierModel supplierModel = new SupplierModel();
+    SupplierOrderBO supplierOrderBO =
+            (SupplierOrderBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.SUPPLIER_ORDER);
 
     @FXML
     void viewDetailsOnMouseClick(MouseEvent event) throws IOException {
@@ -67,8 +68,8 @@ public class SupplierOrderManageBarFormController {
 
     @FXML
     void reportOnMouseClick(MouseEvent event) throws SQLException, JRException {
-        SupplierOrderDto supplierOrderDto = supplierOrderModel.getData(id.getText());
-        SupplierDto supplierDto = supplierModel.getData(supplierOrderDto.getSupplier_Id());
+        SupplierOrderDto supplierOrderDto = supplierOrderBO.getSupplierOrderData(id.getText());
+        SupplierDto supplierDto = supplierOrderBO.getSupplierData(supplierOrderDto.getSupplier_Id());
 
         HashMap<String, Object> hashMap = new HashMap<>();
 
@@ -118,7 +119,7 @@ public class SupplierOrderManageBarFormController {
 
     public void setData(String id) {
         try {
-            SupplierOrderDto supplierOrderDto = supplierOrderModel.getData(id);
+            SupplierOrderDto supplierOrderDto = supplierOrderBO.getSupplierOrderData(id);
 
             this.id.setText(supplierOrderDto.getSupplier_Order_Id());
             supplierId.setText(supplierOrderDto.getSupplier_Id());

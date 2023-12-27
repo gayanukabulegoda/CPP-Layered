@@ -11,7 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import lk.grb.ceylonPottersPaletteLayered.model.SupplierModel;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.SupplierBO;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -55,6 +56,10 @@ public class SupplierManageFormController implements Initializable {
         return controller;
     }
 
+    SupplierBO supplierBO =
+            (SupplierBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.SUPPLIER);
+
     @FXML
     void btnAddSupplierOnAction(ActionEvent event) throws IOException {
         Navigation.imgPopUpBackground("supplierAddPopUpForm.fxml");
@@ -85,11 +90,10 @@ public class SupplierManageFormController implements Initializable {
             return;
         }
 
-        SupplierModel supplierModel = new SupplierModel();
-        ArrayList<String> allSupplierId = supplierModel.getAllSupplierId();
+        ArrayList<String> allSupplierId = supplierBO.getAllSupplierId();
 
         for (int i = 0; i < allSupplierId.size(); i++) {
-            if (txtSearch.getText().equals(supplierModel.getSupplierContactNo(allSupplierId.get(i)))) {
+            if (txtSearch.getText().equals(supplierBO.getSupplierContactNo(allSupplierId.get(i)))) {
                 SupplierViewPopUpFormController.supplierId = allSupplierId.get(i);
                 Navigation.imgPopUpBackground("supplierViewPopUpForm.fxml");
                 lblSearchAlert.setText(" ");
@@ -109,8 +113,7 @@ public class SupplierManageFormController implements Initializable {
     public void allSupplierId() throws SQLException {
 
         vBoxSupplierManage.getChildren().clear();
-        SupplierModel supplierModel = new SupplierModel();
-        ArrayList<String> list = supplierModel.getAllSupplierId();
+        ArrayList<String> list = supplierBO.getAllSupplierId();
 
         for (int i = 0; i < list.size(); i++) {
             loadDataTable(list.get(i));

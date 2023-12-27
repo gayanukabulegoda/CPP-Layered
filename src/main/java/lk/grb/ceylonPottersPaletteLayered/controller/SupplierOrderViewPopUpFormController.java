@@ -14,10 +14,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.SupplierOrderBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.SupplierOrderDto;
-import lk.grb.ceylonPottersPaletteLayered.model.SupplierModel;
-import lk.grb.ceylonPottersPaletteLayered.model.SupplierOrderDetailModel;
-import lk.grb.ceylonPottersPaletteLayered.model.SupplierOrderModel;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -65,9 +64,9 @@ public class SupplierOrderViewPopUpFormController implements Initializable {
     public static String supplierOrderId;
     public static String supplierId;
 
-    SupplierOrderModel supplierOrderModel = new SupplierOrderModel();
-    SupplierModel supplierModel = new SupplierModel();
-    SupplierOrderDetailModel supplierOrderDetailModel = new SupplierOrderDetailModel();
+    SupplierOrderBO supplierOrderBO =
+            (SupplierOrderBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.SUPPLIER_ORDER);
 
     @FXML
     void btnCloseOnAction(ActionEvent event) {
@@ -137,9 +136,9 @@ public class SupplierOrderViewPopUpFormController implements Initializable {
 
     public void setData() throws SQLException {
 
-        SupplierOrderDto supplierOrderDto = supplierOrderModel.getData(supplierOrderId);
-        String supplierName = supplierModel.getSupplierName(supplierId);
-        ArrayList<String[]> list = supplierOrderDetailModel.getDataAsAnArray(supplierOrderId);
+        SupplierOrderDto supplierOrderDto = supplierOrderBO.getSupplierOrderData(supplierOrderId);
+        String supplierName = supplierOrderBO.getSupplierName(supplierId);
+        ArrayList<String[]> list = supplierOrderBO.getSupplierOrderDataAsAnArray(supplierOrderId);
 
         lblOrderId.setText(supplierOrderDto.getSupplier_Order_Id());
         lblOrderDate.setText(supplierOrderDto.getDate());

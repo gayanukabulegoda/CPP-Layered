@@ -10,8 +10,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.SupplierBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.SupplierDto;
-import lk.grb.ceylonPottersPaletteLayered.model.SupplierModel;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.RegExPatterns;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
@@ -57,7 +58,9 @@ public class SupplierUpdatePopUpFormController implements Initializable {
 
     public static String supplierId;
 
-    SupplierModel supplierModel = new SupplierModel();
+    SupplierBO supplierBO =
+            (SupplierBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.SUPPLIER);
 
     @FXML
     void btnCancelOnAction(ActionEvent event) {
@@ -80,7 +83,7 @@ public class SupplierUpdatePopUpFormController implements Initializable {
             supplierDto.setContact_No(txtContactNo.getText());
             supplierDto.setEmail(txtSupplierEmail.getText());
 
-            boolean updated = supplierModel.update(supplierDto);
+            boolean updated = supplierBO.updateSupplier(supplierDto);
 
             if (updated) {
                 Navigation.closePane();
@@ -199,7 +202,7 @@ public class SupplierUpdatePopUpFormController implements Initializable {
 
     public void setData() {
         try {
-            SupplierDto supplierDto = supplierModel.getData(supplierId);
+            SupplierDto supplierDto = supplierBO.getSupplierData(supplierId);
 
             txtSupplierName.setText(supplierDto.getName());
             txtContactNo.setText(supplierDto.getContact_No());

@@ -4,7 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import lk.grb.ceylonPottersPaletteLayered.model.ItemStockModel;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.SupplierOrderBO;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
 import java.sql.SQLException;
@@ -31,7 +32,9 @@ public class SupplierOrderAddPopUpBarFormController {
     @FXML
     private Text unitPrice;
 
-    ItemStockModel itemStockModel = new ItemStockModel();
+    SupplierOrderBO supplierOrderBO =
+            (SupplierOrderBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.SUPPLIER_ORDER);
 
     @FXML
     void deleteOnMouseClick(MouseEvent event) {
@@ -62,7 +65,7 @@ public class SupplierOrderAddPopUpBarFormController {
 
     public void setData(String[] element) {
         try {
-            String[] descriptionAndUnitPrice = itemStockModel.descAndUnitPriceGet(element[0]);
+            String[] descriptionAndUnitPrice = supplierOrderBO.itemDescAndUnitPriceGet(element[0]);
 
             this.id.setText(element[0]);
             description.setText(descriptionAndUnitPrice[0]);

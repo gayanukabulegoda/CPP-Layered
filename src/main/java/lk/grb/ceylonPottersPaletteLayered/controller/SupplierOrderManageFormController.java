@@ -11,8 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import lk.grb.ceylonPottersPaletteLayered.model.SupplierModel;
-import lk.grb.ceylonPottersPaletteLayered.model.SupplierOrderModel;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.SupplierOrderBO;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -61,6 +61,10 @@ public class SupplierOrderManageFormController implements Initializable {
     public static  SupplierOrderManageFormController getInstance() {
         return controller;
     }
+
+    SupplierOrderBO supplierOrderBO =
+            (SupplierOrderBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.SUPPLIER_ORDER);
 
     @FXML
     void btnAddOrderOnAction(ActionEvent event) throws IOException {
@@ -116,14 +120,12 @@ public class SupplierOrderManageFormController implements Initializable {
             return;
         }
 
-        SupplierOrderModel supplierOrderModel = new SupplierOrderModel();
-        ArrayList<String> allSupplierOrderId = supplierOrderModel.getAllSupplierOrderId();
-        SupplierModel supplierModel = new SupplierModel();
+        ArrayList<String> allSupplierOrderId = supplierOrderBO.getAllSupplierOrderId();
 
         for (int i = 0; i < allSupplierOrderId.size(); i++) {
             if (txtSearch.getText().equals(allSupplierOrderId.get(i))) {
                 SupplierOrderViewPopUpFormController.supplierOrderId = txtSearch.getText();
-                SupplierOrderViewPopUpFormController.supplierId = supplierOrderModel.getSupplierIdForOrder(txtSearch.getText());
+                SupplierOrderViewPopUpFormController.supplierId = supplierOrderBO.getSupplierIdForOrder(txtSearch.getText());
                 lblSearchAlert.setText(" ");
                 StyleUtil.searchBarTransparent(searchBarPane);
                 Navigation.imgPopUpBackground("supplierOrderViewPopUpForm.fxml");
@@ -131,10 +133,10 @@ public class SupplierOrderManageFormController implements Initializable {
                 return;
             }
 
-            ArrayList<String> supplierIds = supplierOrderModel.getSupplierId(allSupplierOrderId.get(i));
+            ArrayList<String> supplierIds = supplierOrderBO.getSupplierId(allSupplierOrderId.get(i));
 
             for (int j = 0; j < supplierIds.size(); j++) {
-                if (txtSearch.getText().equals(supplierModel.getSupplierContactNo(supplierIds.get(j)))) {
+                if (txtSearch.getText().equals(supplierOrderBO.getSupplierContactNo(supplierIds.get(j)))) {
                     allSelectedSupplierOrderId(supplierIds.get(j));
                     lblSearchAlert.setText(" ");
                     StyleUtil.searchBarTransparent(searchBarPane);
@@ -158,8 +160,7 @@ public class SupplierOrderManageFormController implements Initializable {
     public void allSelectedSupplierOrderId(String id) throws SQLException {
 
         vBoxSupplierOrders.getChildren().clear();
-        SupplierOrderModel supplierOrderModel = new SupplierOrderModel();
-        ArrayList<String> list = supplierOrderModel.getSelectedAllSupplierOrderId(id);
+        ArrayList<String> list = supplierOrderBO.getSelectedAllSupplierOrderId(id);
 
         for (int i = 0; i < list.size(); i++) {
             loadDataTable(list.get(i));
@@ -169,8 +170,7 @@ public class SupplierOrderManageFormController implements Initializable {
     public void allSupplierOrderId() throws SQLException {
 
         vBoxSupplierOrders.getChildren().clear();
-        SupplierOrderModel supplierOrderModel = new SupplierOrderModel();
-        ArrayList<String> list = supplierOrderModel.getAllSupplierOrderId();
+        ArrayList<String> list = supplierOrderBO.getAllSupplierOrderId();
 
         for (int i = 0; i < list.size(); i++) {
             loadDataTable(list.get(i));

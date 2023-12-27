@@ -9,8 +9,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.SupplierBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.SupplierDto;
-import lk.grb.ceylonPottersPaletteLayered.model.SupplierModel;
 import lk.grb.ceylonPottersPaletteLayered.util.*;
 
 import java.sql.SQLException;
@@ -51,14 +52,17 @@ public class SupplierAddPopUpFormController {
     @FXML
     private Label lblSupplierNameAlert;
 
-    SupplierModel supplierModel = new SupplierModel();
+    SupplierBO supplierBO =
+            (SupplierBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.SUPPLIER);
+
     @FXML
     void btnAddOnAction() throws SQLException {
 
         if(validateSupplier()) {
             SupplierDto supplierDto = new SupplierDto();
 
-            ArrayList<String> list = supplierModel.getAllSupplierId();
+            ArrayList<String> list = supplierBO.getAllSupplierId();
 
             supplierDto.setSupplier_Id(NewId.newId(list, NewId.GetType.SUPPLIER));
             supplierDto.setName(txtSupplierName.getText());
@@ -68,7 +72,7 @@ public class SupplierAddPopUpFormController {
             supplierDto.setDate(DateTimeUtil.dateNow());
             supplierDto.setUser_Name(GlobalFormController.user);
 
-            boolean saved = supplierModel.save(supplierDto);
+            boolean saved = supplierBO.saveSupplier(supplierDto);
 
             if (saved) {
                 Navigation.closePane();

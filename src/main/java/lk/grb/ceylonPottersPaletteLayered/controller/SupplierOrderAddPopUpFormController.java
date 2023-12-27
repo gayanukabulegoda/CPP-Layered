@@ -15,11 +15,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.SupplierOrderBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.SupplierOrderDto;
-import lk.grb.ceylonPottersPaletteLayered.model.ItemStockModel;
-import lk.grb.ceylonPottersPaletteLayered.model.PlaceSupplierOrderModel;
-import lk.grb.ceylonPottersPaletteLayered.model.SupplierModel;
-import lk.grb.ceylonPottersPaletteLayered.model.SupplierOrderModel;
 import lk.grb.ceylonPottersPaletteLayered.util.*;
 
 import java.io.IOException;
@@ -90,16 +88,17 @@ public class SupplierOrderAddPopUpFormController implements Initializable {
     @FXML
     private Label lblCmbSupplierAlert;
 
-    SupplierOrderModel supplierOrderModel = new SupplierOrderModel();
-    PlaceSupplierOrderModel placeSupplierOrderModel = new PlaceSupplierOrderModel();
-    SupplierModel supplierModel = new SupplierModel();
-    ItemStockModel itemStockModel = new ItemStockModel();
     public static ArrayList<String[]> itemList;
+
+    SupplierOrderBO supplierOrderBO =
+            (SupplierOrderBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.SUPPLIER_ORDER);
+
     ArrayList<String> idList;
 
     {
         try {
-            idList = supplierOrderModel.getAllSupplierOrderId();
+            idList = supplierOrderBO.getAllSupplierOrderId();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -253,7 +252,7 @@ public class SupplierOrderAddPopUpFormController implements Initializable {
         supplierOrderDto.setTime(DateTimeUtil.timeNow());
         supplierOrderDto.setOrderList(itemList);
 
-        boolean isSaved = placeSupplierOrderModel.placeSupplierOrder(supplierOrderDto);
+        boolean isSaved = supplierOrderBO.placeSupplierOrder(supplierOrderDto);
 
         if (isSaved) {
             Navigation.closeOrderPopUpPane();
@@ -268,31 +267,31 @@ public class SupplierOrderAddPopUpFormController implements Initializable {
     void cmbItemIdOnAction(ActionEvent event) throws SQLException {
         for (int i = 0; i < itemList.size(); i++) {
             if(cmbItemId.getSelectionModel().getSelectedItem().equals(itemList.get(i)[0])){
-                int qty = Integer.parseInt(itemStockModel.getQtyOnHand(itemList.get(i)[0]));
+                int qty = Integer.parseInt(supplierOrderBO.getItemQtyOnHand(itemList.get(i)[0]));
                 int orderedQty = Integer.parseInt(itemList.get(i)[1]);
                 lblQtyOnHand.setText(String.valueOf(qty - orderedQty));
-                lblUnitPrice.setText(itemStockModel.getUnitPrice(itemList.get(i)[0]));
-                lblDescription.setText(itemStockModel.getDescription(itemList.get(i)[0]));
+                lblUnitPrice.setText(supplierOrderBO.getItemUnitPrice(itemList.get(i)[0]));
+                lblDescription.setText(supplierOrderBO.getItemDescription(itemList.get(i)[0]));
                 return;
             }
         }
-        lblDescription.setText(itemStockModel.getDescription(cmbItemId.getSelectionModel().getSelectedItem()));
-        lblUnitPrice.setText(itemStockModel.getUnitPrice(cmbItemId.getSelectionModel().getSelectedItem()));
-        lblQtyOnHand.setText(itemStockModel.getQtyOnHand(cmbItemId.getSelectionModel().getSelectedItem()));
+        lblDescription.setText(supplierOrderBO.getItemDescription(cmbItemId.getSelectionModel().getSelectedItem()));
+        lblUnitPrice.setText(supplierOrderBO.getItemUnitPrice(cmbItemId.getSelectionModel().getSelectedItem()));
+        lblQtyOnHand.setText(supplierOrderBO.getItemQtyOnHand(cmbItemId.getSelectionModel().getSelectedItem()));
     }
 
     public void setItemDataInComboBox() throws SQLException {
-        ArrayList<String> roles = itemStockModel.getAllItemId();
+        ArrayList<String> roles = supplierOrderBO.getAllItemId();
         cmbItemId.getItems().addAll(roles);
     }
 
     @FXML
     void cmbSupplierIdOnAction(ActionEvent event) throws SQLException {
-        lblSupplierName.setText(supplierModel.getSupplierName(cmbSupplierId.getSelectionModel().getSelectedItem()));
+        lblSupplierName.setText(supplierOrderBO.getSupplierName(cmbSupplierId.getSelectionModel().getSelectedItem()));
     }
 
     public void setSupplierDataInComboBox() throws SQLException {
-        ArrayList<String> roles = supplierModel.getAllSupplierId();
+        ArrayList<String> roles = supplierOrderBO.getAllSupplierId();
         cmbSupplierId.getItems().addAll(roles);
     }
 
