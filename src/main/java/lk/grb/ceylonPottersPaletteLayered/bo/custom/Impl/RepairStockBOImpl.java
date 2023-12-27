@@ -3,14 +3,14 @@ package lk.grb.ceylonPottersPaletteLayered.bo.custom.Impl;
 import lk.grb.ceylonPottersPaletteLayered.bo.custom.RepairStockBO;
 import lk.grb.ceylonPottersPaletteLayered.dao.DAOFactory;
 import lk.grb.ceylonPottersPaletteLayered.dao.custom.ProductStockDAO;
-import lk.grb.ceylonPottersPaletteLayered.dao.custom.RemoveRepairedStockDAO;
 import lk.grb.ceylonPottersPaletteLayered.dao.custom.RepairStockDAO;
-import lk.grb.ceylonPottersPaletteLayered.dao.custom.UpdateRepairStockDAO;
 import lk.grb.ceylonPottersPaletteLayered.dto.ProductStockDto;
 import lk.grb.ceylonPottersPaletteLayered.dto.RepairStockDto;
 import lk.grb.ceylonPottersPaletteLayered.entity.ProductStock;
 import lk.grb.ceylonPottersPaletteLayered.entity.RepairStock;
+import lk.grb.ceylonPottersPaletteLayered.util.TransactionConnection;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -23,14 +23,6 @@ public class RepairStockBOImpl implements RepairStockBO {
     ProductStockDAO productStockDAO =
             (ProductStockDAO) DAOFactory.getDaoFactory().
                     getDAO(DAOFactory.DAOTypes.PRODUCT_STOCK);
-
-    RemoveRepairedStockDAO removeRepairedStockDAO =
-            (RemoveRepairedStockDAO) DAOFactory.getDaoFactory().
-                    getDAO(DAOFactory.DAOTypes.REMOVE_REPAIRED_STOCK);
-
-    UpdateRepairStockDAO updateRepairStockDAO =
-            (UpdateRepairStockDAO) DAOFactory.getDaoFactory().
-                    getDAO(DAOFactory.DAOTypes.UPDATE_REPAIR_STOCK);
 
     @Override
     public RepairStockDto getRepairStockData(String id) throws SQLException {
@@ -56,12 +48,40 @@ public class RepairStockBOImpl implements RepairStockBO {
 
     @Override
     public boolean removeRepairStock(String product_Id, String qty) throws SQLException {
-        return removeRepairedStockDAO.removeRepairStock(product_Id, qty);
+        boolean isUpdated = false;
+
+        Connection connection = TransactionConnection.getDbConnection();
+
+        if (productStockDAO.updateIncrement(product_Id, qty)) {
+
+            if (repairStockDAO.updateDecrement(product_Id, qty)) {
+                TransactionConnection.commit(connection);
+                isUpdated = true;
+            }
+            else TransactionConnection.rollBack(connection);
+        }
+        else TransactionConnection.rollBack(connection);
+
+        return isUpdated;
     }
 
     @Override
     public boolean updateRepairStock(String product_Id, String qty) throws SQLException {
-        return updateRepairStockDAO.updateRepairStock(product_Id, qty);
+        boolean isUpdated = false;
+
+        Connection connection = TransactionConnection.getDbConnection();
+
+        if (productStockDAO.update(product_Id, qty)) {
+
+            if (repairStockDAO.update(product_Id, qty)) {
+                TransactionConnection.commit(connection);
+                isUpdated = true;
+            }
+            else TransactionConnection.rollBack(connection);
+        }
+        else TransactionConnection.rollBack(connection);
+
+        return isUpdated;
     }
 
     @Override
