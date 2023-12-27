@@ -11,7 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import lk.grb.ceylonPottersPaletteLayered.model.ItemStockModel;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.ItemStockBO;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -55,6 +56,10 @@ public class ItemStockFormController implements Initializable {
         return controller;
     }
 
+    ItemStockBO itemStockBO =
+            (ItemStockBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.ITEM_STOCK);
+
     @FXML
     void btnAddItemOnAction(ActionEvent event) throws IOException {
         Navigation.imgPopUpBackground("itemAddPopUpForm.fxml");
@@ -95,11 +100,10 @@ public class ItemStockFormController implements Initializable {
             return;
         }
 
-        ItemStockModel itemStockModel = new ItemStockModel();
-        ArrayList<String> allItemId = itemStockModel.getAllItemId();
+        ArrayList<String> allItemId = itemStockBO.getAllItemId();
 
         for (int i = 0; i < allItemId.size(); i++) {
-            if (txtSearch.getText().equals(itemStockModel.getDescription(allItemId.get(i)))) {
+            if (txtSearch.getText().equals(itemStockBO.getItemDescription(allItemId.get(i)))) {
                 ItemViewPopUpFormController.itemId = allItemId.get(i);
                 lblSearchAlert.setText(" ");
                 StyleUtil.searchBarTransparent(searchBarPane);
@@ -119,8 +123,7 @@ public class ItemStockFormController implements Initializable {
     public void allItemId() throws SQLException {
 
         vBoxItemStock.getChildren().clear();
-        ItemStockModel itemStockModel = new ItemStockModel();
-        ArrayList<String> list = itemStockModel.getAllItemId();
+        ArrayList<String> list = itemStockBO.getAllItemId();
 
         for (int i = 0; i < list.size(); i++) {
             loadDataTable(list.get(i));

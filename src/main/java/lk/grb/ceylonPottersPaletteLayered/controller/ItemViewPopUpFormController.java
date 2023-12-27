@@ -7,8 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.ItemStockBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.ItemStockDto;
-import lk.grb.ceylonPottersPaletteLayered.model.ItemStockModel;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -41,7 +42,9 @@ public class ItemViewPopUpFormController implements Initializable {
 
     public static String itemId;
 
-    ItemStockModel itemStockModel = new ItemStockModel();
+    ItemStockBO itemStockBO =
+            (ItemStockBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.ITEM_STOCK);
 
     @FXML
     void btnCloseIconOnAction(ActionEvent event) {
@@ -75,7 +78,7 @@ public class ItemViewPopUpFormController implements Initializable {
 
     public void setData() throws SQLException {
 
-        ItemStockDto itemStockDto = itemStockModel.getData(itemId);
+        ItemStockDto itemStockDto = itemStockBO.getItemData(itemId);
 
         lblItemId.setText(itemStockDto.getItem_Id());
         lblDescription.setText(itemStockDto.getDescription());

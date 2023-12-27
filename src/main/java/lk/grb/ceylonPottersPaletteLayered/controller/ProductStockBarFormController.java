@@ -4,8 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.ProductStockBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.ProductStockDto;
-import lk.grb.ceylonPottersPaletteLayered.model.ProductStockModel;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -38,7 +39,9 @@ public class ProductStockBarFormController {
     @FXML
     private ImageView viewImg;
 
-    ProductStockModel productStockModel = new ProductStockModel();
+    ProductStockBO productStockBO =
+            (ProductStockBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.PRODUCT_STOCK);
 
     @FXML
     void deleteOnMouseClick(MouseEvent event) throws IOException {
@@ -90,7 +93,7 @@ public class ProductStockBarFormController {
 
     public void setData(String id) {
         try {
-            ProductStockDto productStockDto = productStockModel.getData(id);
+            ProductStockDto productStockDto = productStockBO.getProductData(id);
 
             this.id.setText(productStockDto.getProduct_Id());
             description.setText(productStockDto.getDescription());

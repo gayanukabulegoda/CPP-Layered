@@ -10,7 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import lk.grb.ceylonPottersPaletteLayered.model.ProductStockModel;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.RepairStockBO;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -45,6 +46,10 @@ public class RepairedStockFormController implements Initializable {
         return controller;
     }
 
+    RepairStockBO repairStockBO =
+            (RepairStockBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.REPAIR_STOCK);
+
     @FXML
     void btnItemStockOnAction(ActionEvent event) throws IOException {
         Navigation.switchPaging(GlobalFormController.getInstance().pagingPane, "itemStockForm.fxml");
@@ -70,11 +75,10 @@ public class RepairedStockFormController implements Initializable {
             return;
         }
 
-        ProductStockModel productStockModel = new ProductStockModel();
-        ArrayList<String> allProductId = productStockModel.getAllProductId();
+        ArrayList<String> allProductId = repairStockBO.getAllProductId();
 
         for (int i = 0; i < allProductId.size(); i++) {
-            if (txtSearch.getText().equals(productStockModel.getDescription(allProductId.get(i)))) {
+            if (txtSearch.getText().equals(repairStockBO.getProductDescription(allProductId.get(i)))) {
                 ProductViewPopUpFormController.productId = allProductId.get(i);
                 txtSearch.clear();
                 lblSearchAlert.setText(" ");
@@ -94,8 +98,7 @@ public class RepairedStockFormController implements Initializable {
     public void allRepairedProductId() throws SQLException {
 
         vBoxRepairStock.getChildren().clear();
-        ProductStockModel productStockModel = new ProductStockModel();
-        ArrayList<String> list = productStockModel.getAllProductId();
+        ArrayList<String> list = repairStockBO.getAllProductId();
 
         for (int i = 0; i < list.size(); i++) {
             loadDataTable(list.get(i));

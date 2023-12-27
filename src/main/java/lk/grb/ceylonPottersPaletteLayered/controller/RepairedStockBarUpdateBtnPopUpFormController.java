@@ -6,7 +6,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import lk.grb.ceylonPottersPaletteLayered.model.UpdateRepairStockModel;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.RepairStockBO;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -26,7 +27,9 @@ public class RepairedStockBarUpdateBtnPopUpFormController {
     @FXML
     private Pane updateBtnPane;
 
-    UpdateRepairStockModel updateRepairStockModel = new UpdateRepairStockModel();
+    RepairStockBO repairStockBO =
+            (RepairStockBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.REPAIR_STOCK);
 
     @FXML
     void btnCloseIconOnAction(ActionEvent event) {
@@ -37,7 +40,9 @@ public class RepairedStockBarUpdateBtnPopUpFormController {
     void btnUpdateOnAction(ActionEvent event) {
 
         try {
-            boolean isUpdated = updateRepairStockModel.updateRepairStock(RepairedStockBarFormController.productId, txtEnterQuantity.getText());
+            boolean isUpdated = repairStockBO.
+                    updateRepairStock(RepairedStockBarFormController.
+                            productId, txtEnterQuantity.getText());
 
             if (isUpdated) {
                 Navigation.closePane();

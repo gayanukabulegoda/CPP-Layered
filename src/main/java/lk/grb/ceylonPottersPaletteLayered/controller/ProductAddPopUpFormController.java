@@ -9,9 +9,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.ProductStockBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.ProductStockDto;
-import lk.grb.ceylonPottersPaletteLayered.model.ProductStockModel;
-import lk.grb.ceylonPottersPaletteLayered.model.ProductStockTransactionModel;
 import lk.grb.ceylonPottersPaletteLayered.util.*;
 
 import java.sql.SQLException;
@@ -60,8 +60,9 @@ public class ProductAddPopUpFormController {
 
     public static int producedTotalProductQuantity;
 
-    ProductStockModel productStockModel = new ProductStockModel();
-    ProductStockTransactionModel productStockTransactionModel = new ProductStockTransactionModel();
+    ProductStockBO productStockBO =
+            (ProductStockBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.PRODUCT_STOCK);
 
     @FXML
     void btnAddOnAction() throws SQLException {
@@ -69,7 +70,7 @@ public class ProductAddPopUpFormController {
         if(validateProduct()) {
             ProductStockDto productStockDto = new ProductStockDto();
 
-            ArrayList<String> list = productStockModel.getAllProductId();
+            ArrayList<String> list = productStockBO.getAllProductId();
 
             productStockDto.setProduct_Id(NewId.newId(list, NewId.GetType.PRODUCT_STOCK));
             productStockDto.setDescription(txtDescription.getText());
@@ -80,7 +81,7 @@ public class ProductAddPopUpFormController {
             producedTotalProductQuantity += productStockDto.getQty_On_Hand();
             productStockDto.setQty(producedTotalProductQuantity);
 
-            boolean saved = productStockTransactionModel.saveProduct(productStockDto);
+            boolean saved = productStockBO.saveProduct(productStockDto);
 
             if (saved) {
                 Navigation.closePane();

@@ -11,7 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import lk.grb.ceylonPottersPaletteLayered.model.ProductStockModel;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.ProductStockBO;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -55,6 +56,10 @@ public class ProductStockFormController implements Initializable {
         return controller;
     }
 
+    ProductStockBO productStockBO =
+            (ProductStockBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.PRODUCT_STOCK);
+
     @FXML
     void btnAddProductOnAction(ActionEvent event) throws IOException {
         Navigation.imgPopUpBackground("productAddPopUpForm.fxml");
@@ -95,11 +100,10 @@ public class ProductStockFormController implements Initializable {
             return;
         }
 
-        ProductStockModel productStockModel = new ProductStockModel();
-        ArrayList<String> allProductId = productStockModel.getAllProductId();
+        ArrayList<String> allProductId = productStockBO.getAllProductId();
 
         for (int i = 0; i < allProductId.size(); i++) {
-            if (txtSearch.getText().equals(productStockModel.getDescription(allProductId.get(i)))) {
+            if (txtSearch.getText().equals(productStockBO.getProductDescription(allProductId.get(i)))) {
                 ProductViewPopUpFormController.productId = allProductId.get(i);
                 txtSearch.clear();
                 lblSearchAlert.setText(" ");
@@ -119,8 +123,7 @@ public class ProductStockFormController implements Initializable {
     public void allProductId() throws SQLException {
 
         vBoxProductStock.getChildren().clear();
-        ProductStockModel productStockModel = new ProductStockModel();
-        ArrayList<String> list = productStockModel.getAllProductId();
+        ArrayList<String> list = productStockBO.getAllProductId();
 
         for (int i = 0; i < list.size(); i++) {
             loadDataTable(list.get(i));

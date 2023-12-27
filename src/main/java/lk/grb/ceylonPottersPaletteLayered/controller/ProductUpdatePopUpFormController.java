@@ -10,8 +10,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.ProductStockBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.ProductStockDto;
-import lk.grb.ceylonPottersPaletteLayered.model.ProductStockModel;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.RegExPatterns;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
@@ -64,7 +65,9 @@ public class ProductUpdatePopUpFormController implements Initializable {
 
     public static String productId;
 
-    ProductStockModel productStockModel = new ProductStockModel();
+    ProductStockBO productStockBO =
+            (ProductStockBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.PRODUCT_STOCK);
 
     @FXML
     void btnCancelOnAction(ActionEvent event) {
@@ -89,7 +92,7 @@ public class ProductUpdatePopUpFormController implements Initializable {
             productStockDto.setQty_On_Hand(Integer.parseInt(txtQuantity.getText()));
             productStockDto.setCategory(txtCategory.getText());
 
-            boolean updated = productStockModel.updateFromPopUp(productStockDto);
+            boolean updated = productStockBO.updateFromPopUp(productStockDto);
 
             if (updated) {
                 Navigation.closePane();
@@ -231,7 +234,7 @@ public class ProductUpdatePopUpFormController implements Initializable {
 
     public void setData() {
         try {
-            ProductStockDto productStockDto = productStockModel.getData(productId);
+            ProductStockDto productStockDto = productStockBO.getProductData(productId);
 
             txtDescription.setText(productStockDto.getDescription());
             txtQuantity.setText(String.valueOf(productStockDto.getQty_On_Hand()));
