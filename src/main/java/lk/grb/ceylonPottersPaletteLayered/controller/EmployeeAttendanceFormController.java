@@ -14,8 +14,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeAttendanceModel;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeModel;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.AttendanceBO;
 import lk.grb.ceylonPottersPaletteLayered.qr.QrReader;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
@@ -76,6 +76,10 @@ public class EmployeeAttendanceFormController implements Initializable {
         return controller;
     }
 
+    AttendanceBO attendanceBO =
+            (AttendanceBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.ATTENDANCE);
+
     @FXML
     void btnRefreshTableOnAction(ActionEvent event) {
         try {
@@ -110,11 +114,10 @@ public class EmployeeAttendanceFormController implements Initializable {
             return;
         }
 
-        EmployeeModel employeeModel = new EmployeeModel();
-        ArrayList<String> allEmployeeId = employeeModel.getAllEmployeeId();
+        ArrayList<String> allEmployeeId = attendanceBO.getAllEmployeeId();
 
         for (int i = 0; i < allEmployeeId.size(); i++) {
-            if (txtSearch.getText().equals(employeeModel.getEmployeeContactNo(allEmployeeId.get(i)))) {
+            if (txtSearch.getText().equals(attendanceBO.getEmployeeContactNo(allEmployeeId.get(i)))) {
                 allSelectedEmployeeSalaryId(allEmployeeId.get(i));
                 lblSearchAlert.setText(" ");
                 StyleUtil.searchBarTransparent(searchBarPane);
@@ -205,8 +208,7 @@ public class EmployeeAttendanceFormController implements Initializable {
     public void allSelectedEmployeeSalaryId(String id) throws SQLException {
 
         vBoxEmployeeAttendance.getChildren().clear();
-        EmployeeAttendanceModel employeeAttendanceModel = new EmployeeAttendanceModel();
-        ArrayList<String> list = employeeAttendanceModel.getSelectedAllAttendanceId(id);
+        ArrayList<String> list = attendanceBO.getSelectedAllAttendanceId(id);
 
         for (int i = 0; i < list.size(); i++) {
             loadDataTable(list.get(i));
@@ -216,8 +218,7 @@ public class EmployeeAttendanceFormController implements Initializable {
     public void allAttendanceId() throws SQLException {
 
         vBoxEmployeeAttendance.getChildren().clear();
-        EmployeeAttendanceModel employeeAttendanceModel = new EmployeeAttendanceModel();
-        ArrayList<String> list = employeeAttendanceModel.getAllAttendanceId();
+        ArrayList<String> list = attendanceBO.getAllAttendanceId();
 
         for (int i = 0; i < list.size(); i++) {
             loadDataTable(list.get(i));

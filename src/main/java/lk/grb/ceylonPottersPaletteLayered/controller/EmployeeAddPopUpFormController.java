@@ -12,8 +12,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.EmployeeBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeDto;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeModel;
 import lk.grb.ceylonPottersPaletteLayered.qr.QrGenerator;
 import lk.grb.ceylonPottersPaletteLayered.util.*;
 
@@ -95,7 +96,6 @@ public class EmployeeAddPopUpFormController implements Initializable {
     private Label lblStreetAlert;
 
     public static EmployeeAddPopUpFormController controller;
-    EmployeeModel employeeModel = new EmployeeModel();
 
     public EmployeeAddPopUpFormController() {
         controller = this;
@@ -104,6 +104,10 @@ public class EmployeeAddPopUpFormController implements Initializable {
     public static EmployeeAddPopUpFormController getInstance() {
         return controller;
     }
+
+    EmployeeBO employeeBO =
+            (EmployeeBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.EMPLOYEE);
 
     public String getRole() {
         return String.valueOf(cmbRole.getSelectionModel().getSelectedItem());
@@ -126,7 +130,7 @@ public class EmployeeAddPopUpFormController implements Initializable {
         if(validateEmployee()) {
             EmployeeDto employeeDto = new EmployeeDto();
 
-            ArrayList<String> list = employeeModel.getAllEmployeeId();
+            ArrayList<String> list = employeeBO.getAllEmployeeId();
 
             employeeDto.setEmployee_Id(NewId.newId(list, NewId.GetType.EMPLOYEE));
             employeeDto.setFirst_Name(txtFirstName.getText());
@@ -142,7 +146,7 @@ public class EmployeeAddPopUpFormController implements Initializable {
             employeeDto.setTime(DateTimeUtil.timeNow());
             employeeDto.setUserName(GlobalFormController.user);
 
-            boolean save = employeeModel.save(employeeDto);
+            boolean save = employeeBO.saveEmployee(employeeDto);
 
             if (save) {
                 QrGenerator.generateQr(employeeDto.getEmployee_Id());

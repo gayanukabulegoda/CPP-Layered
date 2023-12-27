@@ -4,10 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.SalaryBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeDto;
 import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeSalaryDto;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeModel;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeSalaryModel;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -36,8 +36,9 @@ public class EmployeeSalaryBarFormController {
 
     private String salary_Id;
 
-    EmployeeSalaryModel employeeSalaryModel = new EmployeeSalaryModel();
-    EmployeeModel employeeModel = new EmployeeModel();
+    SalaryBO salaryBO =
+            (SalaryBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.SALARY);
 
     @FXML
     void updateOnMouseClick(MouseEvent event) throws IOException {
@@ -74,8 +75,8 @@ public class EmployeeSalaryBarFormController {
     public void setData(String id) {
 
         try {
-            EmployeeSalaryDto employeeSalaryDto = employeeSalaryModel.getData(id);
-            EmployeeDto employeeDto = employeeModel.getData(employeeSalaryDto.getEmployee_Id());
+            EmployeeSalaryDto employeeSalaryDto = salaryBO.getSalaryData(id);
+            EmployeeDto employeeDto = salaryBO.getEmployeeData(employeeSalaryDto.getEmployee_Id());
 
             this.id.setText(employeeSalaryDto.getEmployee_Id());
             name.setText(employeeDto.getFirst_Name() + " " + employeeDto.getLast_Name());

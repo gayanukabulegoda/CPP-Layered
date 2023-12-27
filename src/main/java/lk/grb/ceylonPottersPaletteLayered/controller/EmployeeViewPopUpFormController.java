@@ -7,8 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.EmployeeBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeDto;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeModel;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -47,7 +48,9 @@ public class EmployeeViewPopUpFormController implements Initializable {
 
     public static String employeeId;
 
-    EmployeeModel employeeModel = new EmployeeModel();
+    EmployeeBO employeeBO =
+            (EmployeeBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.EMPLOYEE);
 
     @FXML
     void btnCloseIconOnAction(ActionEvent event) {
@@ -81,7 +84,7 @@ public class EmployeeViewPopUpFormController implements Initializable {
 
     public void setData() throws SQLException {
 
-        EmployeeDto employeeDto = employeeModel.getData(employeeId);
+        EmployeeDto employeeDto = employeeBO.getEmployeeData(employeeId);
 
         lblEmployeeId.setText(employeeDto.getEmployee_Id());
         lblEmployeeName.setText(employeeDto.getFirst_Name() + " " + employeeDto.getLast_Name());

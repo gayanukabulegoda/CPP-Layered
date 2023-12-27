@@ -4,10 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.AttendanceBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeAttendanceDto;
 import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeDto;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeAttendanceModel;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeModel;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -36,8 +36,9 @@ public class EmployeeAttendanceBarFormController {
 
     private String employee_Attendance_Id;
 
-    EmployeeAttendanceModel employeeAttendanceModel = new EmployeeAttendanceModel();
-    EmployeeModel employeeModel = new EmployeeModel();
+    AttendanceBO attendanceBO =
+            (AttendanceBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.ATTENDANCE);
 
     @FXML
     void deleteOnMouseClick(MouseEvent event) throws IOException {
@@ -74,8 +75,8 @@ public class EmployeeAttendanceBarFormController {
 
     public void setData(String id) {
         try {
-            EmployeeAttendanceDto employeeAttendanceDto = employeeAttendanceModel.getData(id);
-            EmployeeDto employeeDto = employeeModel.getData(employeeAttendanceDto.getEmployee_Id());
+            EmployeeAttendanceDto employeeAttendanceDto = attendanceBO.getAttendanceData(id);
+            EmployeeDto employeeDto = attendanceBO.getEmployeeData(employeeAttendanceDto.getEmployee_Id());
 
             this.id.setText(employeeAttendanceDto.getEmployee_Id());
             name.setText(employeeDto.getFirst_Name() + " " + employeeDto.getLast_Name());

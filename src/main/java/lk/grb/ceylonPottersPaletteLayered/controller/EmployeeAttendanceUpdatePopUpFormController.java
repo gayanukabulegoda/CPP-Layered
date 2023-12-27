@@ -10,9 +10,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.AttendanceBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeAttendanceDto;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeAttendanceModel;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeModel;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -43,8 +43,9 @@ public class EmployeeAttendanceUpdatePopUpFormController implements Initializabl
 
     public static String employeeAttendanceId;
 
-    EmployeeModel employeeModel = new EmployeeModel();
-    EmployeeAttendanceModel employeeAttendanceModel = new EmployeeAttendanceModel();
+    AttendanceBO attendanceBO =
+            (AttendanceBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.ATTENDANCE);
 
     @FXML
     void btnCloseIconOnAction(ActionEvent event) {
@@ -62,7 +63,7 @@ public class EmployeeAttendanceUpdatePopUpFormController implements Initializabl
             employeeAttendanceDto.setDate(employeeAttendanceDto.getDate());
             employeeAttendanceDto.setTime(employeeAttendanceDto.getTime());
 
-            boolean updated = employeeAttendanceModel.update(employeeAttendanceDto);
+            boolean updated = attendanceBO.updateAttendance(employeeAttendanceDto);
 
             if (updated) {
                 Navigation.closePane();
@@ -101,11 +102,11 @@ public class EmployeeAttendanceUpdatePopUpFormController implements Initializabl
 
     @FXML
     void cmbEmployeeIdOnAction(ActionEvent event) throws SQLException {
-        lblEmployeeName.setText(employeeModel.getEmployeeName(String.valueOf(cmbEmployeeId.getSelectionModel().getSelectedItem())));
+        lblEmployeeName.setText(attendanceBO.getEmployeeName(String.valueOf(cmbEmployeeId.getSelectionModel().getSelectedItem())));
     }
 
     public void setDataInComboBox() throws SQLException {
-        ArrayList<String> roles = employeeModel.getAllEmployeeId();
+        ArrayList<String> roles = attendanceBO.getAllEmployeeId();
         cmbEmployeeId.getItems().addAll(roles);
     }
 
@@ -131,9 +132,9 @@ public class EmployeeAttendanceUpdatePopUpFormController implements Initializabl
 
     public void setData() {
         try {
-            EmployeeAttendanceDto employeeAttendanceDto = employeeAttendanceModel.getData(employeeAttendanceId);
+            EmployeeAttendanceDto employeeAttendanceDto = attendanceBO.getAttendanceData(employeeAttendanceId);
 
-            lblEmployeeName.setText(employeeModel.getEmployeeName(employeeAttendanceDto.getEmployee_Id()));
+            lblEmployeeName.setText(attendanceBO.getEmployeeName(employeeAttendanceDto.getEmployee_Id()));
             cmbEmployeeId.setValue(employeeAttendanceDto.getEmployee_Id());
 
         } catch (SQLException e) {

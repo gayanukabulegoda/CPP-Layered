@@ -4,8 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.EmployeeBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeDto;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeModel;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -38,7 +39,9 @@ public class EmployeeManageBarFormController {
     @FXML
     private ImageView viewImg;
 
-    EmployeeModel employeeModel = new EmployeeModel();
+    EmployeeBO employeeBO =
+            (EmployeeBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.EMPLOYEE);
 
     @FXML
     void deleteOnMouseClick(MouseEvent event) throws IOException {
@@ -90,7 +93,7 @@ public class EmployeeManageBarFormController {
 
     public void setData(String id) {
         try {
-            EmployeeDto employeedto = employeeModel.getData(id);
+            EmployeeDto employeedto = employeeBO.getEmployeeData(id);
 
             this.id.setText(employeedto.getEmployee_Id());
             name.setText(employeedto.getFirst_Name() + " " + employeedto.getLast_Name());

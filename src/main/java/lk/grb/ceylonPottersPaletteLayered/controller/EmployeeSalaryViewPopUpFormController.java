@@ -7,8 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.SalaryBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeSalaryDto;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeSalaryModel;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -47,7 +48,9 @@ public class EmployeeSalaryViewPopUpFormController implements Initializable {
 
     public static String salaryId;
 
-    EmployeeSalaryModel employeeSalaryModel = new EmployeeSalaryModel();
+    SalaryBO salaryBO =
+            (SalaryBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.SALARY);
 
     @FXML
     void btnCloseIconOnAction(ActionEvent event) {
@@ -81,7 +84,7 @@ public class EmployeeSalaryViewPopUpFormController implements Initializable {
 
     public void setData() throws SQLException {
 
-        EmployeeSalaryDto employeeSalaryDto = employeeSalaryModel.getData(salaryId);
+        EmployeeSalaryDto employeeSalaryDto = salaryBO.getSalaryData(salaryId);
 
         lblEmployeeId.setText(employeeSalaryDto.getEmployee_Id());
         lblSalary.setText(String.valueOf(employeeSalaryDto.getSalary()));

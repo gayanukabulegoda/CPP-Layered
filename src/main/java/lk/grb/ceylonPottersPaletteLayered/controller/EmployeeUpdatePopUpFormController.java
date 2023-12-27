@@ -11,8 +11,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.EmployeeBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeDto;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeModel;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.RegExPatterns;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
@@ -96,7 +97,6 @@ public class EmployeeUpdatePopUpFormController implements Initializable {
     public static String employeeId;
 
     public static EmployeeUpdatePopUpFormController controller;
-    EmployeeModel employeeModel = new EmployeeModel();
 
     public EmployeeUpdatePopUpFormController() {
         controller = this;
@@ -105,6 +105,10 @@ public class EmployeeUpdatePopUpFormController implements Initializable {
     public static EmployeeUpdatePopUpFormController getInstance() {
         return controller;
     }
+
+    EmployeeBO employeeBO =
+            (EmployeeBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.EMPLOYEE);
 
     @FXML
     void btnCancelOnAction(ActionEvent event) {
@@ -133,7 +137,7 @@ public class EmployeeUpdatePopUpFormController implements Initializable {
             employeeDto.setEmail(txtEmail.getText());
             employeeDto.setRole(getRole());
 
-            boolean updated = employeeModel.update(employeeDto);
+            boolean updated = employeeBO.updateEmployee(employeeDto);
 
             if (updated) {
                 Navigation.closePane();
@@ -410,7 +414,7 @@ public class EmployeeUpdatePopUpFormController implements Initializable {
 
     public void setData() {
         try {
-            EmployeeDto employeeDto = employeeModel.getData(employeeId);
+            EmployeeDto employeeDto = employeeBO.getEmployeeData(employeeId);
 
             txtFirstName.setText(employeeDto.getFirst_Name());
             txtLastName.setText(employeeDto.getLast_Name());

@@ -109,7 +109,7 @@ public class SalaryBOImpl implements SalaryBO {
     }
 
     @Override
-    public boolean update(EmployeeSalaryDto dto) throws SQLException {
+    public boolean updateSalary(EmployeeSalaryDto dto) throws SQLException {
         return employeeSalaryDAO.update(
                 new Salary(
                         dto.getSalary_Id(),

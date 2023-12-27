@@ -11,10 +11,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.SalaryBO;
 import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeSalaryDto;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeAttendanceModel;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeModel;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeSalaryModel;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.RegExPatterns;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
@@ -70,9 +69,9 @@ public class EmployeeSalaryUpdatePopUpFormController implements Initializable {
 
     public static String salaryId;
 
-    EmployeeModel employeeModel = new EmployeeModel();
-    EmployeeSalaryModel employeeSalaryModel = new EmployeeSalaryModel();
-    EmployeeAttendanceModel employeeAttendanceModel = new EmployeeAttendanceModel();
+    SalaryBO salaryBO =
+            (SalaryBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.SALARY);
 
     @FXML
     void btnCancelOnAction(ActionEvent event) {
@@ -99,7 +98,7 @@ public class EmployeeSalaryUpdatePopUpFormController implements Initializable {
             employeeSalaryDto.setDate(employeeSalaryDto.getDate());
             employeeSalaryDto.setTime(employeeSalaryDto.getTime());
 
-            boolean updated = employeeSalaryModel.update(employeeSalaryDto);
+            boolean updated = salaryBO.updateSalary(employeeSalaryDto);
 
             if (updated) {
                 Navigation.closePane();
@@ -187,8 +186,8 @@ public class EmployeeSalaryUpdatePopUpFormController implements Initializable {
 
     @FXML
     void cmbEmployeeIdOnAction(ActionEvent event) throws SQLException {
-        lblEmployeeName.setText(employeeModel.getEmployeeName(String.valueOf(cmbEmployeeId.getSelectionModel().getSelectedItem())));
-        lblWorkedDays.setText(employeeAttendanceModel.workedDayCount(cmbEmployeeId.getSelectionModel().getSelectedItem()));
+        lblEmployeeName.setText(salaryBO.getEmployeeName(String.valueOf(cmbEmployeeId.getSelectionModel().getSelectedItem())));
+        lblWorkedDays.setText(salaryBO.workedDayCount(cmbEmployeeId.getSelectionModel().getSelectedItem()));
     }
 
     @FXML
@@ -203,17 +202,17 @@ public class EmployeeSalaryUpdatePopUpFormController implements Initializable {
     }
 
     public void setDataInComboBox() throws SQLException {
-        ArrayList<String> roles = employeeModel.getAllEmployeeId();
+        ArrayList<String> roles = salaryBO.getAllEmployeeId();
         cmbEmployeeId.getItems().addAll(roles);
     }
 
     public void setData() {
         try {
-            EmployeeSalaryDto employeeSalaryDto = employeeSalaryModel.getData(salaryId);
+            EmployeeSalaryDto employeeSalaryDto = salaryBO.getSalaryData(salaryId);
 
             txtBonus.setText(String.valueOf(employeeSalaryDto.getBonus()));
             txtSalary.setText(String.valueOf(employeeSalaryDto.getSalary()));
-            lblEmployeeName.setText(employeeModel.getEmployeeName(employeeSalaryDto.getEmployee_Id()));
+            lblEmployeeName.setText(salaryBO.getEmployeeName(employeeSalaryDto.getEmployee_Id()));
             lblTotalAmount.setText(String.valueOf(employeeSalaryDto.getTotal_Payment()));
             lblWorkedDays.setText(String.valueOf(employeeSalaryDto.getWorked_Day_Count()));
             cmbEmployeeId.setValue(employeeSalaryDto.getEmployee_Id());

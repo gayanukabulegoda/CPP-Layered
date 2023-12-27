@@ -11,7 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeModel;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.EmployeeBO;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -55,6 +56,10 @@ public class EmployeeManageFormController implements Initializable {
         return controller;
     }
 
+    EmployeeBO employeeBO =
+            (EmployeeBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.EMPLOYEE);
+
     @FXML
     void btnAddEmployeeOnAction(ActionEvent event) throws IOException {
         Navigation.imgPopUpBackground("employeeAddPopUpForm.fxml");
@@ -95,11 +100,10 @@ public class EmployeeManageFormController implements Initializable {
             return;
         }
 
-        EmployeeModel employeeModel = new EmployeeModel();
-        ArrayList<String> allEmployeeId = employeeModel.getAllEmployeeId();
+        ArrayList<String> allEmployeeId = employeeBO.getAllEmployeeId();
 
         for (int i = 0; i < allEmployeeId.size(); i++) {
-            if (txtSearch.getText().equals(employeeModel.getEmployeeContactNo(allEmployeeId.get(i)))) {
+            if (txtSearch.getText().equals(employeeBO.getEmployeeContactNo(allEmployeeId.get(i)))) {
                 EmployeeViewPopUpFormController.employeeId = allEmployeeId.get(i);
                 lblSearchAlert.setText(" ");
                 StyleUtil.searchBarTransparent(searchBarPane);
@@ -119,8 +123,7 @@ public class EmployeeManageFormController implements Initializable {
     public void allEmployeeId() throws SQLException {
 
         vBoxEmployeeManage.getChildren().clear();
-        EmployeeModel employeeModel = new EmployeeModel();
-        ArrayList<String> list = employeeModel.getAllEmployeeId();
+        ArrayList<String> list = employeeBO.getAllEmployeeId();
 
         for (int i = 0; i < list.size(); i++) {
             loadDataTable(list.get(i));

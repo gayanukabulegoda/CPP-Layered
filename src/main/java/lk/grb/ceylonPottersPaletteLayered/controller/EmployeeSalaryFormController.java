@@ -11,8 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeModel;
-import lk.grb.ceylonPottersPaletteLayered.model.EmployeeSalaryModel;
+import lk.grb.ceylonPottersPaletteLayered.bo.BOFactory;
+import lk.grb.ceylonPottersPaletteLayered.bo.custom.SalaryBO;
 import lk.grb.ceylonPottersPaletteLayered.util.Navigation;
 import lk.grb.ceylonPottersPaletteLayered.util.StyleUtil;
 
@@ -61,6 +61,10 @@ public class EmployeeSalaryFormController implements Initializable {
     public static EmployeeSalaryFormController getInstance() {
         return controller;
     }
+
+    SalaryBO salaryBO =
+            (SalaryBO) BOFactory.getBoFactory().
+                    getBO(BOFactory.BOTypes.SALARY);
 
     @FXML
     void btnAddSalaryOnAction(ActionEvent event) throws IOException {
@@ -121,12 +125,10 @@ public class EmployeeSalaryFormController implements Initializable {
             return;
         }
 
-        EmployeeSalaryModel employeeSalaryModel = new EmployeeSalaryModel();
-        EmployeeModel employeeModel = new EmployeeModel();
-        ArrayList<String> allEmployeeId = employeeSalaryModel.getAllEmployeeId();
+        ArrayList<String> allEmployeeId = salaryBO.getAllEmployeeId();
 
         for (int i = 0; i < allEmployeeId.size(); i++) {
-            if (txtSearch.getText().equals(employeeModel.getEmployeeContactNo(allEmployeeId.get(i)))) {
+            if (txtSearch.getText().equals(salaryBO.getEmployeeContactNo(allEmployeeId.get(i)))) {
                 allSelectedEmployeeSalaryId(allEmployeeId.get(i));
                 lblSearchAlert.setText(" ");
                 StyleUtil.searchBarTransparent(searchBarPane);
@@ -145,8 +147,7 @@ public class EmployeeSalaryFormController implements Initializable {
     public void allSalaryId() throws SQLException {
 
         vBoxEmployeeSalary.getChildren().clear();
-        EmployeeSalaryModel employeeSalaryModel = new EmployeeSalaryModel();
-        ArrayList<String> list = employeeSalaryModel.getAllSalaryId();
+        ArrayList<String> list = salaryBO.getAllSalaryId();
 
         for (int i = 0; i < list.size(); i++) {
             loadDataTable(list.get(i));
@@ -156,8 +157,7 @@ public class EmployeeSalaryFormController implements Initializable {
     public void allSelectedEmployeeSalaryId(String id) throws SQLException {
 
         vBoxEmployeeSalary.getChildren().clear();
-        EmployeeSalaryModel employeeSalaryModel = new EmployeeSalaryModel();
-        ArrayList<String> list = employeeSalaryModel.getSelectedAllSalaryId(id);
+        ArrayList<String> list = salaryBO.getSelectedAllSalaryId(id);
 
         for (int i = 0; i < list.size(); i++) {
             loadDataTable(list.get(i));
