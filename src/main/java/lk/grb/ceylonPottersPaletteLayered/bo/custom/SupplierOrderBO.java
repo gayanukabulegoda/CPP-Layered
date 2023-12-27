@@ -12,7 +12,7 @@ public interface SupplierOrderBO extends SuperBO {
 
     ArrayList<String> getAllSupplierId() throws SQLException;
 
-    boolean placeSupplierOrder(SupplierOrderDto dto);
+    boolean placeSupplierOrder(SupplierOrderDto dto) throws SQLException;
 
     String getItemQtyOnHand(String id) throws SQLException;
 

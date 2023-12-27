@@ -18,7 +18,6 @@ public class DAOFactory {
         EMPLOYEE, EMPLOYEE_ATTENDANCE, EMPLOYEE_SALARY,
         ITEM_STOCK, PRODUCT_STOCK, REPAIR_STOCK,
         SUPPLIER, SUPPLIER_ORDER, SUPPLIER_ORDER_DETAIL,
-        PLACE_CUSTOMER_ORDER, PLACE_SUPPLIER_ORDER, PRODUCT_STOCK_TRANSACTION,
         REMOVE_REPAIRED_STOCK, UPDATE_REPAIR_STOCK, USER
     }
 
@@ -48,12 +47,6 @@ public class DAOFactory {
                 return new SupplierOrderDAOImpl();
             case SUPPLIER_ORDER_DETAIL:
                 return new SupplierOrderDetailDAOImpl();
-            case PLACE_CUSTOMER_ORDER:
-                return new PlaceCustomerOrderDAOImpl();
-            case PLACE_SUPPLIER_ORDER:
-                return new PlaceSupplierOrderDAOImpl();
-            case PRODUCT_STOCK_TRANSACTION:
-                return new ProductStockTransactionDAOImpl();
             case REMOVE_REPAIRED_STOCK:
                 return new RemoveRepairedStockDAOImpl();
             case UPDATE_REPAIR_STOCK:

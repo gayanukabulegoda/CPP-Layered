@@ -13,7 +13,7 @@ public interface CustomerOrderBO extends SuperBO {
 
     ArrayList<String> getAllCustomerOrderId() throws SQLException;
 
-    boolean placeCustomerOrder(CustomerOrderDto dto);
+    boolean placeCustomerOrder(CustomerOrderDto dto) throws SQLException;
 
     String getCustomerName(String id) throws SQLException;
 

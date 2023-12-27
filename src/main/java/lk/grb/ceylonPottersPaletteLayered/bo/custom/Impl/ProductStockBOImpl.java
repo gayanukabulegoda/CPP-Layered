@@ -3,9 +3,12 @@ package lk.grb.ceylonPottersPaletteLayered.bo.custom.Impl;
 import lk.grb.ceylonPottersPaletteLayered.bo.custom.ProductStockBO;
 import lk.grb.ceylonPottersPaletteLayered.dao.DAOFactory;
 import lk.grb.ceylonPottersPaletteLayered.dao.custom.ProductStockDAO;
+import lk.grb.ceylonPottersPaletteLayered.dao.custom.RepairStockDAO;
 import lk.grb.ceylonPottersPaletteLayered.dto.ProductStockDto;
 import lk.grb.ceylonPottersPaletteLayered.entity.ProductStock;
+import lk.grb.ceylonPottersPaletteLayered.util.TransactionConnection;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -15,6 +18,10 @@ public class ProductStockBOImpl implements ProductStockBO {
             (ProductStockDAO) DAOFactory.getDaoFactory().
                     getDAO(DAOFactory.DAOTypes.PRODUCT_STOCK);
 
+    RepairStockDAO repairStockDAO =
+            (RepairStockDAO) DAOFactory.getDaoFactory().
+                    getDAO(DAOFactory.DAOTypes.REPAIR_STOCK);
+
     @Override
     public ArrayList<String> getAllProductId() throws SQLException {
         return productStockDAO.getAllId();
@@ -22,16 +29,30 @@ public class ProductStockBOImpl implements ProductStockBO {
 
     @Override
     public boolean saveProduct(ProductStockDto dto) throws SQLException {
-        return productStockDAO.save(
-                new ProductStock(
-                        dto.getProduct_Id(),
-                        dto.getDescription(),
-                        dto.getQty_On_Hand(),
-                        dto.getUnit_Price(),
-                        dto.getCategory(),
-                        dto.getQty()
-                )
+        boolean isUpdated = false;
+
+        ProductStock entity = new ProductStock(
+                dto.getProduct_Id(),
+                dto.getDescription(),
+                dto.getQty_On_Hand(),
+                dto.getUnit_Price(),
+                dto.getCategory(),
+                dto.getQty()
         );
+
+        Connection connection = TransactionConnection.getDbConnection();
+
+        if (productStockDAO.save(entity)) {
+
+            if (repairStockDAO.save(entity.getProduct_Id(), 0)) {
+                TransactionConnection.commit(connection);
+                isUpdated = true;
+            }
+            else TransactionConnection.rollBack(connection);
+        }
+        else TransactionConnection.rollBack(connection);
+
+        return isUpdated;
     }
 
     @Override

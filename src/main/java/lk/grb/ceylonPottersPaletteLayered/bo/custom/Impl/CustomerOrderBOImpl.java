@@ -7,7 +7,9 @@ import lk.grb.ceylonPottersPaletteLayered.dto.CustomerDto;
 import lk.grb.ceylonPottersPaletteLayered.dto.CustomerOrderDto;
 import lk.grb.ceylonPottersPaletteLayered.entity.Customer;
 import lk.grb.ceylonPottersPaletteLayered.entity.CustomerOrder;
+import lk.grb.ceylonPottersPaletteLayered.util.TransactionConnection;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -29,10 +31,6 @@ public class CustomerOrderBOImpl implements CustomerOrderBO {
             (ProductStockDAO) DAOFactory.getDaoFactory().
                     getDAO(DAOFactory.DAOTypes.PRODUCT_STOCK);
 
-    PlaceCustomerOrderDAO placeCustomerOrderDAO =
-            (PlaceCustomerOrderDAO) DAOFactory.getDaoFactory().
-                    getDAO(DAOFactory.DAOTypes.PLACE_CUSTOMER_ORDER);
-
     @Override
     public String[] productDescAndUnitPriceGet(String id) throws SQLException {
         return productStockDAO.descAndUnitPriceGet(id);
@@ -44,18 +42,35 @@ public class CustomerOrderBOImpl implements CustomerOrderBO {
     }
 
     @Override
-    public boolean placeCustomerOrder(CustomerOrderDto dto) {
-        placeCustomerOrderDAO.placeCustomerOrder(
-                new CustomerOrder(
-                        dto.getCustomer_Order_Id(),
-                        dto.getCustomer_Id(),
-                        dto.getTotal_Price(),
-                        dto.getDate(),
-                        dto.getTime(),
-                        dto.getOrderList()
-                )
+    public boolean placeCustomerOrder(CustomerOrderDto dto) throws SQLException {
+        boolean isSaved = false;
+
+        CustomerOrder entity = new CustomerOrder(
+                dto.getCustomer_Order_Id(),
+                dto.getCustomer_Id(),
+                dto.getTotal_Price(),
+                dto.getDate(),
+                dto.getTime(),
+                dto.getOrderList()
         );
-        return false;
+
+        Connection connection = TransactionConnection.getDbConnection();
+
+        if (customerOrderDAO.save(entity)) {
+
+            if (productStockDAO.update(entity.getOrderList())) {
+
+                if (customerOrderDetailDAO.save(entity)) {
+                    TransactionConnection.commit(connection);
+                    isSaved = true;
+                }
+                else TransactionConnection.rollBack(connection);
+            }
+            else TransactionConnection.rollBack(connection);
+        }
+        else TransactionConnection.rollBack(connection);
+
+        return isSaved;
     }
 
     @Override
