@@ -10,10 +10,10 @@ import java.util.Properties;
 public class SendEmail {
 
     private Session newSession = null;
-    private MimeMessage mimeMessage = new MimeMessage(Session.getDefaultInstance(new Properties(), null));
+    private MimeMessage mimeMessage =
+            new MimeMessage(Session.getDefaultInstance(new Properties(), null));
 
     public void sendMail(String[] recipientSubjectBody) throws MessagingException {
-
         setUpServerProperties();
         draftEmail(recipientSubjectBody);
         sendEmail();
@@ -28,7 +28,8 @@ public class SendEmail {
 
         newSession = Session.getInstance(properties, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("ceylonpotterspallet@gmail.com", "vord gsyd hfnf vwua");
+                return new PasswordAuthentication(
+                        "ceylonpotterspallet@gmail.com", "vord gsyd hfnf vwua");
             }
         });
     }

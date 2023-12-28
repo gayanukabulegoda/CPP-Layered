@@ -26,8 +26,14 @@ public class QrGenerator {
         generateQrCode(input, path + input + ".png", charset, hints, 400, 400);
     }
 
-    public static void generateQrCode(String data, String path, String charset, Map<EncodeHintType, ?> hints, int h, int w) throws IOException, WriterException {
-        BitMatrix matrix = new MultiFormatWriter().encode(new String(data.getBytes(charset), charset), BarcodeFormat.QR_CODE, w, h, hints);
-        MatrixToImageWriter.writeToFile(matrix, path.substring(path.lastIndexOf('.') + 1), new File(path));
+    public static void generateQrCode(
+            String data, String path, String charset,
+            Map<EncodeHintType, ?> hints, int h, int w) throws IOException, WriterException {
+
+        BitMatrix matrix = new MultiFormatWriter().
+                encode(new String(data.getBytes(charset), charset), BarcodeFormat.QR_CODE, w, h, hints);
+
+        MatrixToImageWriter.
+                writeToFile(matrix, path.substring(path.lastIndexOf('.') + 1), new File(path));
     }
 }

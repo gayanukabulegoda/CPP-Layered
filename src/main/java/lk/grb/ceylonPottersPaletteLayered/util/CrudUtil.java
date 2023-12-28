@@ -1,7 +1,6 @@
 package lk.grb.ceylonPottersPaletteLayered.util;
 
 import lk.grb.ceylonPottersPaletteLayered.dao.SuperDAO;
-import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeDto;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
