@@ -1,12 +1,9 @@
 package lk.grb.ceylonPottersPaletteLayered.dao.custom.Impl;
 
 import lk.grb.ceylonPottersPaletteLayered.dao.custom.EmployeeDAO;
-import lk.grb.ceylonPottersPaletteLayered.db.DbConnection;
-import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeDto;
 import lk.grb.ceylonPottersPaletteLayered.entity.Employee;
 import lk.grb.ceylonPottersPaletteLayered.util.SQLUtil;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -76,8 +73,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                 entity.getContact_No(),
                 entity.getEmail(),
                 entity.getRole(),
-                entity.getEmployee_Id()
-        );
+                entity.getEmployee_Id());
     }
 
     @Override
@@ -87,7 +83,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public ArrayList<String> getAllId() throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT employee_Id FROM employee ORDER BY LENGTH(employee_Id),employee_Id");
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT employee_Id FROM employee ORDER BY LENGTH(employee_Id),employee_Id");
+
         ArrayList<String> list = new ArrayList<>();
 
         while (resultSet.next()) {
@@ -98,12 +96,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public String getEmployeeName(String id) throws SQLException {
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT first_Name FROM employee WHERE employee_Id=?", id);
 
-        String sql = ("SELECT first_Name FROM employee WHERE employee_Id=?");
-        PreparedStatement statement = DbConnection.getInstance().getConnection().prepareStatement(sql);
-        statement.setString(1,id);
-
-        ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
             return resultSet.getString(1);
         }
@@ -112,12 +107,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public String getEmployeeRole(String id) throws SQLException {
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT role FROM employee WHERE employee_Id=?", id);
 
-        String sql = ("SELECT role FROM employee WHERE employee_Id=?");
-        PreparedStatement statement = DbConnection.getInstance().getConnection().prepareStatement(sql);
-        statement.setString(1,id);
-
-        ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
             return resultSet.getString(1);
         }
@@ -126,7 +118,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public String getEmployeeContactNo(String id) throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT contact_No FROM employee WHERE employee_Id=?", id);
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT contact_No FROM employee WHERE employee_Id=?", id);
 
         if (resultSet.next()) {
             return resultSet.getString(1);

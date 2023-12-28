@@ -1,8 +1,6 @@
 package lk.grb.ceylonPottersPaletteLayered.dao.custom.Impl;
 
 import lk.grb.ceylonPottersPaletteLayered.dao.custom.CustomerOrderDAO;
-import lk.grb.ceylonPottersPaletteLayered.dto.CustomerOrderDto;
-import lk.grb.ceylonPottersPaletteLayered.entity.Customer;
 import lk.grb.ceylonPottersPaletteLayered.entity.CustomerOrder;
 import lk.grb.ceylonPottersPaletteLayered.util.SQLUtil;
 
@@ -39,7 +37,10 @@ public class CustomerOrderDAOImpl implements CustomerOrderDAO {
 
     @Override
     public ArrayList<String> getAllId() throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT customer_Order_Id FROM customer_Order ORDER BY LENGTH(customer_Order_Id),customer_Order_Id");
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT customer_Order_Id FROM customer_Order " +
+                        "ORDER BY LENGTH(customer_Order_Id),customer_Order_Id");
+
         ArrayList<String> list = new ArrayList<>();
 
         while (resultSet.next()) {
@@ -50,7 +51,10 @@ public class CustomerOrderDAOImpl implements CustomerOrderDAO {
 
     @Override
     public ArrayList<String> getAllCustomerOrderIdS() throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT customer_Order_Id FROM customer_Order ORDER BY CAST(Substring(customer_Order_Id, 3) AS UNSIGNED)");
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT customer_Order_Id FROM customer_Order " +
+                        "ORDER BY CAST(Substring(customer_Order_Id, 3) AS UNSIGNED)");
+
         ArrayList<String> list = new ArrayList<>();
 
         while (resultSet.next()) {
@@ -61,8 +65,9 @@ public class CustomerOrderDAOImpl implements CustomerOrderDAO {
 
     @Override
     public ArrayList<String> getSelectedAllCustomerOrderId(String id) throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT customer_Order_Id FROM customer_Order " +
-                "WHERE customer_Id = ? ORDER BY date desc, time desc", id);
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT customer_Order_Id FROM customer_Order " +
+                        "WHERE customer_Id = ? ORDER BY date desc, time desc", id);
 
         ArrayList<String> list = new ArrayList<>();
 
@@ -74,8 +79,9 @@ public class CustomerOrderDAOImpl implements CustomerOrderDAO {
 
     @Override
     public ArrayList<String> getCustomerId(String id) throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT customer_Id FROM customer_Order " +
-                "WHERE customer_Order_Id = ? ORDER BY date desc, time desc", id);
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT customer_Id FROM customer_Order " +
+                        "WHERE customer_Order_Id = ? ORDER BY date desc, time desc", id);
 
         ArrayList<String> list = new ArrayList<>();
 
@@ -87,8 +93,8 @@ public class CustomerOrderDAOImpl implements CustomerOrderDAO {
 
     @Override
     public String getCustomerIdForOrder(String id) throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT customer_Id FROM customer_Order " +
-                "WHERE customer_Order_Id = ?", id);
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT customer_Id FROM customer_Order WHERE customer_Order_Id = ?", id);
 
         if (resultSet.next()) {
             return resultSet.getString(1);
@@ -98,7 +104,8 @@ public class CustomerOrderDAOImpl implements CustomerOrderDAO {
 
     @Override
     public String getTodaySales() throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT COUNT(*) FROM customer_Order WHERE DATE(date) = CURDATE()");
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT COUNT(*) FROM customer_Order WHERE DATE(date) = CURDATE()");
 
         if (resultSet.next()) {
             return resultSet.getString(1);

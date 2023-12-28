@@ -1,13 +1,9 @@
 package lk.grb.ceylonPottersPaletteLayered.dao.custom.Impl;
 
 import lk.grb.ceylonPottersPaletteLayered.dao.custom.EmployeeAttendanceDAO;
-import lk.grb.ceylonPottersPaletteLayered.db.DbConnection;
-import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeAttendanceDto;
 import lk.grb.ceylonPottersPaletteLayered.entity.Attendance;
 import lk.grb.ceylonPottersPaletteLayered.util.SQLUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,13 +20,11 @@ public class EmployeeAttendanceDAOImpl implements EmployeeAttendanceDAO {
 
     @Override
     public boolean update(Attendance entity) throws SQLException {
-
         return SQLUtil.execute("UPDATE attendance SET " +
                         "employee_Id=?" +
                         "WHERE attendance_Id=?",
                 entity.getEmployee_Id(),
-                entity.getAttendance_Id()
-        );
+                entity.getAttendance_Id());
     }
 
     @Override
@@ -54,7 +48,9 @@ public class EmployeeAttendanceDAOImpl implements EmployeeAttendanceDAO {
 
     @Override
     public ArrayList<String> getAllId() throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT attendance_Id FROM attendance ORDER BY date desc, time desc");
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT attendance_Id FROM attendance ORDER BY date desc, time desc");
+
         ArrayList<String> list = new ArrayList<>();
 
         while (resultSet.next()) {
@@ -65,7 +61,10 @@ public class EmployeeAttendanceDAOImpl implements EmployeeAttendanceDAO {
 
     @Override
     public ArrayList<String> getSelectedAllAttendanceId(String id) throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT attendance_Id FROM attendance WHERE employee_Id = ? ORDER BY date desc, time desc", id);
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT attendance_Id FROM attendance WHERE employee_Id = ? " +
+                        "ORDER BY date desc, time desc", id);
+
         ArrayList<String> list = new ArrayList<>();
 
         while (resultSet.next()) {
@@ -76,14 +75,9 @@ public class EmployeeAttendanceDAOImpl implements EmployeeAttendanceDAO {
 
     @Override
     public String workedDayCount(String id) throws SQLException {
-        String sql = "SELECT COUNT(*) AS work_days FROM attendance WHERE employee_Id = ? AND MONTH(date) = MONTH(CURDATE())";
-
-        Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(sql);
-
-        pstm.setString(1,id);
-
-        ResultSet resultSet = pstm.executeQuery();
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT COUNT(*) AS work_days FROM attendance " +
+                        "WHERE employee_Id = ? AND MONTH(date) = MONTH(CURDATE())", id);
 
         if (resultSet.next()) {
             return resultSet.getString(1);
@@ -93,9 +87,8 @@ public class EmployeeAttendanceDAOImpl implements EmployeeAttendanceDAO {
 
     @Override
     public String getTodayAttendance() throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT COUNT(*) " +
-                "FROM attendance " +
-                "WHERE date = CURDATE()");
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT COUNT(*) FROM attendance WHERE date = CURDATE()");
 
         if (resultSet.next()) {
             return resultSet.getString(1);

@@ -1,14 +1,9 @@
 package lk.grb.ceylonPottersPaletteLayered.dao.custom.Impl;
 
-import lk.grb.ceylonPottersPaletteLayered.dao.SuperDAO;
 import lk.grb.ceylonPottersPaletteLayered.dao.custom.SupplierDAO;
-import lk.grb.ceylonPottersPaletteLayered.db.DbConnection;
-import lk.grb.ceylonPottersPaletteLayered.dto.SupplierDto;
 import lk.grb.ceylonPottersPaletteLayered.entity.Supplier;
-import lk.grb.ceylonPottersPaletteLayered.util.CrudUtil;
 import lk.grb.ceylonPottersPaletteLayered.util.SQLUtil;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -28,7 +23,8 @@ public class SupplierDAOImpl implements SupplierDAO {
 
     @Override
     public Supplier getData(String id) throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT * FROM supplier WHERE supplier_Id=?", id);
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT * FROM supplier WHERE supplier_Id=?", id);
 
         Supplier entity = new Supplier();
 
@@ -54,8 +50,7 @@ public class SupplierDAOImpl implements SupplierDAO {
                 entity.getName(),
                 entity.getEmail(),
                 entity.getContact_No(),
-                entity.getSupplier_Id()
-        );
+                entity.getSupplier_Id());
     }
 
     @Override
@@ -65,7 +60,9 @@ public class SupplierDAOImpl implements SupplierDAO {
 
     @Override
     public ArrayList<String> getAllId() throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT supplier_Id FROM supplier ORDER BY LENGTH(supplier_Id),supplier_Id");
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT supplier_Id FROM supplier ORDER BY LENGTH(supplier_Id),supplier_Id");
+
         ArrayList<String> list = new ArrayList<>();
 
         while (resultSet.next()) {
@@ -76,12 +73,9 @@ public class SupplierDAOImpl implements SupplierDAO {
 
     @Override
     public String getSupplierName(String id) throws SQLException {
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT name FROM supplier WHERE supplier_Id=?", id);
 
-        String sql = ("SELECT name FROM supplier WHERE supplier_Id=?");
-        PreparedStatement statement = DbConnection.getInstance().getConnection().prepareStatement(sql);
-        statement.setString(1,id);
-
-        ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
             return resultSet.getString(1);
         }
@@ -100,7 +94,8 @@ public class SupplierDAOImpl implements SupplierDAO {
 
     @Override
     public String getSupplierContactNo(String id) throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT contact_No FROM supplier WHERE supplier_Id=?", id);
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT contact_No FROM supplier WHERE supplier_Id=?", id);
 
         if (resultSet.next()) {
             return resultSet.getString(1);

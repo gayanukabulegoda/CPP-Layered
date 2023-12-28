@@ -1,7 +1,6 @@
 package lk.grb.ceylonPottersPaletteLayered.dao.custom.Impl;
 
 import lk.grb.ceylonPottersPaletteLayered.dao.custom.EmployeeSalaryDAO;
-import lk.grb.ceylonPottersPaletteLayered.dto.EmployeeSalaryDto;
 import lk.grb.ceylonPottersPaletteLayered.entity.Salary;
 import lk.grb.ceylonPottersPaletteLayered.util.SQLUtil;
 
@@ -25,7 +24,6 @@ public class EmployeeSalaryDAOImpl implements EmployeeSalaryDAO {
 
     @Override
     public boolean update(Salary entity) throws SQLException {
-
         return SQLUtil.execute("UPDATE salary SET " +
                         "employee_Id=?," +
                         "worked_Day_Count=?," +
@@ -38,13 +36,13 @@ public class EmployeeSalaryDAOImpl implements EmployeeSalaryDAO {
                 entity.getSalary(),
                 entity.getBonus(),
                 entity.getTotal_Payment(),
-                entity.getSalary_Id()
-        );
+                entity.getSalary_Id());
     }
 
     @Override
     public Salary getData(String id) throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT * FROM salary WHERE salary_Id=?", id);
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT * FROM salary WHERE salary_Id=?", id);
 
         Salary entity = new Salary();
 
@@ -63,7 +61,9 @@ public class EmployeeSalaryDAOImpl implements EmployeeSalaryDAO {
 
     @Override
     public ArrayList<String> getAllId() throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT salary_Id FROM salary ORDER BY salary_Id desc");
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT salary_Id FROM salary ORDER BY salary_Id desc");
+
         ArrayList<String> list = new ArrayList<>();
 
         while (resultSet.next()) {
@@ -74,7 +74,10 @@ public class EmployeeSalaryDAOImpl implements EmployeeSalaryDAO {
 
     @Override
     public ArrayList<String> getSelectedAllSalaryId(String id) throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT salary_Id FROM salary WHERE employee_Id = ? ORDER BY salary_Id desc", id);
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT salary_Id FROM salary " +
+                        "WHERE employee_Id = ? ORDER BY salary_Id desc", id);
+
         ArrayList<String> list = new ArrayList<>();
 
         while (resultSet.next()) {
@@ -106,7 +109,8 @@ public class EmployeeSalaryDAOImpl implements EmployeeSalaryDAO {
 
     @Override
     public String getSalaryId(String employeeId) throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT salary_Id FROM salary WHERE employee_Id=?", employeeId);
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT salary_Id FROM salary WHERE employee_Id=?", employeeId);
 
         if (resultSet.next()) {
             return resultSet.getString(1);

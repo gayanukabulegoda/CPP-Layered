@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public interface UserDAO extends CrudUtil<User> {
-    String checkUsernameAndPassword(String userName, String password) throws SQLException, ClassNotFoundException;
+    String checkUsernameAndPassword(String userName, String password) throws SQLException;
 
     String getRole(String userName) throws SQLException;
 

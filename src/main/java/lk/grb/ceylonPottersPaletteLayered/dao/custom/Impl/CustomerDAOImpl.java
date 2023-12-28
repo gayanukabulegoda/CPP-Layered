@@ -1,12 +1,9 @@
 package lk.grb.ceylonPottersPaletteLayered.dao.custom.Impl;
 
 import lk.grb.ceylonPottersPaletteLayered.dao.custom.CustomerDAO;
-import lk.grb.ceylonPottersPaletteLayered.db.DbConnection;
-import lk.grb.ceylonPottersPaletteLayered.dto.CustomerDto;
 import lk.grb.ceylonPottersPaletteLayered.entity.Customer;
 import lk.grb.ceylonPottersPaletteLayered.util.SQLUtil;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -52,8 +49,7 @@ public class CustomerDAOImpl implements CustomerDAO {
                 entity.getName(),
                 entity.getEmail(),
                 entity.getContact_No(),
-                entity.getCustomer_Id()
-        );
+                entity.getCustomer_Id());
     }
 
     @Override
@@ -63,7 +59,9 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public ArrayList<String> getAllId() throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT customer_Id FROM customer ORDER BY LENGTH(customer_Id),customer_Id");
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT customer_Id FROM customer ORDER BY LENGTH(customer_Id),customer_Id");
+
         ArrayList<String> list = new ArrayList<>();
 
         while (resultSet.next()) {
@@ -74,12 +72,8 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public String getCustomerName(String id) throws SQLException {
+        ResultSet resultSet = SQLUtil.execute("SELECT name FROM customer WHERE customer_Id=?", id);
 
-        String sql = ("SELECT name FROM customer WHERE customer_Id=?");
-        PreparedStatement statement = DbConnection.getInstance().getConnection().prepareStatement(sql);
-        statement.setString(1,id);
-
-        ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
             return resultSet.getString(1);
         }

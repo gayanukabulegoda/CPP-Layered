@@ -1,7 +1,6 @@
 package lk.grb.ceylonPottersPaletteLayered.dao.custom.Impl;
 
 import lk.grb.ceylonPottersPaletteLayered.dao.custom.UserDAO;
-import lk.grb.ceylonPottersPaletteLayered.dto.UserDto;
 import lk.grb.ceylonPottersPaletteLayered.entity.User;
 import lk.grb.ceylonPottersPaletteLayered.util.SQLUtil;
 
@@ -11,28 +10,24 @@ import java.util.ArrayList;
 
 public class UserDAOImpl implements UserDAO {
     @Override
-    public String checkUsernameAndPassword(String userName, String password) throws SQLException, ClassNotFoundException {
-        ResultSet set = SQLUtil.execute("SELECT user_Name FROM user WHERE user_Name=? AND password=?", userName, password);
+    public String checkUsernameAndPassword(String userName, String password) throws SQLException {
+        ResultSet set = SQLUtil.
+                execute("SELECT user_Name FROM user " +
+                        "WHERE user_Name=? AND password=?", userName, password);
 
-        if (set.next()) {
-            return set.getString(1);
-        } else {
-            return "No";
-        }
+        if (set.next()) return set.getString(1);
+        else return "Invalid!!";
     }
 
     @Override
     public String getRole(String userName) throws SQLException {
-        ResultSet set = SQLUtil.execute("SELECT e.role " +
-                "FROM employee e " +
-                "JOIN user u ON e.employee_Id = u.employee_Id " +
-                "WHERE u.user_Name = ?;", userName);
+        ResultSet set = SQLUtil.
+                execute("SELECT e.role FROM employee e " +
+                        "JOIN user u ON e.employee_Id = u.employee_Id " +
+                        "WHERE u.user_Name = ?;", userName);
 
-        if (set.next()) {
-            return set.getString(1);
-        } else {
-            return "No";
-        }
+        if (set.next()) return set.getString(1);
+        else return "Invalid!!";
     }
 
     @Override
@@ -41,8 +36,7 @@ public class UserDAOImpl implements UserDAO {
                         "password=? " +
                         "WHERE user_Name=?",
                 entity.getPassword(),
-                entity.getUser_Name()
-        );
+                entity.getUser_Name());
     }
 
     @Override
@@ -55,29 +49,26 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean delete(String userName) throws SQLException {
-        return SQLUtil.execute("DELETE FROM user WHERE user_Name=?", userName);
+        return SQLUtil.
+                execute("DELETE FROM user WHERE user_Name=?", userName);
     }
 
     @Override
     public String getEmployeeId(String userName) throws SQLException {
-        ResultSet set = SQLUtil.execute("SELECT employee_Id FROM user WHERE user_Name=?", userName);
+        ResultSet set = SQLUtil.
+                execute("SELECT employee_Id FROM user WHERE user_Name=?", userName);
 
-        if (set.next()) {
-            return set.getString(1);
-        } else {
-            return "null";
-        }
+        if (set.next()) return set.getString(1);
+        else return "null";
     }
 
     @Override
     public String getUserName(String employeeId) throws SQLException {
-        ResultSet set = SQLUtil.execute("SELECT user_Name FROM user WHERE employee_Id=?", employeeId);
+        ResultSet set = SQLUtil.
+                execute("SELECT user_Name FROM user WHERE employee_Id=?", employeeId);
 
-        if (set.next()) {
-            return set.getString(1);
-        } else {
-            return "null";
-        }
+        if (set.next()) return set.getString(1);
+        else return "null";
     }
 
     @Override

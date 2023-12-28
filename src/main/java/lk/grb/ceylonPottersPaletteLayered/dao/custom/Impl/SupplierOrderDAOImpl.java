@@ -1,8 +1,6 @@
 package lk.grb.ceylonPottersPaletteLayered.dao.custom.Impl;
 
 import lk.grb.ceylonPottersPaletteLayered.dao.custom.SupplierOrderDAO;
-import lk.grb.ceylonPottersPaletteLayered.dto.SupplierOrderDto;
-import lk.grb.ceylonPottersPaletteLayered.entity.Supplier;
 import lk.grb.ceylonPottersPaletteLayered.entity.SupplierOrder;
 import lk.grb.ceylonPottersPaletteLayered.util.SQLUtil;
 
@@ -23,7 +21,8 @@ public class SupplierOrderDAOImpl implements SupplierOrderDAO {
 
     @Override
     public SupplierOrder getData(String id) throws SQLException {
-        ResultSet set = SQLUtil.execute("SELECT * FROM supplier_Order WHERE supplier_Order_Id=?", id);
+        ResultSet set = SQLUtil.
+                execute("SELECT * FROM supplier_Order WHERE supplier_Order_Id=?", id);
 
         SupplierOrder entity = new SupplierOrder();
 
@@ -39,7 +38,10 @@ public class SupplierOrderDAOImpl implements SupplierOrderDAO {
 
     @Override
     public ArrayList<String> getAllId() throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT supplier_Order_Id FROM supplier_Order ORDER BY LENGTH(supplier_Order_Id),supplier_Order_Id");
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT supplier_Order_Id FROM supplier_Order " +
+                        "ORDER BY LENGTH(supplier_Order_Id),supplier_Order_Id");
+
         ArrayList<String> list = new ArrayList<>();
 
         while (resultSet.next()) {
@@ -50,8 +52,9 @@ public class SupplierOrderDAOImpl implements SupplierOrderDAO {
 
     @Override
     public ArrayList<String> getSelectedAllSupplierOrderId(String id) throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT supplier_Order_Id FROM supplier_Order " +
-                "WHERE supplier_Id = ? ORDER BY date desc, time desc", id);
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT supplier_Order_Id FROM supplier_Order " +
+                        "WHERE supplier_Id = ? ORDER BY date desc, time desc", id);
 
         ArrayList<String> list = new ArrayList<>();
 
@@ -63,8 +66,9 @@ public class SupplierOrderDAOImpl implements SupplierOrderDAO {
 
     @Override
     public ArrayList<String> getSupplierId(String id) throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT supplier_Id FROM supplier_Order " +
-                "WHERE supplier_Order_Id = ? ORDER BY date desc, time desc", id);
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT supplier_Id FROM supplier_Order " +
+                        "WHERE supplier_Order_Id = ? ORDER BY date desc, time desc", id);
 
         ArrayList<String> list = new ArrayList<>();
 
@@ -76,8 +80,9 @@ public class SupplierOrderDAOImpl implements SupplierOrderDAO {
 
     @Override
     public String getSupplierIdForOrder(String id) throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT supplier_Id FROM supplier_Order " +
-                "WHERE supplier_Order_Id = ?", id);
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT supplier_Id FROM supplier_Order " +
+                        "WHERE supplier_Order_Id = ?", id);
 
         if (resultSet.next()) {
             return resultSet.getString(1);
@@ -87,7 +92,8 @@ public class SupplierOrderDAOImpl implements SupplierOrderDAO {
 
     @Override
     public double getOrderTotal() throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT SUM(total_Price) FROM supplier_Order");
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT SUM(total_Price) FROM supplier_Order");
 
         if (resultSet.next()) {
             return resultSet.getDouble(1);
