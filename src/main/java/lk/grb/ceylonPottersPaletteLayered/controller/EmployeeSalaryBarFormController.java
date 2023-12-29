@@ -79,7 +79,7 @@ public class EmployeeSalaryBarFormController {
             EmployeeDto employeeDto = salaryBO.getEmployeeData(employeeSalaryDto.getEmployee_Id());
 
             this.id.setText(employeeSalaryDto.getEmployee_Id());
-            name.setText(employeeDto.getFirst_Name() + " " + employeeDto.getLast_Name());
+            name.setText(salaryBO.setEmployeeName(employeeDto.getFirst_Name(), employeeDto.getLast_Name()));
             payment.setText(String.valueOf(employeeSalaryDto.getTotal_Payment()));
             date.setText(employeeSalaryDto.getDate());
             salary_Id = id;

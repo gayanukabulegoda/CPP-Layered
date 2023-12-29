@@ -27,4 +27,8 @@ public interface SalaryBO extends SuperBO {
     String workedDayCount(String id) throws SQLException;
 
     boolean updateSalary(EmployeeSalaryDto dto) throws SQLException;
+
+    String setEmployeeName(String firstName, String lastName);
+
+    double getTotalSalaryAmount(String salary, String bonus);
 }

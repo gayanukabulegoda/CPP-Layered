@@ -100,4 +100,9 @@ public class AttendanceBOImpl implements AttendanceBO {
                 )
         );
     }
+
+    @Override
+    public String setEmployeeName(String firstName, String lastName) {
+        return firstName + " " + lastName;
+    }
 }

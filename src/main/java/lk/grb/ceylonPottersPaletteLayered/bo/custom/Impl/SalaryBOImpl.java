@@ -123,4 +123,14 @@ public class SalaryBOImpl implements SalaryBO {
                 )
         );
     }
+
+    @Override
+    public String setEmployeeName(String firstName, String lastName) {
+        return firstName + " " + lastName;
+    }
+
+    @Override
+    public double getTotalSalaryAmount(String salary, String bonus) {
+        return Double.parseDouble(salary) + Double.parseDouble(bonus);
+    }
 }

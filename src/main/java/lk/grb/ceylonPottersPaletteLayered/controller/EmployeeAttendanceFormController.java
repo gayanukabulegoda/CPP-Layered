@@ -201,7 +201,6 @@ public class EmployeeAttendanceFormController implements Initializable {
     @FXML
     void btnQrOnMouseExited(MouseEvent event) {
         StyleUtil.qrBtnUnselected(btnQrPane, imgQrScan);
-
         scanQrMsgPane.setVisible(false);
     }
 

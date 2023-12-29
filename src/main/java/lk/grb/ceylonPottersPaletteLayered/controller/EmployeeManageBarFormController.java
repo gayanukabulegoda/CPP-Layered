@@ -96,7 +96,7 @@ public class EmployeeManageBarFormController {
             EmployeeDto employeedto = employeeBO.getEmployeeData(id);
 
             this.id.setText(employeedto.getEmployee_Id());
-            name.setText(employeedto.getFirst_Name() + " " + employeedto.getLast_Name());
+            name.setText(employeeBO.setEmployeeName(employeedto.getFirst_Name(), employeedto.getLast_Name()));
             role.setText(employeedto.getRole());
             email.setText(employeedto.getEmail());
             contact_No.setText(employeedto.getContact_No());

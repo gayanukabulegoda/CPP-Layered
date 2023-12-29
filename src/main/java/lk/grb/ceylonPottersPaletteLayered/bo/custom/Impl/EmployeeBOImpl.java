@@ -86,4 +86,9 @@ public class EmployeeBOImpl implements EmployeeBO {
                 )
         );
     }
+
+    @Override
+    public String setEmployeeName(String firstName, String lastName) {
+        return firstName + " " + lastName;
+    }
 }

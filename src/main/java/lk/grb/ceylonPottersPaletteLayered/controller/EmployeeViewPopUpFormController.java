@@ -87,7 +87,7 @@ public class EmployeeViewPopUpFormController implements Initializable {
         EmployeeDto employeeDto = employeeBO.getEmployeeData(employeeId);
 
         lblEmployeeId.setText(employeeDto.getEmployee_Id());
-        lblEmployeeName.setText(employeeDto.getFirst_Name() + " " + employeeDto.getLast_Name());
+        lblEmployeeName.setText(employeeBO.setEmployeeName(employeeDto.getFirst_Name(), employeeDto.getLast_Name()));
         lblContactNo.setText(employeeDto.getContact_No());
         lblRegisteredDate.setText(employeeDto.getDate());
         lblRegisteredTime.setText(employeeDto.getTime());

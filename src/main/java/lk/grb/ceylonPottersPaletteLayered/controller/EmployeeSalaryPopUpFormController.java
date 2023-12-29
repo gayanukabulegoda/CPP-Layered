@@ -195,13 +195,13 @@ public class EmployeeSalaryPopUpFormController implements Initializable {
     @FXML
     void txtBonusOnAction(ActionEvent event) {
         isEmpty();
-        lblTotalAmount.setText(String.valueOf(Double.parseDouble(txtSalary.getText())+Double.parseDouble(txtBonus.getText())));
+        lblTotalAmount.setText(String.valueOf(salaryBO.getTotalSalaryAmount(txtSalary.getText(), txtBonus.getText())));
     }
 
     @FXML
     void txtSalaryOnAction(ActionEvent event) {
         isEmpty();
-        lblTotalAmount.setText(String.valueOf((Double.parseDouble(txtSalary.getText()))+Double.parseDouble(txtBonus.getText())));
+        lblTotalAmount.setText(String.valueOf(salaryBO.getTotalSalaryAmount(txtSalary.getText(), txtBonus.getText())));
         txtBonus.setEditable(true);
     }
 

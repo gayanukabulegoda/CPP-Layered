@@ -16,4 +16,6 @@ public interface EmployeeBO extends SuperBO {
     String getEmployeeContactNo(String id) throws SQLException;
 
     boolean updateEmployee(EmployeeDto dto) throws SQLException;
+
+    String setEmployeeName(String firstName, String lastName);
 }

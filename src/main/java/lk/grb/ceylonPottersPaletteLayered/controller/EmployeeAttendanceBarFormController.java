@@ -79,7 +79,7 @@ public class EmployeeAttendanceBarFormController {
             EmployeeDto employeeDto = attendanceBO.getEmployeeData(employeeAttendanceDto.getEmployee_Id());
 
             this.id.setText(employeeAttendanceDto.getEmployee_Id());
-            name.setText(employeeDto.getFirst_Name() + " " + employeeDto.getLast_Name());
+            name.setText(attendanceBO.setEmployeeName(employeeDto.getFirst_Name(), employeeDto.getLast_Name()));
             time.setText(employeeAttendanceDto.getTime());
             date.setText(employeeAttendanceDto.getDate());
             employee_Attendance_Id = id;
