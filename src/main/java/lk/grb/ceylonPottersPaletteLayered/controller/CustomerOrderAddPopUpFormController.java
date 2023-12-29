@@ -135,7 +135,7 @@ public class CustomerOrderAddPopUpFormController implements Initializable {
                     double unitPrice = Double.parseDouble(lblUnitPrice.getText());
                     int orderQty = Integer.parseInt(txtProductQty.getText());
 
-                    netTotal += (orderQty * unitPrice);
+                    netTotal += customerOrderBO.getTotal(String.valueOf(unitPrice), String.valueOf(orderQty));
                     lblNetTotal.setText(String.valueOf(netTotal));
                     allCustomerOrderCartId();
                     txtProductQty.clear();
@@ -150,7 +150,7 @@ public class CustomerOrderAddPopUpFormController implements Initializable {
 
             allCustomerOrderCartId();
 
-            netTotal += (Integer.parseInt(txtProductQty.getText())) * (Double.parseDouble(lblUnitPrice.getText()));
+            netTotal += customerOrderBO.getTotal(lblUnitPrice.getText(), txtProductQty.getText());
             lblNetTotal.setText(String.valueOf(netTotal));
 
             txtProductQty.clear();

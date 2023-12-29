@@ -36,7 +36,7 @@ public class CustomerOrderViewPopUpBarFormController {
             description.setText(descriptionAndUnitPrice[0]);
             unitPrice.setText(descriptionAndUnitPrice[1]);
             qty.setText(element[1]);
-            total.setText(String.valueOf(Double.parseDouble(unitPrice.getText()) * Integer.parseInt(qty.getText())));
+            total.setText(String.valueOf(customerOrderBO.getTotal(unitPrice.getText(), qty.getText())));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

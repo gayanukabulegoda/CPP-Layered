@@ -40,4 +40,6 @@ public interface CustomerOrderBO extends SuperBO {
     ArrayList<String> getSelectedAllCustomerOrderId(String id) throws SQLException;
 
     ArrayList<String[]> getCustomerOrderDetailData(String id) throws SQLException;
+
+    double getTotal(String unitPrice, String qty);
 }

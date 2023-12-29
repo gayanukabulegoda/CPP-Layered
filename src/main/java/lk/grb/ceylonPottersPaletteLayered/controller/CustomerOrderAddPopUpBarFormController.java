@@ -42,10 +42,12 @@ public class CustomerOrderAddPopUpBarFormController {
         removeElement(CustomerOrderAddPopUpFormController.productList,x);
 
         double netTotal = CustomerOrderAddPopUpFormController.getInstance().netTotal;
-        double total = Integer.parseInt(qty.getText()) * Double.parseDouble(unitPrice.getText());
+        double total = customerOrderBO.getTotal(unitPrice.getText(), qty.getText());
         CustomerOrderAddPopUpFormController.getInstance().netTotal = (netTotal - total);
 
-        CustomerOrderAddPopUpFormController.getInstance().lblNetTotal.setText(String.valueOf(CustomerOrderAddPopUpFormController.getInstance().netTotal));
+        CustomerOrderAddPopUpFormController.getInstance().lblNetTotal.
+                setText(String.valueOf(CustomerOrderAddPopUpFormController.getInstance().netTotal));
+
         CustomerOrderAddPopUpFormController.getInstance().allCustomerOrderCartId();
     }
 
@@ -71,7 +73,7 @@ public class CustomerOrderAddPopUpBarFormController {
             description.setText(descriptionAndUnitPrice[0]);
             unitPrice.setText(descriptionAndUnitPrice[1]);
             qty.setText(element[1]);
-            total.setText(String.valueOf(Double.parseDouble(unitPrice.getText()) * Integer.parseInt(qty.getText())));
+            total.setText(String.valueOf(customerOrderBO.getTotal(unitPrice.getText(), qty.getText())));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

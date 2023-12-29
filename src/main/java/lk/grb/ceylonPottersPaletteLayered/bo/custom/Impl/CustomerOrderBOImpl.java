@@ -154,4 +154,9 @@ public class CustomerOrderBOImpl implements CustomerOrderBO {
     public ArrayList<String[]> getCustomerOrderDetailData(String id) throws SQLException {
         return customerOrderDetailDAO.getData(id);
     }
+
+    @Override
+    public double getTotal(String unitPrice, String qty) {
+        return Double.parseDouble(unitPrice) * Integer.parseInt(qty);
+    }
 }
