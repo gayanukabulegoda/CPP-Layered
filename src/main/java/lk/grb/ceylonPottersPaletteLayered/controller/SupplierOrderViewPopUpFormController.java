@@ -83,32 +83,20 @@ public class SupplierOrderViewPopUpFormController implements Initializable {
         StyleUtil.confirmORSaveBtnUnselected(btnClosePane);
     }
 
-    public void start() {
-        imgFlower1.setCache(true);
-        imgFlower1.setCacheHint(CacheHint.SPEED);
+    private void start() {
+        setRotateTransition(imgFlower1, 360);
+        setRotateTransition(imgFlower2, -360);
+        setRotateTransition(imgFlower3, -360);
+    }
 
-        imgFlower2.setCache(true);
-        imgFlower2.setCacheHint(CacheHint.SPEED);
+    /** Create a RotateTransition for continuous rotation */
+    private void setRotateTransition(ImageView img, int rotateAngle) {
+        img.setCache(true);
+        img.setCacheHint(CacheHint.QUALITY);
 
-        imgFlower3.setCache(true);
-        imgFlower3.setCacheHint(CacheHint.SPEED);
-
-        // Create a RotateTransition for continuous rotation
-        RotateTransition rotateTransition1 = new RotateTransition(Duration.seconds(8), imgFlower1);
-        rotateTransition1.setInterpolator(Interpolator.LINEAR);
-        rotateTransition1.setByAngle(360); // Rotate by 360 degrees
-        rotateTransition1.setCycleCount(RotateTransition.INDEFINITE); // Repeat indefinitely
-        rotateTransition1.play();
-
-        RotateTransition rotateTransition2 = new RotateTransition(Duration.seconds(8), imgFlower2);
-        rotateTransition2.setInterpolator(Interpolator.LINEAR);
-        rotateTransition2.setByAngle(-360); // Rotate by 360 degrees
-        rotateTransition2.setCycleCount(RotateTransition.INDEFINITE); // Repeat indefinitely
-        rotateTransition2.play();
-
-        RotateTransition rotateTransition = new RotateTransition(Duration.seconds(8), imgFlower3);
+        RotateTransition rotateTransition = new RotateTransition(Duration.seconds(8), img);
         rotateTransition.setInterpolator(Interpolator.LINEAR);
-        rotateTransition.setByAngle(-360); // Rotate by 360 degrees
+        rotateTransition.setByAngle(rotateAngle); // Rotate by 360 degrees
         rotateTransition.setCycleCount(RotateTransition.INDEFINITE); // Repeat indefinitely
         rotateTransition.play();
     }
