@@ -190,8 +190,8 @@ public class DashboardFormController implements Initializable {
         vBoxOrders.getChildren().clear();
         ArrayList<String> list = dashboardBO.getAllCustomerOrderIdS();
 
-        for (int i = 0; i < list.size(); i++) {
-            loadDataTable(list.get(i));
+        for (String id : list) {
+            loadDataTable(id);
         }
     }
 
@@ -225,24 +225,25 @@ public class DashboardFormController implements Initializable {
         rotateTransition.play();
     }
 
-    public void setPiChart() throws SQLException {
+    private void setPiChart() throws SQLException {
+        ObservableList<PieChart.Data> pieChartData = addPieChartData();
 
-        // Create sample data for the pie chart
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Total Income", dashboardBO.getCustomerOrderTotal()),
-                new PieChart.Data("Total Expenses", (dashboardBO.getSupplierOrderTotal() + dashboardBO.getSalaryTotal()))
-        );
-
-        // Create a pie chart with the data
-        pieChart = new PieChart(pieChartData);
+        pieChart = new PieChart(pieChartData); // Create a pie chart with the data
 
         pieChart.getData().get(0).getNode().setStyle("-fx-pie-color: #C56E33;");
         pieChart.getData().get(1).getNode().setStyle("-fx-pie-color: #973F04;");
-
         pieChart.setLabelLineLength(0);
         pieChart.setLabelsVisible(false);
 
         piChartPane.getChildren().add(pieChart);
+    }
+
+    /** Add data for the Pie Chart */
+    private ObservableList<PieChart.Data> addPieChartData() throws SQLException {
+        return FXCollections.observableArrayList(
+                new PieChart.Data("Total Income", dashboardBO.getCustomerOrderTotal()),
+                new PieChart.Data("Total Expenses", (dashboardBO.getSupplierOrderTotal() + dashboardBO.getSalaryTotal()))
+        );
     }
 
     @Override
@@ -252,8 +253,8 @@ public class DashboardFormController implements Initializable {
         try {
             ArrayList<String> allProductId = dashboardBO.getAllProductId();
 
-            for (int i = 0; i < allProductId.size(); i++) {
-                qtyTotal += Integer.parseInt(dashboardBO.getProductQtyTotal(allProductId.get(i)));
+            for (String productId : allProductId) {
+                qtyTotal += Integer.parseInt(dashboardBO.getProductQtyTotal(productId));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -117,6 +117,20 @@ public class DeleteUserFormController implements Initializable {
         lblUnsuccessfulAlert.setText(" ");
         lblConfirmAlert.setText(" ");
 
+        AtomicReference<String> id = startQR();
+
+        if(lblEmployeeId.getText().equals(String.valueOf(id))) deleteUser(event);
+        else {
+            userDataPane.setStyle("-fx-border-color: red;" +
+                    "-fx-border-radius: 12px");
+            btnConfirm.setStyle("-fx-border-color: red;" +
+                    "-fx-text-fill: red;" +
+                    "-fx-border-radius: 12px");
+            lblUnsuccessfulAlert.setText("Unsuccessful Authentication!!");
+        }
+    }
+
+    private AtomicReference<String> startQR() {
         AtomicReference<String> id = new AtomicReference<>();
 
         Thread qrThread = new Thread(() -> id.set(QrReader.readQr()));
@@ -127,34 +141,28 @@ public class DeleteUserFormController implements Initializable {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        return id;
+    }
 
-        if(lblEmployeeId.getText().equals(String.valueOf(id))) {
-
-            boolean delete = userBO.deleteUser(GlobalFormController.user);
-            if (delete) {
-                Navigation.close(event);
-                Navigation.switchNavigation("loginForm.fxml", event);
-
-                SendEmail sendEmail = new SendEmail();
-                EmployeeDto employeeDto = userBO.getEmployeeData(lblEmployeeId.getText());
-
-                String subject = "Account Deleted";
-                String body = "Hello " + employeeDto.getFirst_Name() +" "+ employeeDto.getLast_Name() +
-                        ",\nYour Ceylon Potter's Pallet Account:\n" +
-                        "DELETED Successfully..!!!";
-
-                String[] detail = {employeeDto.getEmail(), subject, body};
-                sendEmail.sendMail(detail);
-            }
-
-        } else {
-            userDataPane.setStyle("-fx-border-color: red;" +
-                    "-fx-border-radius: 12px");
-            btnConfirm.setStyle("-fx-border-color: red;" +
-                    "-fx-text-fill: red;" +
-                    "-fx-border-radius: 12px");
-            lblUnsuccessfulAlert.setText("Unsuccessful Authentication!!");
+    private void deleteUser(ActionEvent event) throws SQLException, IOException, MessagingException {
+        if (userBO.deleteUser(GlobalFormController.user)) {
+            Navigation.close(event);
+            Navigation.switchNavigation("loginForm.fxml", event);
+            sendConfirmationMail();
         }
+    }
+
+    private void sendConfirmationMail() throws SQLException, MessagingException {
+        SendEmail sendEmail = new SendEmail();
+        EmployeeDto employeeDto = userBO.getEmployeeData(lblEmployeeId.getText());
+
+        String subject = "Account Deleted";
+        String body = "Hello " + employeeDto.getFirst_Name() +" "+ employeeDto.getLast_Name() +
+                ",\nYour Ceylon Potter's Pallet Account:\n" +
+                "DELETED Successfully..!!!";
+
+        String[] detail = {employeeDto.getEmail(), subject, body};
+        sendEmail.sendMail(detail);
     }
 
     @FXML

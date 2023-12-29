@@ -28,7 +28,7 @@ public class WelcomeFormController implements Initializable{
 
         progressBar.setStyle("-fx-accent: #885D40;");
 
-        Task<Void> task = new Task<Void>() {
+        Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {
                 for (int i = 0; i <= 10; i++) {
