@@ -85,6 +85,16 @@ public class SupplierOrderManageBarFormController {
 
         JasperDesign load = JRXmlLoader.load(resourceAsStream);
 
+        JRDesignQuery jrDesignQuery = getJrDesignQuery();
+
+        load.setQuery(jrDesignQuery);
+        JasperReport jasperReport = JasperCompileManager.compileReport(load);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, hashMap, DbConnection.getInstance().getConnection());
+        JasperViewer.viewReport(jasperPrint,false);
+        JasperExportManager.exportReportToPdfFile(jasperPrint,"/home/gayanuka/Documents/Jasper Reports/Supplier_Report_PDFs/"+id.getText()+".pdf");
+    }
+
+    private JRDesignQuery getJrDesignQuery() {
         JRDesignQuery jrDesignQuery = new JRDesignQuery();
         jrDesignQuery.setText("SELECT\n" +
                 "    sod.item_Id,\n" +
@@ -99,12 +109,7 @@ public class SupplierOrderManageBarFormController {
                 "    item_Stock i ON i.item_Id = sod.item_Id\n" +
                 "WHERE\n" +
                 "    so.supplier_Order_Id = '"+ id.getText() +"'");
-
-        load.setQuery(jrDesignQuery);
-        JasperReport jasperReport = JasperCompileManager.compileReport(load);
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, hashMap, DbConnection.getInstance().getConnection());
-        JasperViewer.viewReport(jasperPrint,false);
-        JasperExportManager.exportReportToPdfFile(jasperPrint,"/home/gayanuka/Documents/Jasper Reports/Supplier_Report_PDFs/"+id.getText()+".pdf");
+        return jrDesignQuery;
     }
 
     @FXML
