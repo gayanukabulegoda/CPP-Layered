@@ -129,17 +129,15 @@ public class CustomerOrderAddPopUpFormController implements Initializable {
 
             for (int i = 0; i < productList.size(); i++) {
                 if (productList.get(i)[0].equals(String.valueOf(cmbProductId.getSelectionModel().getSelectedItem()))) {
+
                     int qty = Integer.parseInt(productList.get(i)[1]);
                     productList.get(i)[1] = String.valueOf(qty + Integer.parseInt(txtProductQty.getText()));
 
-                    double unitPrice = Double.parseDouble(lblUnitPrice.getText());
-                    int orderQty = Integer.parseInt(txtProductQty.getText());
-
-                    netTotal += customerOrderBO.getTotal(String.valueOf(unitPrice), String.valueOf(orderQty));
+                    netTotal += customerOrderBO.getTotal(lblUnitPrice.getText(), txtProductQty.getText());
                     lblNetTotal.setText(String.valueOf(netTotal));
+
                     allCustomerOrderCartId();
                     txtProductQty.clear();
-
                     return;
                 }
             }

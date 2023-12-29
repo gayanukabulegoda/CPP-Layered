@@ -130,17 +130,15 @@ public class SupplierOrderAddPopUpFormController implements Initializable {
 
             for (int i = 0; i < itemList.size(); i++) {
                 if (itemList.get(i)[0].equals(String.valueOf(cmbItemId.getSelectionModel().getSelectedItem()))) {
+
                     int qty = Integer.parseInt(itemList.get(i)[1]);
                     itemList.get(i)[1] = String.valueOf(qty + Integer.parseInt(txtItemQty.getText()));
 
-                    double unitPrice = Double.parseDouble(lblUnitPrice.getText());
-                    int orderQty = Integer.parseInt(txtItemQty.getText());
-
-                    netTotal += (orderQty * unitPrice);
+                    netTotal += supplierOrderBO.getTotal(lblUnitPrice.getText(), txtItemQty.getText());
                     lblNetTotal.setText(String.valueOf(netTotal));
+
                     allSupplierOrderCartId();
                     txtItemQty.clear();
-
                     return;
                 }
             }
@@ -151,7 +149,7 @@ public class SupplierOrderAddPopUpFormController implements Initializable {
 
             allSupplierOrderCartId();
 
-            netTotal += (Integer.parseInt(txtItemQty.getText())) * (Double.parseDouble(lblUnitPrice.getText()));
+            netTotal += supplierOrderBO.getTotal(lblUnitPrice.getText(), txtItemQty.getText());
             lblNetTotal.setText(String.valueOf(netTotal));
 
             txtItemQty.clear();

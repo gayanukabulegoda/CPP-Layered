@@ -23,7 +23,6 @@ public class WelcomeFormController implements Initializable{
     @FXML
     private ProgressBar progressBar;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

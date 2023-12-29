@@ -45,8 +45,8 @@ public class CustomerOrderAddPopUpBarFormController {
         double total = customerOrderBO.getTotal(unitPrice.getText(), qty.getText());
         CustomerOrderAddPopUpFormController.getInstance().netTotal = (netTotal - total);
 
-        CustomerOrderAddPopUpFormController.getInstance().lblNetTotal.
-                setText(String.valueOf(CustomerOrderAddPopUpFormController.getInstance().netTotal));
+        CustomerOrderAddPopUpFormController.getInstance().
+                lblNetTotal.setText(String.valueOf(CustomerOrderAddPopUpFormController.getInstance().netTotal));
 
         CustomerOrderAddPopUpFormController.getInstance().allCustomerOrderCartId();
     }

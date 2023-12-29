@@ -39,4 +39,6 @@ public interface SupplierOrderBO extends SuperBO {
     ArrayList<String> getSelectedAllSupplierOrderId(String id) throws SQLException;
 
     ArrayList<String[]> getSupplierOrderDataAsAnArray(String id) throws SQLException;
+
+    double getTotal(String unitPrice, String qty);
 }

@@ -41,8 +41,7 @@ public class RepairedStockBarRepairedBtnPopUpFormController {
 
         try {
             boolean isUpdated = repairStockBO.
-                    removeRepairStock(RepairedStockBarFormController.
-                            productId, txtEnterQuantity.getText());
+                    removeRepairStock(RepairedStockBarFormController.productId, txtEnterQuantity.getText());
 
             if (isUpdated) {
                 Navigation.closePane();

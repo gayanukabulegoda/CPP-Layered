@@ -154,4 +154,9 @@ public class SupplierOrderBOImpl implements SupplierOrderBO {
     public ArrayList<String[]> getSupplierOrderDataAsAnArray(String id) throws SQLException {
         return supplierOrderDetailDAO.getDataAsAnArray(id);
     }
+
+    @Override
+    public double getTotal(String unitPrice, String qty) {
+        return Double.parseDouble(unitPrice) * Integer.parseInt(qty);
+    }
 }
