@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane minHeight="60.0" minWidth="240.0" prefHeight="60.0" prefWidth="250.0" style="-fx-border-color: AE7C5A; -fx-border-width: 1; -fx-border-radius: 12;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.grb.ceylonPottersPaletteLayered.controller.DashboardOrderBarFormController">
+<Pane minHeight="60.0" minWidth="240.0" prefHeight="60.0" prefWidth="250.0" style="-fx-border-color: AE7C5A; -fx-border-width: 1; -fx-border-radius: 12;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ceylonPottersPaletteLayered.controller.DashboardOrderBarFormController">
    <children>
       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="14.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
          <image>

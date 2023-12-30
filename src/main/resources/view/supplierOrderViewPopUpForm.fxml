@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="729.0" prefWidth="1269.0" style="-fx-background-color: white; -fx-background-radius: 16;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.grb.ceylonPottersPaletteLayered.controller.SupplierOrderViewPopUpFormController">
+<AnchorPane prefHeight="729.0" prefWidth="1269.0" style="-fx-background-color: white; -fx-background-radius: 16;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ceylonPottersPaletteLayered.controller.SupplierOrderViewPopUpFormController">
    <children>
       <Pane layoutX="954.0" layoutY="25.0" prefHeight="680.0" prefWidth="294.0" style="-fx-background-color: white; -fx-background-radius: 16; -fx-border-color: E8E8E8; -fx-border-width: 1; -fx-border-radius: 16;">
          <children>

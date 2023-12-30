@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="409.0" prefWidth="627.0" style="-fx-background-radius: 12; -fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.grb.ceylonPottersPaletteLayered.controller.ProductUpdatePopUpFormController">
+<AnchorPane prefHeight="409.0" prefWidth="627.0" style="-fx-background-radius: 12; -fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ceylonPottersPaletteLayered.controller.ProductUpdatePopUpFormController">
    <children>
       <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="48.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
          <image>

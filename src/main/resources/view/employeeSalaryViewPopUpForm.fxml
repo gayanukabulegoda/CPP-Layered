@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="490.0" prefWidth="627.0" style="-fx-background-radius: 12; -fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.grb.ceylonPottersPaletteLayered.controller.EmployeeSalaryViewPopUpFormController">
+<AnchorPane prefHeight="490.0" prefWidth="627.0" style="-fx-background-radius: 12; -fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ceylonPottersPaletteLayered.controller.EmployeeSalaryViewPopUpFormController">
    <children>
       <Pane layoutX="29.0" layoutY="136.0" prefHeight="246.0" prefWidth="569.0" style="-fx-background-color: white; -fx-background-radius: 16; -fx-border-color: E8E8E8; -fx-border-width: 1; -fx-border-radius: 16;">
          <children>

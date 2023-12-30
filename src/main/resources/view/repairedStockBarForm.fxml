@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="53.0" prefWidth="1479.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.grb.ceylonPottersPaletteLayered.controller.RepairedStockBarFormController">
+<AnchorPane prefHeight="53.0" prefWidth="1479.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ceylonPottersPaletteLayered.controller.RepairedStockBarFormController">
    <children>
       <HBox alignment="CENTER_LEFT" layoutX="41.0" prefHeight="56.0" prefWidth="1405.0" spacing="10.0" style="-fx-background-color: white;">
          <children>

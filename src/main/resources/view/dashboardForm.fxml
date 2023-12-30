@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1523.0" style="-fx-background-color: E8E8E8;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.grb.ceylonPottersPaletteLayered.controller.DashboardFormController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1523.0" style="-fx-background-color: E8E8E8;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ceylonPottersPaletteLayered.controller.DashboardFormController">
    <children>
       <Pane fx:id="deleteUserTextPane" layoutX="327.0" layoutY="808.0" prefHeight="41.0" prefWidth="185.0" style="-fx-background-color: white; -fx-background-radius: 0 12 25 25;" visible="false">
          <children>
