@@ -39,7 +39,7 @@ public class CustomerOrderDAOImpl implements CustomerOrderDAO {
     public ArrayList<String> getAllId() throws SQLException {
         ResultSet resultSet = SQLUtil.
                 execute("SELECT customer_Order_Id FROM customer_Order " +
-                        "ORDER BY LENGTH(customer_Order_Id),customer_Order_Id");
+                        "ORDER BY date desc, time desc");
 
         ArrayList<String> list = new ArrayList<>();
 

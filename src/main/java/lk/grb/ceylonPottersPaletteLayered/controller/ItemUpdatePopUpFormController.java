@@ -95,7 +95,7 @@ public class ItemUpdatePopUpFormController implements Initializable {
     private boolean validateItem() {
         boolean result = true;
 
-        if (RegExPatterns.qtyOrUnitPricePattern(txtUnitPrice.getText())) {
+        if (RegExPatterns.pricePattern(txtUnitPrice.getText())) {
             lblUnitPriceAlert.setText("Invalid Unit Price!!");
             result = false;
         }
@@ -105,7 +105,7 @@ public class ItemUpdatePopUpFormController implements Initializable {
             result = false;
         }
 
-        if (RegExPatterns.qtyOrUnitPricePattern(txtQuantity.getText())) {
+        if (RegExPatterns.qtyPattern(txtQuantity.getText())) {
             lblQuantityAlert.setText("Invalid Quantity!!");
             result = false;
         }
@@ -131,7 +131,7 @@ public class ItemUpdatePopUpFormController implements Initializable {
         lblUnitPriceAlert.setText(" ");
 
         if (event.getCode() == KeyCode.ENTER) {
-            if (RegExPatterns.qtyOrUnitPricePattern(txtUnitPrice.getText())) {
+            if (RegExPatterns.pricePattern(txtUnitPrice.getText())) {
                 lblUnitPriceAlert.setText("Invalid Unit Price!!");
                 event.consume();
             } else {
@@ -145,7 +145,7 @@ public class ItemUpdatePopUpFormController implements Initializable {
         lblQuantityAlert.setText(" ");
 
         if (event.getCode() == KeyCode.ENTER) {
-            if (RegExPatterns.qtyOrUnitPricePattern(txtQuantity.getText())) {
+            if (RegExPatterns.qtyPattern(txtQuantity.getText())) {
                 lblQuantityAlert.setText("Invalid Quantity!!");
                 event.consume();
             } else {

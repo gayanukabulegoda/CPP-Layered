@@ -169,7 +169,7 @@ public class SupplierOrderAddPopUpFormController implements Initializable {
             result = false;
         }
 
-        if (RegExPatterns.qtyOrUnitPricePattern(txtItemQty.getText())) {
+        if (RegExPatterns.qtyPattern(txtItemQty.getText())) {
             lblQtyAlert.setText("Enter the Item Quantity!!");
             result = false;
         }
@@ -181,7 +181,7 @@ public class SupplierOrderAddPopUpFormController implements Initializable {
         lblQtyAlert.setText(" ");
 
         if (event.getCode() == KeyCode.ENTER) {
-            if (RegExPatterns.qtyOrUnitPricePattern(txtItemQty.getText())) {
+            if (RegExPatterns.qtyPattern(txtItemQty.getText())) {
                 lblQtyAlert.setText("Invalid Quantity!!");
                 event.consume();
             } else {

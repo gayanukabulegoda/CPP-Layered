@@ -168,7 +168,7 @@ public class CustomerOrderAddPopUpFormController implements Initializable {
             result = false;
         }
 
-        if (RegExPatterns.qtyOrUnitPricePattern(txtProductQty.getText())) {
+        if (RegExPatterns.qtyPattern(txtProductQty.getText())) {
             lblQtyAlert.setText("Enter the Product Quantity!!");
             result = false;
         }
@@ -180,7 +180,7 @@ public class CustomerOrderAddPopUpFormController implements Initializable {
         lblQtyAlert.setText(" ");
 
         if (event.getCode() == KeyCode.ENTER) {
-            if (RegExPatterns.qtyOrUnitPricePattern(txtProductQty.getText())) {
+            if (RegExPatterns.qtyPattern(txtProductQty.getText())) {
                 lblQtyAlert.setText("Enter the Product Quantity!!");
                 event.consume();
             } else {
@@ -336,8 +336,8 @@ public class CustomerOrderAddPopUpFormController implements Initializable {
 
         vBoxCustomerOrder.getChildren().clear();
 
-        for (int i = 0; i < productList.size(); i++) {
-            loadDataTable(productList.get(i));
+        for (String[] list : productList) {
+            loadDataTable(list);
         }
     }
 

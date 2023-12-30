@@ -172,8 +172,8 @@ public class CustomerOrderManageFormController implements Initializable {
         vBoxCustomerOrders.getChildren().clear();
         ArrayList<String> list = customerOrderBO.getAllCustomerOrderId();
 
-        for (int i = 0; i < list.size(); i++) {
-            loadDataTable(list.get(i));
+        for (String customerOrderId : list) {
+            loadDataTable(customerOrderId);
         }
     }
 

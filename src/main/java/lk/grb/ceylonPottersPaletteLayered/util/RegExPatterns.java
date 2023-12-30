@@ -9,7 +9,7 @@ public class RegExPatterns {
     }
 
     public static boolean contactNoPattern(String contactNo) {
-        return !Pattern.matches("([0]\\d{1,9})", contactNo);
+        return !Pattern.matches("(0\\d{9})", contactNo);
     }
 
     public static boolean emailPattern(String email) {
@@ -28,11 +28,11 @@ public class RegExPatterns {
         return !Pattern.matches("([\\d]{1,})", houseNo);
     }
 
-    public static boolean qtyOrUnitPricePattern(String value) {
+    public static boolean qtyPattern(String value) {
         return !Pattern.matches("(\\d+)", value);
     }
 
-    public static boolean salaryOrBonusPattern(String value) {
+    public static boolean pricePattern(String value) {
         return !Pattern.matches("([\\d.]+)", value);
     }
 

@@ -115,12 +115,12 @@ public class EmployeeSalaryUpdatePopUpFormController implements Initializable {
             result = false;
         }
 
-        if (RegExPatterns.salaryOrBonusPattern(txtSalary.getText())) {
+        if (RegExPatterns.pricePattern(txtSalary.getText())) {
             lblSalaryAlert.setText("Invalid Salary!!");
             result = false;
         }
 
-        if (RegExPatterns.salaryOrBonusPattern(txtBonus.getText())) {
+        if (RegExPatterns.pricePattern(txtBonus.getText())) {
             lblBonusAlert.setText("Invalid Bonus!!");
             result = false;
         }
@@ -146,7 +146,7 @@ public class EmployeeSalaryUpdatePopUpFormController implements Initializable {
         lblSalaryAlert.setText(" ");
 
         if (event.getCode() == KeyCode.ENTER) {
-            if (RegExPatterns.salaryOrBonusPattern(txtSalary.getText())) {
+            if (RegExPatterns.pricePattern(txtSalary.getText())) {
                 lblSalaryAlert.setText("Invalid Salary!!");
                 event.consume();
             } else {
@@ -160,7 +160,7 @@ public class EmployeeSalaryUpdatePopUpFormController implements Initializable {
         lblBonusAlert.setText(" ");
 
         if (event.getCode() == KeyCode.ENTER) {
-            if (RegExPatterns.salaryOrBonusPattern(txtBonus.getText())) {
+            if (RegExPatterns.pricePattern(txtBonus.getText())) {
                 lblBonusAlert.setText("Invalid Bonus!!");
                 event.consume();
             } else {
@@ -198,7 +198,6 @@ public class EmployeeSalaryUpdatePopUpFormController implements Initializable {
     @FXML
     void txtSalaryOnAction(ActionEvent event) {
         lblTotalAmount.setText(String.valueOf(salaryBO.getTotalSalaryAmount(txtSalary.getText(), txtBonus.getText())));
-        txtBonus.setEditable(true);
     }
 
     public void setDataInComboBox() throws SQLException {
@@ -261,5 +260,6 @@ public class EmployeeSalaryUpdatePopUpFormController implements Initializable {
         }
 
         setData();
+        txtBonus.setEditable(true);
     }
 }

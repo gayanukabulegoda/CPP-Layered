@@ -98,7 +98,7 @@ public class ProductAddPopUpFormController {
             result = false;
         }
 
-        if (RegExPatterns.qtyOrUnitPricePattern(txtUnitPrice.getText())) {
+        if (RegExPatterns.pricePattern(txtUnitPrice.getText())) {
             lblUnitPriceAlert.setText("Invalid Unit Price!!");
             result = false;
         }
@@ -108,7 +108,7 @@ public class ProductAddPopUpFormController {
             result = false;
         }
 
-        if (RegExPatterns.qtyOrUnitPricePattern(txtQuantity.getText())) {
+        if (RegExPatterns.qtyPattern(txtQuantity.getText())) {
             lblQtyAlert.setText("Invalid Quantity!!");
             result = false;
         }
@@ -148,7 +148,7 @@ public class ProductAddPopUpFormController {
         lblUnitPriceAlert.setText(" ");
 
         if (event.getCode() == KeyCode.ENTER) {
-            if (RegExPatterns.qtyOrUnitPricePattern(txtUnitPrice.getText())) {
+            if (RegExPatterns.pricePattern(txtUnitPrice.getText())) {
                 lblUnitPriceAlert.setText("Invalid Unit Price!!");
                 event.consume();
             } else {
@@ -162,7 +162,7 @@ public class ProductAddPopUpFormController {
         lblQtyAlert.setText(" ");
 
         if (event.getCode() == KeyCode.ENTER) {
-            if (RegExPatterns.qtyOrUnitPricePattern(txtQuantity.getText())) {
+            if (RegExPatterns.qtyPattern(txtQuantity.getText())) {
                 lblQtyAlert.setText("Invalid Quantity!!");
                 event.consume();
             } else {

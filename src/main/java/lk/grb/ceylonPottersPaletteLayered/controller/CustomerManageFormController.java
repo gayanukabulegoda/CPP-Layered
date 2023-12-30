@@ -92,9 +92,9 @@ public class CustomerManageFormController implements Initializable {
 
         ArrayList<String> allCustomerId = customerBO.getAllCustomerId();
 
-        for (int i = 0; i < allCustomerId.size(); i++) {
-            if (txtSearch.getText().equals(customerBO.getCustomerContactNo(allCustomerId.get(i)))) {
-                CustomerViewPopUpFormController.customerId = allCustomerId.get(i);
+        for (String customerId : allCustomerId) {
+            if (txtSearch.getText().equals(customerBO.getCustomerContactNo(customerId))) {
+                CustomerViewPopUpFormController.customerId = customerId;
                 Navigation.imgPopUpBackground("customerViewPopUpForm.fxml");
                 lblSearchAlert.setText(" ");
                 StyleUtil.searchBarTransparent(searchBarPane);
@@ -115,8 +115,8 @@ public class CustomerManageFormController implements Initializable {
         vBoxCustomerManage.getChildren().clear();
         ArrayList<String> list = customerBO.getAllCustomerId();
 
-        for (int i = 0; i < list.size(); i++) {
-           loadDataTable(list.get(i));
+        for (String customerId : list) {
+            loadDataTable(customerId);
         }
     }
 

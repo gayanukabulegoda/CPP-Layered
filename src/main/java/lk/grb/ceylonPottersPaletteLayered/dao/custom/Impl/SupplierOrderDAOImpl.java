@@ -40,7 +40,7 @@ public class SupplierOrderDAOImpl implements SupplierOrderDAO {
     public ArrayList<String> getAllId() throws SQLException {
         ResultSet resultSet = SQLUtil.
                 execute("SELECT supplier_Order_Id FROM supplier_Order " +
-                        "ORDER BY LENGTH(supplier_Order_Id),supplier_Order_Id");
+                        "ORDER BY date desc, time desc");
 
         ArrayList<String> list = new ArrayList<>();
 
