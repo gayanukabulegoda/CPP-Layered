@@ -352,12 +352,7 @@ public class GlobalFormController implements Initializable {
         btnSelected(paneBtnDashboard, lblDashboard, imgDashboard, "dashboardIcon2.png");
 
         lblUser.setText(userBO.getUserRole(user));
-
-        try {
-            Navigation.switchPaging(pagingPane, "dashboardForm.fxml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Navigation.switchPaging(pagingPane, "dashboardForm.fxml");
 
         setTimeLine();
         lblDate.setText(DateTimeUtil.dateNowFormatted());

@@ -82,11 +82,7 @@ public class EmployeeAttendanceFormController implements Initializable {
 
     @FXML
     void btnRefreshTableOnAction(ActionEvent event) {
-        try {
-            allAttendanceId();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        allAttendanceId();
     }
 
     @FXML
@@ -214,10 +210,15 @@ public class EmployeeAttendanceFormController implements Initializable {
         }
     }
 
-    public void allAttendanceId() throws SQLException {
+    public void allAttendanceId() {
 
         vBoxEmployeeAttendance.getChildren().clear();
-        ArrayList<String> list = attendanceBO.getAllAttendanceId();
+        ArrayList<String> list = null;
+        try {
+            list = attendanceBO.getAllAttendanceId();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         for (String attendanceId : list) {
             loadDataTable(attendanceId);
@@ -238,10 +239,6 @@ public class EmployeeAttendanceFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            allAttendanceId();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        allAttendanceId();
     }
 }

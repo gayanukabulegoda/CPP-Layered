@@ -83,11 +83,7 @@ public class CustomerOrderManageFormController implements Initializable {
 
     @FXML
     void btnRefreshTableOnAction(ActionEvent event) {
-        try {
-            allCustomerOrderId();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        allCustomerOrderId();
     }
 
     @FXML
@@ -122,8 +118,8 @@ public class CustomerOrderManageFormController implements Initializable {
 
         ArrayList<String> allCustomerOrderId = customerOrderBO.getAllCustomerOrderId();
 
-        for (int i = 0; i < allCustomerOrderId.size(); i++) {
-            if (txtSearch.getText().equals(allCustomerOrderId.get(i))) {
+        for (String customerOrderId : allCustomerOrderId) {
+            if (txtSearch.getText().equals(customerOrderId)) {
                 CustomerOrderViewPopUpFormController.customerOrderId = txtSearch.getText();
                 CustomerOrderViewPopUpFormController.customerId = customerOrderBO.getCustomerIdForOrder(txtSearch.getText());
                 Navigation.imgPopUpBackground("customerOrderViewPopUpForm.fxml");
@@ -133,11 +129,11 @@ public class CustomerOrderManageFormController implements Initializable {
                 return;
             }
 
-            ArrayList<String> customerIds = customerOrderBO.getCustomerId(allCustomerOrderId.get(i));
+            ArrayList<String> customerIds = customerOrderBO.getCustomerId(customerOrderId);
 
-            for (int j = 0; j < customerIds.size(); j++) {
-                if (txtSearch.getText().equals(customerOrderBO.getCustomerContactNo(customerIds.get(j)))) {
-                    allSelectedCustomerOrderId(customerIds.get(j));
+            for (String customerId : customerIds) {
+                if (txtSearch.getText().equals(customerOrderBO.getCustomerContactNo(customerId))) {
+                    allSelectedCustomerOrderId(customerId);
                     lblSearchAlert.setText(" ");
                     StyleUtil.searchBarTransparent(searchBarPane);
                     txtSearch.clear();
@@ -167,10 +163,15 @@ public class CustomerOrderManageFormController implements Initializable {
         }
     }
 
-    public void allCustomerOrderId() throws SQLException {
+    public void allCustomerOrderId() {
 
         vBoxCustomerOrders.getChildren().clear();
-        ArrayList<String> list = customerOrderBO.getAllCustomerOrderId();
+        ArrayList<String> list;
+        try {
+            list = customerOrderBO.getAllCustomerOrderId();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         for (String customerOrderId : list) {
             loadDataTable(customerOrderId);
@@ -191,10 +192,6 @@ public class CustomerOrderManageFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            allCustomerOrderId();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        allCustomerOrderId();
     }
 }

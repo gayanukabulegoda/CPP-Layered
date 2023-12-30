@@ -51,7 +51,7 @@ public class OTPVerifyFormController implements Initializable {
     @FXML
     private ImageView imgBackBtn;
 
-    public static String otp;
+    private String otp;
     public static String employeeId;
 
     UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
@@ -146,28 +146,21 @@ public class OTPVerifyFormController implements Initializable {
         lblOtpAlert.setText(" ");
     }
 
-    public String generateOTP(int otpLength) {
+    private String generateOTP() {
         String numbers = "0123456789";
-        StringBuilder otp = new StringBuilder(otpLength);
+        StringBuilder otp = new StringBuilder(6);
 
         Random random = new Random();
 
-        for (int i = 0; i < otpLength; i++) {
+        for (int i = 0; i < 6; i++) {
             int index = random.nextInt(numbers.length());
             char digit = numbers.charAt(index);
             otp.append(digit);
         }
-
         return otp.toString();
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        otp = generateOTP(6);
-
-        SendEmail sendEmail = new SendEmail();
-
+    private void sendOTPMail() {
         try {
             EmployeeDto employeeDto = userBO.getEmployeeData(employeeId);
             String email = employeeDto.getEmail();
@@ -175,10 +168,16 @@ public class OTPVerifyFormController implements Initializable {
             String body = "OTP : " + otp;
 
             String[] detail = {email, subject, body};
-            sendEmail.sendMail(detail);
+            SendEmail.sendMail(detail);
 
         } catch (SQLException | MessagingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        otp = generateOTP();
+        sendOTPMail();
     }
 }

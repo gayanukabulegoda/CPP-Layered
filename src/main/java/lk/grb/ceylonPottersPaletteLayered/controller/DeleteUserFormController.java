@@ -175,26 +175,19 @@ public class DeleteUserFormController implements Initializable {
         StyleUtil.confirmORSaveBtnUnselected(deleteBtnPane);
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    private void setLabelValues() {
         lblUsername.setText(GlobalFormController.user);
-
         try {
             lblEmployeeId.setText(userBO.getEmployeeId(GlobalFormController.user));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
             lblEmployeeName.setText(userBO.getEmployeeName(lblEmployeeId.getText()));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
             lblRole.setText(userBO.getEmployeeRole(lblEmployeeId.getText()));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        setLabelValues();
     }
 }

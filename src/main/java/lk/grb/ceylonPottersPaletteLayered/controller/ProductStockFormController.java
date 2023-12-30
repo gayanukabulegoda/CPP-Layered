@@ -102,9 +102,9 @@ public class ProductStockFormController implements Initializable {
 
         ArrayList<String> allProductId = productStockBO.getAllProductId();
 
-        for (int i = 0; i < allProductId.size(); i++) {
-            if (txtSearch.getText().equals(productStockBO.getProductDescription(allProductId.get(i)))) {
-                ProductViewPopUpFormController.productId = allProductId.get(i);
+        for (String productId : allProductId) {
+            if (txtSearch.getText().equals(productStockBO.getProductDescription(productId))) {
+                ProductViewPopUpFormController.productId = productId;
                 txtSearch.clear();
                 lblSearchAlert.setText(" ");
                 StyleUtil.searchBarTransparent(searchBarPane);
@@ -120,13 +120,18 @@ public class ProductStockFormController implements Initializable {
         return Pattern.matches("[A-Za-z\\s]{3,}", txtSearch.getText());
     }
 
-    public void allProductId() throws SQLException {
-
+    public void allProductId() {
         vBoxProductStock.getChildren().clear();
-        ArrayList<String> list = productStockBO.getAllProductId();
+        ArrayList<String> list;
 
-        for (int i = 0; i < list.size(); i++) {
-            loadDataTable(list.get(i));
+        try {
+            list = productStockBO.getAllProductId();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        for (String productId : list) {
+            loadDataTable(productId);
         }
     }
 
@@ -144,10 +149,6 @@ public class ProductStockFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            allProductId();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        allProductId();
     }
 }

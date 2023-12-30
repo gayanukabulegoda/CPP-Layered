@@ -125,14 +125,12 @@ public class SupplierOrderAddPopUpFormController implements Initializable {
 
     @FXML
     void btnAddToCartOnAction() {
-
         if (validateSupplierOrder()) {
+            for (String[] item : itemList) {
+                if (item[0].equals(String.valueOf(cmbItemId.getSelectionModel().getSelectedItem()))) {
 
-            for (int i = 0; i < itemList.size(); i++) {
-                if (itemList.get(i)[0].equals(String.valueOf(cmbItemId.getSelectionModel().getSelectedItem()))) {
-
-                    int qty = Integer.parseInt(itemList.get(i)[1]);
-                    itemList.get(i)[1] = String.valueOf(qty + Integer.parseInt(txtItemQty.getText()));
+                    int qty = Integer.parseInt(item[1]);
+                    item[1] = String.valueOf(qty + Integer.parseInt(txtItemQty.getText()));
 
                     netTotal += supplierOrderBO.getTotal(lblUnitPrice.getText(), txtItemQty.getText());
                     lblNetTotal.setText(String.valueOf(netTotal));
@@ -146,7 +144,6 @@ public class SupplierOrderAddPopUpFormController implements Initializable {
             String[] items = {String.valueOf(cmbItemId.getSelectionModel().getSelectedItem()), txtItemQty.getText()};
 
             itemList.add(items);
-
             allSupplierOrderCartId();
 
             netTotal += supplierOrderBO.getTotal(lblUnitPrice.getText(), txtItemQty.getText());
@@ -263,13 +260,13 @@ public class SupplierOrderAddPopUpFormController implements Initializable {
 
     @FXML
     void cmbItemIdOnAction(ActionEvent event) throws SQLException {
-        for (int i = 0; i < itemList.size(); i++) {
-            if(cmbItemId.getSelectionModel().getSelectedItem().equals(itemList.get(i)[0])){
-                int qty = Integer.parseInt(supplierOrderBO.getItemQtyOnHand(itemList.get(i)[0]));
-                int orderedQty = Integer.parseInt(itemList.get(i)[1]);
+        for (String[] item : itemList) {
+            if (cmbItemId.getSelectionModel().getSelectedItem().equals(item[0])) {
+                int qty = Integer.parseInt(supplierOrderBO.getItemQtyOnHand(item[0]));
+                int orderedQty = Integer.parseInt(item[1]);
                 lblQtyOnHand.setText(String.valueOf(qty - orderedQty));
-                lblUnitPrice.setText(supplierOrderBO.getItemUnitPrice(itemList.get(i)[0]));
-                lblDescription.setText(supplierOrderBO.getItemDescription(itemList.get(i)[0]));
+                lblUnitPrice.setText(supplierOrderBO.getItemUnitPrice(item[0]));
+                lblDescription.setText(supplierOrderBO.getItemDescription(item[0]));
                 return;
             }
         }
@@ -278,9 +275,14 @@ public class SupplierOrderAddPopUpFormController implements Initializable {
         lblQtyOnHand.setText(supplierOrderBO.getItemQtyOnHand(cmbItemId.getSelectionModel().getSelectedItem()));
     }
 
-    public void setItemDataInComboBox() throws SQLException {
-        ArrayList<String> roles = supplierOrderBO.getAllItemId();
-        cmbItemId.getItems().addAll(roles);
+    private void setItemDataInComboBox() {
+        ArrayList<String> items;
+        try {
+            items = supplierOrderBO.getAllItemId();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        cmbItemId.getItems().addAll(items);
     }
 
     @FXML
@@ -288,8 +290,13 @@ public class SupplierOrderAddPopUpFormController implements Initializable {
         lblSupplierName.setText(supplierOrderBO.getSupplierName(cmbSupplierId.getSelectionModel().getSelectedItem()));
     }
 
-    public void setSupplierDataInComboBox() throws SQLException {
-        ArrayList<String> roles = supplierOrderBO.getAllSupplierId();
+    private void setSupplierDataInComboBox() {
+        ArrayList<String> roles;
+        try {
+            roles = supplierOrderBO.getAllSupplierId();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         cmbSupplierId.getItems().addAll(roles);
     }
 
@@ -334,11 +341,10 @@ public class SupplierOrderAddPopUpFormController implements Initializable {
     }
 
     public void allSupplierOrderCartId() {
-
         vBoxCustomerOrder.getChildren().clear();
 
-        for (int i = 0; i < itemList.size(); i++) {
-            loadDataTable(itemList.get(i));
+        for (String[] ar : itemList) {
+            loadDataTable(ar);
         }
     }
 
@@ -359,15 +365,7 @@ public class SupplierOrderAddPopUpFormController implements Initializable {
         lblOrderId.setText(NewId.newId(idList, NewId.GetType.SUPPLIER_ORDER));
         lblOrderDate.setText(DateTimeUtil.dateNow());
 
-        try {
-            setItemDataInComboBox();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            setSupplierDataInComboBox();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        setItemDataInComboBox();
+        setSupplierDataInComboBox();
     }
 }

@@ -9,17 +9,17 @@ import java.util.Properties;
 
 public class SendEmail {
 
-    private Session newSession = null;
-    private MimeMessage mimeMessage =
+    private static Session newSession = null;
+    private static final MimeMessage mimeMessage =
             new MimeMessage(Session.getDefaultInstance(new Properties(), null));
 
-    public void sendMail(String[] recipientSubjectBody) throws MessagingException {
+    public static void sendMail(String[] recipientSubjectBody) throws MessagingException {
         setUpServerProperties();
         draftEmail(recipientSubjectBody);
         sendEmail();
     }
 
-    public void setUpServerProperties() {
+    public static void setUpServerProperties() {
 
         Properties properties = new Properties();
         properties.put("mail.smtp.port", "587"); // Use TLS port
@@ -34,7 +34,7 @@ public class SendEmail {
         });
     }
 
-    public MimeMessage draftEmail(String[] detail) throws MessagingException {
+    public static MimeMessage draftEmail(String[] detail) throws MessagingException {
 
         mimeMessage.setFrom(new InternetAddress("ceylonpotterspallet@gmail.com"));
         String recipients = detail[0];
@@ -55,7 +55,7 @@ public class SendEmail {
         return mimeMessage;
     }
 
-    public void sendEmail() throws MessagingException {
+    public static void sendEmail() throws MessagingException {
 
         String host = "smtp.gmail.com";
         String userName = "ceylonpotterspallet@gmail.com";

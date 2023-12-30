@@ -102,11 +102,10 @@ public class SupplierOrderViewPopUpFormController implements Initializable {
     }
 
     public void allSupplierOrderCartId(ArrayList<String[]> itemList) {
-
         vBoxSupplierOrder.getChildren().clear();
 
-        for (int i = 0; i < itemList.size(); i++) {
-            loadDataTable(itemList.get(i));
+        for (String[] item : itemList) {
+            loadDataTable(item);
         }
     }
 
@@ -122,11 +121,18 @@ public class SupplierOrderViewPopUpFormController implements Initializable {
         }
     }
 
-    public void setData() throws SQLException {
+    public void setData() {
+        SupplierOrderDto supplierOrderDto;
+        String supplierName;
+        ArrayList<String[]> list;
 
-        SupplierOrderDto supplierOrderDto = supplierOrderBO.getSupplierOrderData(supplierOrderId);
-        String supplierName = supplierOrderBO.getSupplierName(supplierId);
-        ArrayList<String[]> list = supplierOrderBO.getSupplierOrderDataAsAnArray(supplierOrderId);
+        try {
+            supplierOrderDto = supplierOrderBO.getSupplierOrderData(supplierOrderId);
+            supplierName = supplierOrderBO.getSupplierName(supplierId);
+            list = supplierOrderBO.getSupplierOrderDataAsAnArray(supplierOrderId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         lblOrderId.setText(supplierOrderDto.getSupplier_Order_Id());
         lblOrderDate.setText(supplierOrderDto.getDate());
@@ -141,10 +147,6 @@ public class SupplierOrderViewPopUpFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         start();
-        try {
-            setData();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        setData();
     }
 }

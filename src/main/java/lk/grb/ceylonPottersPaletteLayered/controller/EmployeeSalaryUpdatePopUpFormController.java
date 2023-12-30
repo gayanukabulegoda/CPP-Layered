@@ -200,8 +200,13 @@ public class EmployeeSalaryUpdatePopUpFormController implements Initializable {
         lblTotalAmount.setText(String.valueOf(salaryBO.getTotalSalaryAmount(txtSalary.getText(), txtBonus.getText())));
     }
 
-    public void setDataInComboBox() throws SQLException {
-        ArrayList<String> roles = salaryBO.getAllEmployeeId();
+    private void setDataInComboBox() {
+        ArrayList<String> roles;
+        try {
+            roles = salaryBO.getAllEmployeeId();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         cmbEmployeeId.getItems().addAll(roles);
     }
 
@@ -253,12 +258,7 @@ public class EmployeeSalaryUpdatePopUpFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            setDataInComboBox();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
+        setDataInComboBox();
         setData();
         txtBonus.setEditable(true);
     }

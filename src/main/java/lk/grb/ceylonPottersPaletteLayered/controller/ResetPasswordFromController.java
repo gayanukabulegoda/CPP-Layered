@@ -49,7 +49,6 @@ public class ResetPasswordFromController {
 
     @FXML
     void btnResetPasswordOnAction(ActionEvent event) throws IOException, SQLException {
-
         if (validatePassword()) {
             UserDto userDto = new UserDto();
 

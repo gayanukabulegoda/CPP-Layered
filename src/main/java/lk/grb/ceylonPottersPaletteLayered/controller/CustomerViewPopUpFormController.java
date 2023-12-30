@@ -82,9 +82,14 @@ public class CustomerViewPopUpFormController implements Initializable {
         StyleUtil.confirmORSaveBtnUnselected(btnClosePane);
     }
 
-    public void setData() throws SQLException {
+    public void setData() {
+        CustomerDto customerDto;
 
-        CustomerDto customerDto = customerBO.getCustomerData(customerId);
+        try {
+            customerDto = customerBO.getCustomerData(customerId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         lblCustomerId.setText(customerDto.getCustomer_Id());
         lblCustomerName.setText(customerDto.getName());
@@ -96,10 +101,6 @@ public class CustomerViewPopUpFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            setData();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        setData();
     }
 }

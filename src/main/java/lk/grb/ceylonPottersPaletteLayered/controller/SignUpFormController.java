@@ -55,7 +55,6 @@ public class SignUpFormController {
 
     @FXML
     void btnSignUpOnAction(ActionEvent event) throws IOException, SQLException {
-
         if (validateCredentials()) {
             UserDto userDto = new UserDto();
 

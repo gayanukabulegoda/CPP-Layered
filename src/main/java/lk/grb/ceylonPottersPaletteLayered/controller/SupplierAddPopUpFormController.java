@@ -58,7 +58,6 @@ public class SupplierAddPopUpFormController {
 
     @FXML
     void btnAddOnAction() throws SQLException {
-
         if(validateSupplier()) {
             SupplierDto supplierDto = new SupplierDto();
 

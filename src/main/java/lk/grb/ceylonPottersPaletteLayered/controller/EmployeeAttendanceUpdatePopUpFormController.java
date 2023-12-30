@@ -105,8 +105,13 @@ public class EmployeeAttendanceUpdatePopUpFormController implements Initializabl
         lblEmployeeName.setText(attendanceBO.getEmployeeName(String.valueOf(cmbEmployeeId.getSelectionModel().getSelectedItem())));
     }
 
-    public void setDataInComboBox() throws SQLException {
-        ArrayList<String> roles = attendanceBO.getAllEmployeeId();
+    public void setDataInComboBox() {
+        ArrayList<String> roles;
+        try {
+            roles = attendanceBO.getAllEmployeeId();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         cmbEmployeeId.getItems().addAll(roles);
     }
 
@@ -144,12 +149,7 @@ public class EmployeeAttendanceUpdatePopUpFormController implements Initializabl
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            setDataInComboBox();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
+        setDataInComboBox();
         setData();
     }
 }

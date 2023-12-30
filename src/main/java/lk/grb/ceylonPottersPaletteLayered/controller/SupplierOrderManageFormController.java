@@ -88,11 +88,7 @@ public class SupplierOrderManageFormController implements Initializable {
 
     @FXML
     void btnRefreshTableOnAction(ActionEvent event) {
-        try {
-            allSupplierOrderId();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        allSupplierOrderId();
     }
 
     @FXML
@@ -122,8 +118,8 @@ public class SupplierOrderManageFormController implements Initializable {
 
         ArrayList<String> allSupplierOrderId = supplierOrderBO.getAllSupplierOrderId();
 
-        for (int i = 0; i < allSupplierOrderId.size(); i++) {
-            if (txtSearch.getText().equals(allSupplierOrderId.get(i))) {
+        for (String supplierOrderId : allSupplierOrderId) {
+            if (txtSearch.getText().equals(supplierOrderId)) {
                 SupplierOrderViewPopUpFormController.supplierOrderId = txtSearch.getText();
                 SupplierOrderViewPopUpFormController.supplierId = supplierOrderBO.getSupplierIdForOrder(txtSearch.getText());
                 lblSearchAlert.setText(" ");
@@ -133,11 +129,11 @@ public class SupplierOrderManageFormController implements Initializable {
                 return;
             }
 
-            ArrayList<String> supplierIds = supplierOrderBO.getSupplierId(allSupplierOrderId.get(i));
+            ArrayList<String> supplierIds = supplierOrderBO.getSupplierId(supplierOrderId);
 
-            for (int j = 0; j < supplierIds.size(); j++) {
-                if (txtSearch.getText().equals(supplierOrderBO.getSupplierContactNo(supplierIds.get(j)))) {
-                    allSelectedSupplierOrderId(supplierIds.get(j));
+            for (String supplierId : supplierIds) {
+                if (txtSearch.getText().equals(supplierOrderBO.getSupplierContactNo(supplierId))) {
+                    allSelectedSupplierOrderId(supplierId);
                     lblSearchAlert.setText(" ");
                     StyleUtil.searchBarTransparent(searchBarPane);
                     txtSearch.clear();
@@ -158,22 +154,26 @@ public class SupplierOrderManageFormController implements Initializable {
     }
 
     public void allSelectedSupplierOrderId(String id) throws SQLException {
-
         vBoxSupplierOrders.getChildren().clear();
         ArrayList<String> list = supplierOrderBO.getSelectedAllSupplierOrderId(id);
 
-        for (int i = 0; i < list.size(); i++) {
-            loadDataTable(list.get(i));
+        for (String supplierOrderId : list) {
+            loadDataTable(supplierOrderId);
         }
     }
 
-    public void allSupplierOrderId() throws SQLException {
-
+    public void allSupplierOrderId() {
         vBoxSupplierOrders.getChildren().clear();
-        ArrayList<String> list = supplierOrderBO.getAllSupplierOrderId();
+        ArrayList<String> list;
 
-        for (int i = 0; i < list.size(); i++) {
-            loadDataTable(list.get(i));
+        try {
+            list = supplierOrderBO.getAllSupplierOrderId();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        for (String supplierOrderId : list) {
+            loadDataTable(supplierOrderId);
         }
     }
 
@@ -191,10 +191,6 @@ public class SupplierOrderManageFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            allSupplierOrderId();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        allSupplierOrderId();
     }
 }

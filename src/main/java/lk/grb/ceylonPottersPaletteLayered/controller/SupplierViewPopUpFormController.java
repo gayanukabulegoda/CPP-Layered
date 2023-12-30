@@ -82,9 +82,14 @@ public class SupplierViewPopUpFormController implements Initializable {
         StyleUtil.confirmORSaveBtnUnselected(btnClosePane);
     }
 
-    public void setData() throws SQLException {
+    public void setData() {
+        SupplierDto supplierDto;
 
-        SupplierDto supplierDto = supplierBO.getSupplierData(supplierId);
+        try {
+            supplierDto = supplierBO.getSupplierData(supplierId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         lblSupplierId.setText(supplierDto.getSupplier_Id());
         lblSupplierName.setText(supplierDto.getName());
@@ -96,10 +101,6 @@ public class SupplierViewPopUpFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            setData();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        setData();
     }
 }

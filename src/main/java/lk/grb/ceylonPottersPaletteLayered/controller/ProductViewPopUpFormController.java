@@ -76,9 +76,14 @@ public class ProductViewPopUpFormController implements Initializable {
         StyleUtil.confirmORSaveBtnUnselected(btnClosePane);
     }
 
-    public void setData() throws SQLException {
+    public void setData() {
 
-        ProductStockDto productStockDto = productStockBO.getProductData(productId);
+        ProductStockDto productStockDto;
+        try {
+            productStockDto = productStockBO.getProductData(productId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         lblProductId.setText(productStockDto.getProduct_Id());
         lblDescription.setText(productStockDto.getDescription());
@@ -88,10 +93,6 @@ public class ProductViewPopUpFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            setData();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        setData();
     }
 }

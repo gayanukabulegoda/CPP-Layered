@@ -185,13 +185,18 @@ public class DashboardFormController implements Initializable {
         StyleUtil.dashboardCustomerAndSupplierBtnUnselected(paneBtnCustomers);
     }
 
-    public void allOrderId() throws SQLException {
-
+    public void allOrderId() {
         vBoxOrders.getChildren().clear();
-        ArrayList<String> list = dashboardBO.getAllCustomerOrderIdS();
+        ArrayList<String> list;
 
-        for (String id : list) {
-            loadDataTable(id);
+        try {
+            list = dashboardBO.getAllCustomerOrderIdS();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        for (String customerOrderId : list) {
+            loadDataTable(customerOrderId);
         }
     }
 
@@ -225,8 +230,14 @@ public class DashboardFormController implements Initializable {
         rotateTransition.play();
     }
 
-    private void setPiChart() throws SQLException {
-        ObservableList<PieChart.Data> pieChartData = addPieChartData();
+    private void setPiChart() {
+        ObservableList<PieChart.Data> pieChartData;
+
+        try {
+            pieChartData = addPieChartData();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         pieChart = new PieChart(pieChartData); // Create a pie chart with the data
 
@@ -246,8 +257,7 @@ public class DashboardFormController implements Initializable {
         );
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    private void setLabelValues() {
         int qtyTotal = 0;
 
         try {
@@ -256,53 +266,23 @@ public class DashboardFormController implements Initializable {
             for (String productId : allProductId) {
                 qtyTotal += Integer.parseInt(dashboardBO.getProductQtyTotal(productId));
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        lblProductTotal.setText(String.valueOf(qtyTotal));
-
-        try {
+            lblProductTotal.setText(String.valueOf(qtyTotal));
             lblAttendance.setText("0" + dashboardBO.getTodayAttendance());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
             lblClayStock.setText(dashboardBO.getAvailableClayStock() + "kg");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
             lblTodaySales.setText("0" + dashboardBO.getTodaySales());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
-            allOrderId();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
             lblCustomerNo.setText("00" + dashboardBO.getCustomerCount());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
             lblSupplierNo.setText("00" + dashboardBO.getSupplierCount());
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        setLabelValues();
+        allOrderId();
         start();
-
-        try {
-            setPiChart();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        setPiChart();
     }
 }

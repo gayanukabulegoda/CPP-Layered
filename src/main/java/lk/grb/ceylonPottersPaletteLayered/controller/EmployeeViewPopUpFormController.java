@@ -82,9 +82,13 @@ public class EmployeeViewPopUpFormController implements Initializable {
         StyleUtil.confirmORSaveBtnUnselected(btnClosePane);
     }
 
-    public void setData() throws SQLException {
-
-        EmployeeDto employeeDto = employeeBO.getEmployeeData(employeeId);
+    public void setData() {
+        EmployeeDto employeeDto;
+        try {
+            employeeDto = employeeBO.getEmployeeData(employeeId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         lblEmployeeId.setText(employeeDto.getEmployee_Id());
         lblEmployeeName.setText(employeeBO.setEmployeeName(employeeDto.getFirst_Name(), employeeDto.getLast_Name()));
@@ -96,10 +100,6 @@ public class EmployeeViewPopUpFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            setData();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        setData();
     }
 }

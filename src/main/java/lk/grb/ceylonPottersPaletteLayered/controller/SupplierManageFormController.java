@@ -83,7 +83,6 @@ public class SupplierManageFormController implements Initializable {
 
     @FXML
     void txtSearchOnAction(ActionEvent event) throws IOException, SQLException {
-
         if (!validateId()) {
             lblSearchAlert.setText("Invalid Contact No!!");
             StyleUtil.searchBarRed(searchBarPane);
@@ -92,9 +91,9 @@ public class SupplierManageFormController implements Initializable {
 
         ArrayList<String> allSupplierId = supplierBO.getAllSupplierId();
 
-        for (int i = 0; i < allSupplierId.size(); i++) {
-            if (txtSearch.getText().equals(supplierBO.getSupplierContactNo(allSupplierId.get(i)))) {
-                SupplierViewPopUpFormController.supplierId = allSupplierId.get(i);
+        for (String supplierId : allSupplierId) {
+            if (txtSearch.getText().equals(supplierBO.getSupplierContactNo(supplierId))) {
+                SupplierViewPopUpFormController.supplierId = supplierId;
                 Navigation.imgPopUpBackground("supplierViewPopUpForm.fxml");
                 lblSearchAlert.setText(" ");
                 StyleUtil.searchBarTransparent(searchBarPane);
@@ -110,13 +109,18 @@ public class SupplierManageFormController implements Initializable {
         return Pattern.matches("[0-9]{10}", txtSearch.getText());
     }
 
-    public void allSupplierId() throws SQLException {
-
+    public void allSupplierId() {
         vBoxSupplierManage.getChildren().clear();
-        ArrayList<String> list = supplierBO.getAllSupplierId();
+        ArrayList<String> list;
 
-        for (int i = 0; i < list.size(); i++) {
-            loadDataTable(list.get(i));
+        try {
+            list = supplierBO.getAllSupplierId();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        for (String id : list) {
+            loadDataTable(id);
         }
     }
 
@@ -134,10 +138,6 @@ public class SupplierManageFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            allSupplierId();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        allSupplierId();
     }
 }

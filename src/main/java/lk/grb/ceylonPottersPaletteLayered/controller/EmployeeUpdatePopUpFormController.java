@@ -397,7 +397,7 @@ public class EmployeeUpdatePopUpFormController implements Initializable {
         StyleUtil.cancelBtnUnselected(cancelBtnPane, lblCancel);
     }
 
-    public void setDataInComboBox() {
+    private void setDataInComboBox() {
         ArrayList<String> roles = new ArrayList<>();
         roles.add("Manager");
         roles.add("Manufacturing Staff");

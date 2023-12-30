@@ -265,8 +265,13 @@ public class CustomerOrderAddPopUpFormController implements Initializable {
         lblCustomerName.setText(customerOrderBO.getCustomerName(cmbCustomerId.getSelectionModel().getSelectedItem()));
     }
 
-    public void setCustomerDataInComboBox() throws SQLException {
-        ArrayList<String> roles = customerOrderBO.getAllCustomerId();
+    public void setCustomerDataInComboBox() {
+        ArrayList<String> roles;
+        try {
+            roles = customerOrderBO.getAllCustomerId();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         cmbCustomerId.getItems().addAll(roles);
     }
 
@@ -327,8 +332,13 @@ public class CustomerOrderAddPopUpFormController implements Initializable {
         StyleUtil.addNewCustomerORSupplierBtnUnselected(btnAddNewCustomerPane, btnAddNewCustomerIconImg);
     }
 
-    public void setProductDataInComboBox() throws SQLException {
-        ArrayList<String> roles = customerOrderBO.getAllProductId();
+    public void setProductDataInComboBox() {
+        ArrayList<String> roles;
+        try {
+            roles = customerOrderBO.getAllProductId();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         cmbProductId.getItems().addAll(roles);
     }
 
@@ -358,16 +368,7 @@ public class CustomerOrderAddPopUpFormController implements Initializable {
         lblOrderId.setText(NewId.newId(idList, NewId.GetType.CUSTOMER_ORDER));
         lblOrderDate.setText(DateTimeUtil.dateNow());
 
-        try {
-            setCustomerDataInComboBox();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
-            setProductDataInComboBox();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        setCustomerDataInComboBox();
+        setProductDataInComboBox();
     }
 }

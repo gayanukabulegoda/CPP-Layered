@@ -48,9 +48,7 @@ public class SignUpOTPVerifyFormController implements Initializable {
     private JFXButton btnVerify;
 
     public static String employeeId;
-    public static String otp;
-
-    SendEmail sendEmail = new SendEmail();
+    private String otp;
 
     @FXML
     void btnBackOnAction(ActionEvent event) throws IOException {
@@ -136,13 +134,13 @@ public class SignUpOTPVerifyFormController implements Initializable {
         lblOtpAlert.setText(" ");
     }
 
-    public String generateOTP(int otpLength) {
+    private String generateOTP() {
         String numbers = "0123456789";
-        StringBuilder otp = new StringBuilder(otpLength);
+        StringBuilder otp = new StringBuilder(6);
 
         Random random = new Random();
 
-        for (int i = 0; i < otpLength; i++) {
+        for (int i = 0; i < 6; i++) {
             int index = random.nextInt(numbers.length());
             char digit = numbers.charAt(index);
             otp.append(digit);
@@ -151,21 +149,23 @@ public class SignUpOTPVerifyFormController implements Initializable {
         return otp.toString();
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        otp = generateOTP(6);
-
+    private void sendOTPMail() {
         try {
             String email = "ceylonpotterspallet@gmail.com";
             String subject = "OTP Verification";
             String body = "OTP : " + otp;
 
             String[] detail = {email, subject, body};
-            sendEmail.sendMail(detail);
+            SendEmail.sendMail(detail);
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        otp = generateOTP();
+        sendOTPMail();
     }
 }

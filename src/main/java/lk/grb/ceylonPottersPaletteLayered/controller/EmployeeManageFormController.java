@@ -120,10 +120,14 @@ public class EmployeeManageFormController implements Initializable {
         return Pattern.matches("[0-9]{10}", txtSearch.getText());
     }
 
-    public void allEmployeeId() throws SQLException {
-
+    public void allEmployeeId() {
         vBoxEmployeeManage.getChildren().clear();
-        ArrayList<String> list = employeeBO.getAllEmployeeId();
+        ArrayList<String> list;
+        try {
+            list = employeeBO.getAllEmployeeId();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         for (String employeeId : list) {
             loadDataTable(employeeId);
@@ -144,10 +148,6 @@ public class EmployeeManageFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            allEmployeeId();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        allEmployeeId();
     }
 }

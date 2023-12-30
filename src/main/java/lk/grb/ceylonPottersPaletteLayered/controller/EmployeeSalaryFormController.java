@@ -93,11 +93,7 @@ public class EmployeeSalaryFormController implements Initializable {
 
     @FXML
     void btnRefreshTableOnAction(ActionEvent event) {
-        try {
-            allSalaryId();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        allSalaryId();
     }
 
     @FXML
@@ -144,13 +140,18 @@ public class EmployeeSalaryFormController implements Initializable {
         return Pattern.matches("[0-9]{10}", txtSearch.getText());
     }
 
-    public void allSalaryId() throws SQLException {
+    public void allSalaryId() {
 
         vBoxEmployeeSalary.getChildren().clear();
-        ArrayList<String> list = salaryBO.getAllSalaryId();
+        ArrayList<String> list;
+        try {
+            list = salaryBO.getAllSalaryId();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
-        for (int i = 0; i < list.size(); i++) {
-            loadDataTable(list.get(i));
+        for (String salaryId : list) {
+            loadDataTable(salaryId);
         }
     }
 
@@ -178,10 +179,6 @@ public class EmployeeSalaryFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            allSalaryId();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        allSalaryId();
     }
 }

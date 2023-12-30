@@ -105,8 +105,8 @@ public class CustomerOrderViewPopUpFormController implements Initializable {
 
         vBoxCustomerOrder.getChildren().clear();
 
-        for (int i = 0; i < productList.size(); i++) {
-            loadDataTable(productList.get(i));
+        for (String[] list : productList) {
+            loadDataTable(list);
         }
     }
 
@@ -122,11 +122,19 @@ public class CustomerOrderViewPopUpFormController implements Initializable {
         }
     }
 
-    public void setData() throws SQLException {
+    public void setData() {
 
-        CustomerOrderDto customerOrderDto = customerOrderBO.getCustomerOrderData(customerOrderId);
-        String customerName = customerOrderBO.getCustomerName(customerId);
-        ArrayList<String[]> list = customerOrderBO.getCustomerOrderDetailData(customerOrderId);
+        CustomerOrderDto customerOrderDto;
+        String customerName;
+        ArrayList<String[]> list;
+
+        try {
+            customerOrderDto = customerOrderBO.getCustomerOrderData(customerOrderId);
+            customerName = customerOrderBO.getCustomerName(customerId);
+            list = customerOrderBO.getCustomerOrderDetailData(customerOrderId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         lblOrderId.setText(customerOrderDto.getCustomer_Order_Id());
         lblOrderDate.setText(customerOrderDto.getDate());
@@ -141,11 +149,6 @@ public class CustomerOrderViewPopUpFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         start();
-
-        try {
-            setData();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        setData();
     }
 }

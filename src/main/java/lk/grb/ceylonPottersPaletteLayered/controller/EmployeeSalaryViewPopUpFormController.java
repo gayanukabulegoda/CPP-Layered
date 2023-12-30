@@ -82,9 +82,14 @@ public class EmployeeSalaryViewPopUpFormController implements Initializable {
         StyleUtil.confirmORSaveBtnUnselected(btnClosePane);
     }
 
-    public void setData() throws SQLException {
+    public void setData() {
 
-        EmployeeSalaryDto employeeSalaryDto = salaryBO.getSalaryData(salaryId);
+        EmployeeSalaryDto employeeSalaryDto;
+        try {
+            employeeSalaryDto = salaryBO.getSalaryData(salaryId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         lblEmployeeId.setText(employeeSalaryDto.getEmployee_Id());
         lblSalary.setText(String.valueOf(employeeSalaryDto.getSalary()));
@@ -96,10 +101,6 @@ public class EmployeeSalaryViewPopUpFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            setData();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        setData();
     }
 }

@@ -110,10 +110,15 @@ public class CustomerManageFormController implements Initializable {
         return Pattern.matches("[0-9]{10}", txtSearch.getText());
     }
 
-    public void allCustomerId() throws SQLException {
+    public void allCustomerId() {
 
         vBoxCustomerManage.getChildren().clear();
-        ArrayList<String> list = customerBO.getAllCustomerId();
+        ArrayList<String> list;
+        try {
+            list = customerBO.getAllCustomerId();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         for (String customerId : list) {
             loadDataTable(customerId);
@@ -134,10 +139,6 @@ public class CustomerManageFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            allCustomerId();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        allCustomerId();
     }
 }

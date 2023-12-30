@@ -68,7 +68,6 @@ public class SignUpEmployeeConfirmFormController {
     }
 
     private boolean validateEmployeeId() {
-
         if (RegExPatterns.employeeIdPattern(txtEmployeeId.getText())) {
             lblEmployeeIdAlert.setText("Invalid ID!! Try Again!!");
             return false;

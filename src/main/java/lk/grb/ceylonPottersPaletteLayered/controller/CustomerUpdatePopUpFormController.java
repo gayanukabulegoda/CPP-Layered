@@ -96,7 +96,6 @@ public class CustomerUpdatePopUpFormController implements Initializable {
 
     public void setData() {
         try {
-
             CustomerDto customerDto = customerBO.getCustomerData(customerId);
 
             txtCustomerName.setText(customerDto.getName());
