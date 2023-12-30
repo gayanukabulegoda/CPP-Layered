@@ -102,9 +102,9 @@ public class EmployeeManageFormController implements Initializable {
 
         ArrayList<String> allEmployeeId = employeeBO.getAllEmployeeId();
 
-        for (int i = 0; i < allEmployeeId.size(); i++) {
-            if (txtSearch.getText().equals(employeeBO.getEmployeeContactNo(allEmployeeId.get(i)))) {
-                EmployeeViewPopUpFormController.employeeId = allEmployeeId.get(i);
+        for (String employeeId : allEmployeeId) {
+            if (txtSearch.getText().equals(employeeBO.getEmployeeContactNo(employeeId))) {
+                EmployeeViewPopUpFormController.employeeId = employeeId;
                 lblSearchAlert.setText(" ");
                 StyleUtil.searchBarTransparent(searchBarPane);
                 txtSearch.clear();
@@ -125,8 +125,8 @@ public class EmployeeManageFormController implements Initializable {
         vBoxEmployeeManage.getChildren().clear();
         ArrayList<String> list = employeeBO.getAllEmployeeId();
 
-        for (int i = 0; i < list.size(); i++) {
-            loadDataTable(list.get(i));
+        for (String employeeId : list) {
+            loadDataTable(employeeId);
         }
     }
 

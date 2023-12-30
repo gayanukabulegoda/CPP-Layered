@@ -108,12 +108,14 @@ public class GlobalFormController implements Initializable {
     public Pane orderPopUpPane;
 
     public static String user;
+
     private boolean dashboardButtonSelected = false;
     private boolean salesButtonSelected = false;
     private boolean stockButtonSelected = false;
     private boolean customerButtonSelected = false;
     private boolean employeeButtonSelected = false;
-    private boolean supplierBttonSelected = false;
+    private boolean supplierButtonSelected = false;
+
     private static GlobalFormController controller;
 
     public GlobalFormController() {
@@ -126,26 +128,12 @@ public class GlobalFormController implements Initializable {
 
     UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
 
-    private void buttonUnSelected() {
-        dashboardButtonSelected = false;
-        salesButtonSelected = false;
-        stockButtonSelected = false;
-        customerButtonSelected = false;
-        employeeButtonSelected = false;
-        supplierBttonSelected = false;
-    }
-
     @FXML
     void btnCustomerOnAction(ActionEvent event) throws IOException {
         buttonUnSelected();
         customerButtonSelected = true;
-
-        btnUnselected(paneBtnDashboard, lblDashboard, imgDashboard, "dashboardIcon.png");
-        btnUnselected(paneBtnSales, lblSales, imgSales, "salesIcon.png");
-        btnUnselected(paneBtnStock, lblStock, imgStock, "stockIcon.png");
-        btnSelected(paneBtnCustomer, lblCustomer, imgCustomer, "customerIcon2.png");
-        btnUnselected(paneBtnEmployee, lblEmployee, imgEmployee, "employeeIcon.png");
-        btnUnselected(paneBtnSupplier, lblSupplier, imgSupplier, "supplierIcon.png");
+        unSelectedButtons();
+        selectedButton(paneBtnCustomer, lblCustomer, imgCustomer, "customerIcon2.png");
 
         Navigation.switchPaging(pagingPane, "customerManageForm.fxml");
     }
@@ -154,13 +142,8 @@ public class GlobalFormController implements Initializable {
     void btnDashboardOnAction(ActionEvent event) throws IOException {
         buttonUnSelected();
         dashboardButtonSelected = true;
-
-        btnSelected(paneBtnDashboard, lblDashboard, imgDashboard, "dashboardIcon2.png");
-        btnUnselected(paneBtnSales, lblSales, imgSales, "salesIcon.png");
-        btnUnselected(paneBtnStock, lblStock, imgStock, "stockIcon.png");
-        btnUnselected(paneBtnCustomer, lblCustomer, imgCustomer, "customerIcon.png");
-        btnUnselected(paneBtnEmployee, lblEmployee, imgEmployee, "employeeIcon.png");
-        btnUnselected(paneBtnSupplier, lblSupplier, imgSupplier, "supplierIcon.png");
+        unSelectedButtons();
+        selectedButton(paneBtnDashboard, lblDashboard, imgDashboard, "dashboardIcon2.png");
 
         Navigation.switchPaging(pagingPane, "dashboardForm.fxml");
     }
@@ -169,13 +152,8 @@ public class GlobalFormController implements Initializable {
     void btnEmployeeOnAction(ActionEvent event) throws IOException {
         buttonUnSelected();
         employeeButtonSelected = true;
-
-        btnUnselected(paneBtnDashboard, lblDashboard, imgDashboard, "dashboardIcon.png");
-        btnUnselected(paneBtnSales, lblSales, imgSales, "salesIcon.png");
-        btnUnselected(paneBtnStock, lblStock, imgStock, "stockIcon.png");
-        btnUnselected(paneBtnCustomer, lblCustomer, imgCustomer, "customerIcon.png");
-        btnSelected(paneBtnEmployee, lblEmployee, imgEmployee, "employeeIcon2.png");
-        btnUnselected(paneBtnSupplier, lblSupplier, imgSupplier, "supplierIcon.png");
+        unSelectedButtons();
+        selectedButton(paneBtnEmployee, lblEmployee, imgEmployee, "employeeIcon2.png");
 
         Navigation.switchPaging(pagingPane, "employeeManageForm.fxml");
     }
@@ -184,13 +162,8 @@ public class GlobalFormController implements Initializable {
     void btnSalesOnAction(ActionEvent event) throws IOException {
         buttonUnSelected();
         salesButtonSelected = true;
-
-        btnUnselected(paneBtnDashboard, lblDashboard, imgDashboard, "dashboardIcon.png");
-        btnSelected(paneBtnSales, lblSales, imgSales, "salesIcon2.png");
-        btnUnselected(paneBtnStock, lblStock, imgStock, "stockIcon.png");
-        btnUnselected(paneBtnCustomer, lblCustomer, imgCustomer, "customerIcon.png");
-        btnUnselected(paneBtnEmployee, lblEmployee, imgEmployee, "employeeIcon.png");
-        btnUnselected(paneBtnSupplier, lblSupplier, imgSupplier, "supplierIcon.png");
+        unSelectedButtons();
+        selectedButton(paneBtnSales, lblSales, imgSales, "salesIcon2.png");
 
         Navigation.switchPaging(pagingPane, "customerOrderManageForm.fxml");
     }
@@ -199,13 +172,8 @@ public class GlobalFormController implements Initializable {
     void btnStockOnAction(ActionEvent event) throws IOException {
         buttonUnSelected();
         stockButtonSelected = true;
-
-        btnUnselected(paneBtnDashboard, lblDashboard, imgDashboard, "dashboardIcon.png");
-        btnUnselected(paneBtnSales, lblSales, imgSales, "salesIcon.png");
-        btnSelected(paneBtnStock, lblStock, imgStock, "stockIcon2.png");
-        btnUnselected(paneBtnCustomer, lblCustomer, imgCustomer, "customerIcon.png");
-        btnUnselected(paneBtnEmployee, lblEmployee, imgEmployee, "employeeIcon.png");
-        btnUnselected(paneBtnSupplier, lblSupplier, imgSupplier, "supplierIcon.png");
+        unSelectedButtons();
+        selectedButton(paneBtnStock, lblStock, imgStock, "stockIcon2.png");
 
         Navigation.switchPaging(pagingPane, "productStockForm.fxml");
     }
@@ -213,16 +181,33 @@ public class GlobalFormController implements Initializable {
     @FXML
     void btnSupplierOnAction(ActionEvent event) throws IOException {
         buttonUnSelected();
-        supplierBttonSelected = true;
+        supplierButtonSelected = true;
+        unSelectedButtons();
+        selectedButton(paneBtnSupplier, lblSupplier, imgSupplier, "supplierIcon2.png");
 
+        Navigation.switchPaging(pagingPane, "supplierManageForm.fxml");
+    }
+
+    private void buttonUnSelected() {
+        dashboardButtonSelected = false;
+        salesButtonSelected = false;
+        stockButtonSelected = false;
+        customerButtonSelected = false;
+        employeeButtonSelected = false;
+        supplierButtonSelected = false;
+    }
+
+    private void unSelectedButtons() {
         btnUnselected(paneBtnDashboard, lblDashboard, imgDashboard, "dashboardIcon.png");
         btnUnselected(paneBtnSales, lblSales, imgSales, "salesIcon.png");
         btnUnselected(paneBtnStock, lblStock, imgStock, "stockIcon.png");
         btnUnselected(paneBtnCustomer, lblCustomer, imgCustomer, "customerIcon.png");
         btnUnselected(paneBtnEmployee, lblEmployee, imgEmployee, "employeeIcon.png");
-        btnSelected(paneBtnSupplier, lblSupplier, imgSupplier, "supplierIcon2.png");
+        btnUnselected(paneBtnSupplier, lblSupplier, imgSupplier, "supplierIcon.png");
+    }
 
-        Navigation.switchPaging(pagingPane, "supplierManageForm.fxml");
+    private void selectedButton(Pane pane, Label label, ImageView imageView, String path) {
+        btnSelected(pane, label, imageView, path);
     }
 
     @FXML
@@ -304,13 +289,13 @@ public class GlobalFormController implements Initializable {
 
     @FXML
     void btnSupplierOnMouseEntered(MouseEvent event) {
-        if(!supplierBttonSelected) allBtnHoverCss(paneBtnSupplier,
+        if(!supplierButtonSelected) allBtnHoverCss(paneBtnSupplier,
                 lblSupplier, imgSupplier, "supplierIcon2.png");
     }
 
     @FXML
     void btnSupplierOnMouseExited(MouseEvent event) {
-        if(!supplierBttonSelected) btnUnselected(paneBtnSupplier,
+        if(!supplierButtonSelected) btnUnselected(paneBtnSupplier,
                 lblSupplier, imgSupplier, "supplierIcon.png");
     }
 
@@ -354,6 +339,12 @@ public class GlobalFormController implements Initializable {
         lblTime.setText(DateTimeUtil.timeNow());
     }
 
+    private void setTimeLine() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> updateClock()));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
     @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -368,10 +359,7 @@ public class GlobalFormController implements Initializable {
             e.printStackTrace();
         }
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> updateClock()));
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
-
+        setTimeLine();
         lblDate.setText(DateTimeUtil.dateNowFormatted());
     }
 }

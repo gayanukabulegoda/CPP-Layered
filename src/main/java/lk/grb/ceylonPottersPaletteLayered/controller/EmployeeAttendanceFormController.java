@@ -116,9 +116,9 @@ public class EmployeeAttendanceFormController implements Initializable {
 
         ArrayList<String> allEmployeeId = attendanceBO.getAllEmployeeId();
 
-        for (int i = 0; i < allEmployeeId.size(); i++) {
-            if (txtSearch.getText().equals(attendanceBO.getEmployeeContactNo(allEmployeeId.get(i)))) {
-                allSelectedEmployeeSalaryId(allEmployeeId.get(i));
+        for (String employeeId : allEmployeeId) {
+            if (txtSearch.getText().equals(attendanceBO.getEmployeeContactNo(employeeId))) {
+                allSelectedEmployeeSalaryId(employeeId);
                 lblSearchAlert.setText(" ");
                 StyleUtil.searchBarTransparent(searchBarPane);
                 txtSearch.clear();
@@ -209,8 +209,8 @@ public class EmployeeAttendanceFormController implements Initializable {
         vBoxEmployeeAttendance.getChildren().clear();
         ArrayList<String> list = attendanceBO.getSelectedAllAttendanceId(id);
 
-        for (int i = 0; i < list.size(); i++) {
-            loadDataTable(list.get(i));
+        for (String attendanceId : list) {
+            loadDataTable(attendanceId);
         }
     }
 
@@ -219,8 +219,8 @@ public class EmployeeAttendanceFormController implements Initializable {
         vBoxEmployeeAttendance.getChildren().clear();
         ArrayList<String> list = attendanceBO.getAllAttendanceId();
 
-        for (int i = 0; i < list.size(); i++) {
-            loadDataTable(list.get(i));
+        for (String attendanceId : list) {
+            loadDataTable(attendanceId);
         }
     }
 
