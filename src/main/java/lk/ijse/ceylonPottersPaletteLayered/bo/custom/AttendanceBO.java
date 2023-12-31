@@ -26,5 +26,7 @@ public interface AttendanceBO extends SuperBO {
 
     boolean updateAttendance(EmployeeAttendanceDto dto) throws SQLException;
 
+    ArrayList<String> getTodayAllEmployeeId() throws SQLException;
+
     String setEmployeeName(String firstName, String lastName);
 }

@@ -15,10 +15,10 @@ import lk.ijse.ceylonPottersPaletteLayered.bo.BOFactory;
 import lk.ijse.ceylonPottersPaletteLayered.bo.custom.UserBO;
 import lk.ijse.ceylonPottersPaletteLayered.util.Navigation;
 import lk.ijse.ceylonPottersPaletteLayered.util.DateTimeUtil;
-import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class GlobalFormController implements Initializable {
@@ -212,14 +212,14 @@ public class GlobalFormController implements Initializable {
 
     @FXML
     void btnLogOutOnAction(ActionEvent event) throws IOException {
-        logoutBtnSelected(paneBtnLogOut, lblLogOut, imgLogOut, "logoutIcon.png");
+        logoutBtnSelected(paneBtnLogOut, lblLogOut, imgLogOut, "logoutIconRed.png");
         Navigation.close(event);
         Navigation.switchNavigation("loginForm.fxml", event);
     }
 
     @FXML
     void btnLogOutOnMouseEntered(MouseEvent event) {
-        logoutBtnSelected(paneBtnLogOut, lblLogOut, imgLogOut, "logoutIcon.png");
+        logoutBtnSelected(paneBtnLogOut, lblLogOut, imgLogOut, "logoutIconRed.png");
     }
 
     @FXML
@@ -345,15 +345,21 @@ public class GlobalFormController implements Initializable {
         timeline.play();
     }
 
-    @SneakyThrows
+    private void setLabelValueAndNavigate() {
+        try {
+            lblUser.setText(userBO.getUserRole(user));
+            Navigation.switchPaging(pagingPane, "dashboardForm.fxml");
+        } catch (SQLException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dashboardButtonSelected = true;
         btnSelected(paneBtnDashboard, lblDashboard, imgDashboard, "dashboardIcon2.png");
 
-        lblUser.setText(userBO.getUserRole(user));
-        Navigation.switchPaging(pagingPane, "dashboardForm.fxml");
-
+        setLabelValueAndNavigate();
         setTimeLine();
         lblDate.setText(DateTimeUtil.dateNowFormatted());
     }

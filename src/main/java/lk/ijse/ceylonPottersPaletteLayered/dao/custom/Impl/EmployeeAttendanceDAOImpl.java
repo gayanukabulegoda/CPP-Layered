@@ -74,6 +74,19 @@ public class EmployeeAttendanceDAOImpl implements EmployeeAttendanceDAO {
     }
 
     @Override
+    public ArrayList<String> getAllTodayEmployeeId() throws SQLException {
+        ResultSet resultSet = SQLUtil.
+                execute("SELECT employee_Id FROM attendance WHERE date = CURDATE()");
+
+        ArrayList<String> list = new ArrayList<>();
+
+        while (resultSet.next()) {
+            list.add(resultSet.getString(1));
+        }
+        return list;
+    }
+
+    @Override
     public String workedDayCount(String id) throws SQLException {
         ResultSet resultSet = SQLUtil.
                 execute("SELECT COUNT(*) AS work_days FROM attendance " +

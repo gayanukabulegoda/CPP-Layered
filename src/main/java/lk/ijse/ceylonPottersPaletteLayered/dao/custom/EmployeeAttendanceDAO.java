@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public interface EmployeeAttendanceDAO extends CrudUtil<Attendance> {
     ArrayList<String> getSelectedAllAttendanceId(String id) throws SQLException;
 
+    ArrayList<String> getAllTodayEmployeeId() throws SQLException;
+
     String workedDayCount(String id) throws SQLException;
 
     String getTodayAttendance() throws SQLException;

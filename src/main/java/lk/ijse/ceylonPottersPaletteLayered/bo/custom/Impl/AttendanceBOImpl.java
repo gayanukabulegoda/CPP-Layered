@@ -102,6 +102,11 @@ public class AttendanceBOImpl implements AttendanceBO {
     }
 
     @Override
+    public ArrayList<String> getTodayAllEmployeeId() throws SQLException {
+        return employeeAttendanceDAO.getAllTodayEmployeeId();
+    }
+
+    @Override
     public String setEmployeeName(String firstName, String lastName) {
         return firstName + " " + lastName;
     }

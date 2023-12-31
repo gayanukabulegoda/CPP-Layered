@@ -4,12 +4,21 @@ import com.jfoenix.controls.JFXComboBox;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import lk.ijse.ceylonPottersPaletteLayered.bo.BOFactory;
 import lk.ijse.ceylonPottersPaletteLayered.bo.custom.AttendanceBO;
 import lk.ijse.ceylonPottersPaletteLayered.util.Navigation;
@@ -65,9 +74,16 @@ public class EmployeeAttendanceMarkPopUpController implements Initializable {
             employeeAttendanceDto.setDate(DateTimeUtil.dateNow());
             employeeAttendanceDto.setTime(DateTimeUtil.timeNow());
 
-            boolean save = attendanceBO.saveAttendance(employeeAttendanceDto);
+            ArrayList<String> allEmployeeId = attendanceBO.getTodayAllEmployeeId();
 
-            if (save) {
+            for (String employeeId : allEmployeeId) {
+                if (cmbEmployeeId.getSelectionModel().getSelectedItem().equals(employeeId)) {
+                    lblCmbEmployeeIdAlert.setText("Attendance Already Marked!!");
+                    return;
+                }
+            }
+
+            if (attendanceBO.saveAttendance(employeeAttendanceDto)) {
                 Navigation.closePane();
                 EmployeeAttendanceFormController.getInstance().allAttendanceId();
             }
@@ -85,11 +101,44 @@ public class EmployeeAttendanceMarkPopUpController implements Initializable {
         employeeAttendanceDto.setDate(DateTimeUtil.dateNow());
         employeeAttendanceDto.setTime(DateTimeUtil.timeNow());
 
-        boolean save = attendanceBO.saveAttendance(employeeAttendanceDto);
+        ArrayList<String> allEmployeeId = attendanceBO.getTodayAllEmployeeId();
+        for (String employeeId : allEmployeeId) {
+            if (id.equals(employeeId)) {
+                AttendanceAlert();
+                return;
+            }
+        }
 
-        if (save) {
+        if (attendanceBO.saveAttendance(employeeAttendanceDto)) {
             EmployeeAttendanceFormController.getInstance().allAttendanceId();
         }
+    }
+
+    private static void AttendanceAlert(){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Attendance Warning");
+        alert.setHeaderText(null);
+
+        Text text = new Text("Attendance has Already been Marked!!");
+        text.setFont(Font.font("Montserrat", FontWeight.NORMAL, 16));
+        text.wrappingWidthProperty().set(250);
+
+        ImageView icon = new ImageView(
+                new Image(EmployeeAttendanceMarkPopUpController.class.
+                        getResourceAsStream("/assests/gif/warning.gif")));
+        icon.setFitHeight(40);
+        icon.setFitWidth(40);
+        alert.setGraphic(icon);
+
+        ButtonType customButtonType = new ButtonType("Got it!", ButtonBar.ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(customButtonType);
+
+        VBox vbox = new VBox(text);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setSpacing(10);
+        alert.getDialogPane().setContent(vbox);
+
+        alert.showAndWait();
     }
 
     private boolean validateEmployeeAttendance() {
