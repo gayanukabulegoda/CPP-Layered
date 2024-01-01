@@ -63,9 +63,16 @@ public class EmployeeAttendanceUpdatePopUpFormController implements Initializabl
             employeeAttendanceDto.setDate(employeeAttendanceDto.getDate());
             employeeAttendanceDto.setTime(employeeAttendanceDto.getTime());
 
-            boolean updated = attendanceBO.updateAttendance(employeeAttendanceDto);
+            ArrayList<String> allEmployeeId = attendanceBO.getTodayAllEmployeeId();
 
-            if (updated) {
+            for (String employeeId : allEmployeeId) {
+                if (cmbEmployeeId.getSelectionModel().getSelectedItem().equals(employeeId)) {
+                    lblCmbEmployeeIdAlert.setText("Attendance Already Marked!!");
+                    return;
+                }
+            }
+
+            if (attendanceBO.updateAttendance(employeeAttendanceDto)) {
                 Navigation.closePane();
                 EmployeeAttendanceFormController.getInstance().allAttendanceId();
             }

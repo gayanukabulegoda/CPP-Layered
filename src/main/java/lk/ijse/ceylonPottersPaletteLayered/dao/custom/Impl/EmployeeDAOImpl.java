@@ -126,4 +126,40 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         }
         return null;
     }
+
+    @Override
+    public ArrayList<String> getAllContactNumbers() throws SQLException {
+        ResultSet resultSet = SQLUtil.execute("SELECT contact_No FROM employee");
+
+        ArrayList<String> contactNumbers = new ArrayList<>();
+
+        while (resultSet.next()) {
+            contactNumbers.add(resultSet.getString(1));
+        }
+        return contactNumbers;
+    }
+
+    @Override
+    public ArrayList<String> getAllEmails() throws SQLException {
+        ResultSet resultSet = SQLUtil.execute("SELECT email FROM employee");
+
+        ArrayList<String> emails = new ArrayList<>();
+
+        while (resultSet.next()) {
+            emails.add(resultSet.getString(1));
+        }
+        return emails;
+    }
+
+    @Override
+    public ArrayList<String> getAllNic() throws SQLException {
+        ResultSet resultSet = SQLUtil.execute("SELECT nic FROM employee");
+
+        ArrayList<String> emails = new ArrayList<>();
+
+        while (resultSet.next()) {
+            emails.add(resultSet.getString(1));
+        }
+        return emails;
+    }
 }

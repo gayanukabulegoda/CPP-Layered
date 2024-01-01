@@ -102,4 +102,28 @@ public class SupplierDAOImpl implements SupplierDAO {
         }
         return null;
     }
+
+    @Override
+    public ArrayList<String> getAllContactNumbers() throws SQLException {
+        ResultSet resultSet = SQLUtil.execute("SELECT contact_No FROM supplier");
+
+        ArrayList<String> contactNumbers = new ArrayList<>();
+
+        while (resultSet.next()) {
+            contactNumbers.add(resultSet.getString(1));
+        }
+        return contactNumbers;
+    }
+
+    @Override
+    public ArrayList<String> getAllEmails() throws SQLException {
+        ResultSet resultSet = SQLUtil.execute("SELECT email FROM supplier");
+
+        ArrayList<String> emails = new ArrayList<>();
+
+        while (resultSet.next()) {
+            emails.add(resultSet.getString(1));
+        }
+        return emails;
+    }
 }

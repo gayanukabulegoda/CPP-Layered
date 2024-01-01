@@ -91,4 +91,19 @@ public class EmployeeBOImpl implements EmployeeBO {
     public String setEmployeeName(String firstName, String lastName) {
         return firstName + " " + lastName;
     }
+
+    @Override
+    public ArrayList<String> getAllEmployeeContactNumbers() throws SQLException {
+        return employeeDAO.getAllContactNumbers();
+    }
+
+    @Override
+    public ArrayList<String> getAllEmployeeEmails() throws SQLException {
+        return employeeDAO.getAllEmails();
+    }
+
+    @Override
+    public ArrayList<String> getAllEmployeeNic() throws SQLException {
+        return employeeDAO.getAllNic();
+    }
 }

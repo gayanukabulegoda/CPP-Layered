@@ -16,4 +16,8 @@ public interface SupplierBO extends SuperBO {
     String getSupplierContactNo(String id) throws SQLException;
 
     boolean updateSupplier(SupplierDto dto) throws SQLException;
+
+    ArrayList<String> getAllSupplierContactNumbers() throws SQLException;
+
+    ArrayList<String> getAllSupplierEmails() throws SQLException;
 }

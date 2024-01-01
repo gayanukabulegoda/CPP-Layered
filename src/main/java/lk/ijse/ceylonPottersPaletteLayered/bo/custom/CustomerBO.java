@@ -16,4 +16,8 @@ public interface CustomerBO extends SuperBO {
     ArrayList<String> getAllCustomerId() throws SQLException;
 
     String getCustomerContactNo(String id) throws SQLException;
+
+    ArrayList<String> getAllCustomerContactNumbers() throws SQLException;
+
+    ArrayList<String> getAllCustomerEmails() throws SQLException;
 }

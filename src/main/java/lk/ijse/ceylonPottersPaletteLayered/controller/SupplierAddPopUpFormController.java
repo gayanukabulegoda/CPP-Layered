@@ -63,6 +63,9 @@ public class SupplierAddPopUpFormController {
 
             ArrayList<String> list = supplierBO.getAllSupplierId();
 
+            if (checkContactNoAvailability()) return;
+            if (checkEmailAvailability()) return;
+
             supplierDto.setSupplier_Id(NewId.newId(list, NewId.GetType.SUPPLIER));
             supplierDto.setName(txtSupplierName.getText());
             supplierDto.setEmail(txtSupplierEmail.getText());
@@ -71,13 +74,35 @@ public class SupplierAddPopUpFormController {
             supplierDto.setDate(DateTimeUtil.dateNow());
             supplierDto.setUser_Name(GlobalFormController.user);
 
-            boolean saved = supplierBO.saveSupplier(supplierDto);
-
-            if (saved) {
+            if (supplierBO.saveSupplier(supplierDto)) {
                 Navigation.closePane();
                 SupplierManageFormController.getInstance().allSupplierId();
             }
         }
+    }
+
+    private boolean checkContactNoAvailability() throws SQLException {
+        ArrayList<String> allSupplierContactNumbers = supplierBO.getAllSupplierContactNumbers();
+
+        for (String contactNo : allSupplierContactNumbers) {
+            if (txtContactNo.getText().equals(contactNo)) {
+                lblContactNoAlert.setText("Contact Number Already Exists!!");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkEmailAvailability() throws SQLException {
+        ArrayList<String> allSupplierEmails = supplierBO.getAllSupplierEmails();
+
+        for (String email : allSupplierEmails) {
+            if (txtSupplierEmail.getText().equals(email)) {
+                lblSupplierEmailAlert.setText("Email Already Exists!!");
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean validateSupplier() {
@@ -130,7 +155,7 @@ public class SupplierAddPopUpFormController {
     }
 
     @FXML
-    void txtContactNoOnKeyPressed(KeyEvent event) {
+    void txtContactNoOnKeyPressed(KeyEvent event) throws SQLException {
         lblContactNoAlert.setText(" ");
 
         if (event.getCode() == KeyCode.ENTER) {
@@ -138,6 +163,7 @@ public class SupplierAddPopUpFormController {
                 lblContactNoAlert.setText("Invalid Contact Number!!");
                 event.consume();
             } else {
+                if (checkContactNoAvailability()) return;
                 txtSupplierEmail.requestFocus();
             }
         }
@@ -152,6 +178,7 @@ public class SupplierAddPopUpFormController {
                 lblSupplierEmailAlert.setText("Invalid Email Address!!");
                 event.consume();
             } else {
+                if (checkEmailAvailability()) return;
                 btnAddOnAction();
             }
         }

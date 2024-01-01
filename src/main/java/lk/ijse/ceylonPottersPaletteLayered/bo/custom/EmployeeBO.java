@@ -18,4 +18,10 @@ public interface EmployeeBO extends SuperBO {
     boolean updateEmployee(EmployeeDto dto) throws SQLException;
 
     String setEmployeeName(String firstName, String lastName);
+
+    ArrayList<String> getAllEmployeeContactNumbers() throws SQLException;
+
+    ArrayList<String> getAllEmployeeEmails() throws SQLException;
+
+    ArrayList<String> getAllEmployeeNic() throws SQLException;
 }

@@ -68,4 +68,14 @@ public class CustomerBOImpl implements CustomerBO {
     public String getCustomerContactNo(String id) throws SQLException {
         return customerDAO.getCustomerContactNo(id);
     }
+
+    @Override
+    public ArrayList<String> getAllCustomerContactNumbers() throws SQLException {
+        return customerDAO.getAllContactNumbers();
+    }
+
+    @Override
+    public ArrayList<String> getAllCustomerEmails() throws SQLException {
+        return customerDAO.getAllEmails();
+    }
 }

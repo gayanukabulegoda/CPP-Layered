@@ -99,4 +99,28 @@ public class CustomerDAOImpl implements CustomerDAO {
         }
         return null;
     }
+
+    @Override
+    public ArrayList<String> getAllContactNumbers() throws SQLException {
+        ResultSet resultSet = SQLUtil.execute("SELECT contact_No FROM customer");
+
+        ArrayList<String> contactNumbers = new ArrayList<>();
+
+        while (resultSet.next()) {
+            contactNumbers.add(resultSet.getString(1));
+        }
+        return contactNumbers;
+    }
+
+    @Override
+    public ArrayList<String> getAllEmails() throws SQLException {
+        ResultSet resultSet = SQLUtil.execute("SELECT email FROM customer");
+
+        ArrayList<String> emails = new ArrayList<>();
+
+        while (resultSet.next()) {
+            emails.add(resultSet.getString(1));
+        }
+        return emails;
+    }
 }

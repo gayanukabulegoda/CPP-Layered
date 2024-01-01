@@ -62,6 +62,9 @@ public class CustomerAddPopUpFormController {
 
         ArrayList<String> list = customerBO.getAllCustomerId();
 
+        if (checkContactNoAvailability()) return;
+        if (checkEmailAvailability()) return;
+
         if (validateCustomer()) {
 
             customerDto.setCustomer_Id(NewId.newId(list, NewId.GetType.CUSTOMER));
@@ -72,13 +75,35 @@ public class CustomerAddPopUpFormController {
             customerDto.setDate(DateTimeUtil.dateNow());
             customerDto.setUser_Name(GlobalFormController.user);
 
-            boolean saved = customerBO.saveCustomer(customerDto);
-
-            if (saved) {
+            if (customerBO.saveCustomer(customerDto)) {
                 Navigation.closePane();
                 CustomerManageFormController.getInstance().allCustomerId();
             }
         }
+    }
+
+    private boolean checkContactNoAvailability() throws SQLException {
+        ArrayList<String> allCustomerContactNumbers = customerBO.getAllCustomerContactNumbers();
+
+        for (String contactNo : allCustomerContactNumbers) {
+            if (txtContactNo.getText().equals(contactNo)) {
+                lblContactNoAlert.setText("Contact Number Already Exists!!");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkEmailAvailability() throws SQLException {
+        ArrayList<String> allCustomerEmails = customerBO.getAllCustomerEmails();
+
+        for (String email : allCustomerEmails) {
+            if (txtCustomerEmail.getText().equals(email)) {
+                lblCustomerEmailAlert.setText("Email Already Exists!!");
+                return true;
+            }
+        }
+        return false;
     }
 
     @FXML
@@ -142,7 +167,7 @@ public class CustomerAddPopUpFormController {
     }
 
     @FXML
-    void txtContactNoOnKeyPressed(KeyEvent event) {
+    void txtContactNoOnKeyPressed(KeyEvent event) throws SQLException {
         lblContactNoAlert.setText(" ");
 
         if (event.getCode() == KeyCode.ENTER) {
@@ -150,6 +175,7 @@ public class CustomerAddPopUpFormController {
                 lblContactNoAlert.setText("Invalid Contact Number!!");
                 event.consume();
             } else {
+                if (checkContactNoAvailability()) return;
                 txtCustomerEmail.requestFocus();
             }
         }
@@ -164,6 +190,7 @@ public class CustomerAddPopUpFormController {
                 lblCustomerEmailAlert.setText("Invalid Email Address!!");
                 event.consume();
             } else {
+                if (checkEmailAvailability()) return;
                 btnAddOnAction();
             }
         }

@@ -132,6 +132,10 @@ public class EmployeeAddPopUpFormController implements Initializable {
 
             ArrayList<String> list = employeeBO.getAllEmployeeId();
 
+            if (checkContactNoAvailability()) return;
+            if (checkEmailAvailability()) return;
+            if (checkNicAvailability()) return;
+
             employeeDto.setEmployee_Id(NewId.newId(list, NewId.GetType.EMPLOYEE));
             employeeDto.setFirst_Name(txtFirstName.getText());
             employeeDto.setLast_Name(txtLastName.getText());
@@ -146,14 +150,48 @@ public class EmployeeAddPopUpFormController implements Initializable {
             employeeDto.setTime(DateTimeUtil.timeNow());
             employeeDto.setUserName(GlobalFormController.user);
 
-            boolean save = employeeBO.saveEmployee(employeeDto);
-
-            if (save) {
+            if (employeeBO.saveEmployee(employeeDto)) {
                 QrGenerator.generateQr(employeeDto.getEmployee_Id());
                 Navigation.closePane();
                 EmployeeManageFormController.getInstance().allEmployeeId();
             }
         }
+    }
+
+    private boolean checkContactNoAvailability() throws SQLException {
+        ArrayList<String> allEmployeeContactNumbers = employeeBO.getAllEmployeeContactNumbers();
+
+        for (String contactNo : allEmployeeContactNumbers) {
+            if (txtContactNo.getText().equals(contactNo)) {
+                lblContactNoAlert.setText("Contact Number Already Exists!!");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkEmailAvailability() throws SQLException {
+        ArrayList<String> allEmployeeEmails = employeeBO.getAllEmployeeEmails();
+
+        for (String email : allEmployeeEmails) {
+            if (txtEmail.getText().equals(email)) {
+                lblEmailAlert.setText("Email Already Exists!!");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkNicAvailability() throws SQLException {
+        ArrayList<String> allEmployeeNic = employeeBO.getAllEmployeeNic();
+
+        for (String nic : allEmployeeNic) {
+            if (txtNic.getText().equals(nic)) {
+                lblNicAlert.setText("NIC Already Exists!!");
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean validateEmployee() {
@@ -221,7 +259,7 @@ public class EmployeeAddPopUpFormController implements Initializable {
     }
 
     @FXML
-    void txtContactNoOnKeyPressed(KeyEvent event) {
+    void txtContactNoOnKeyPressed(KeyEvent event) throws SQLException {
         lblContactNoAlert.setText(" ");
 
         if (event.getCode() == KeyCode.ENTER) {
@@ -229,13 +267,14 @@ public class EmployeeAddPopUpFormController implements Initializable {
                 lblContactNoAlert.setText("Invalid Contact Number!!");
                 event.consume();
             } else {
+                if (checkContactNoAvailability()) return;
                 txtEmail.requestFocus();
             }
         }
     }
 
     @FXML
-    void txtEmailOnKeyPressed(KeyEvent event) {
+    void txtEmailOnKeyPressed(KeyEvent event) throws SQLException {
         lblEmailAlert.setText(" ");
 
         if (event.getCode() == KeyCode.ENTER) {
@@ -243,6 +282,7 @@ public class EmployeeAddPopUpFormController implements Initializable {
                 lblEmailAlert.setText("Invalid Email!!");
                 event.consume();
             } else {
+                if (checkEmailAvailability()) return;
                 txtNic.requestFocus();
             }
         }
@@ -291,7 +331,7 @@ public class EmployeeAddPopUpFormController implements Initializable {
     }
 
     @FXML
-    void txtNicOnKeyPressed(KeyEvent event) {
+    void txtNicOnKeyPressed(KeyEvent event) throws SQLException {
         lblNicAlert.setText(" ");
 
         if (event.getCode() == KeyCode.ENTER) {
@@ -299,6 +339,7 @@ public class EmployeeAddPopUpFormController implements Initializable {
                 lblNicAlert.setText("Invalid NIC!!");
                 event.consume();
             } else {
+                if (checkNicAvailability()) return;
                 cmbRole.requestFocus();
             }
         }

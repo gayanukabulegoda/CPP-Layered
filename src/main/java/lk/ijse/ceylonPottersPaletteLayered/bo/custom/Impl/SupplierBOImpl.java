@@ -68,4 +68,14 @@ public class SupplierBOImpl implements SupplierBO {
                 )
         );
     }
+
+    @Override
+    public ArrayList<String> getAllSupplierContactNumbers() throws SQLException {
+        return supplierDAO.getAllContactNumbers();
+    }
+
+    @Override
+    public ArrayList<String> getAllSupplierEmails() throws SQLException {
+        return supplierDAO.getAllEmails();
+    }
 }
