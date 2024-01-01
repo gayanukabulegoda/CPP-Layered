@@ -19,6 +19,7 @@ import lk.ijse.ceylonPottersPaletteLayered.util.StyleUtil;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CustomerUpdatePopUpFormController implements Initializable {
@@ -58,6 +59,9 @@ public class CustomerUpdatePopUpFormController implements Initializable {
 
     public static String customerId;
 
+    private String previousContactNo;
+    private String previousEmail;
+
     CustomerBO customerBO =
             (CustomerBO) BOFactory.getBoFactory().
                     getBO(BOFactory.BOTypes.CUSTOMER);
@@ -74,9 +78,10 @@ public class CustomerUpdatePopUpFormController implements Initializable {
 
     @FXML
     void btnUpdateOnAction() throws SQLException {
+        if (isUpdatedContactNoValid()) return;
+        if (isUpdatedEmailValid()) return;
 
         if (validateCustomer()) {
-
             CustomerDto customerDto = new CustomerDto();
 
             customerDto.setCustomer_Id(CustomerUpdatePopUpFormController.customerId);
@@ -87,13 +92,45 @@ public class CustomerUpdatePopUpFormController implements Initializable {
             customerDto.setTime(customerDto.getTime());
             customerDto.setUser_Name(customerDto.getUser_Name());
 
-            boolean updated = customerBO.updateCustomer(customerDto);
-
-            if (updated) {
+            if (customerBO.updateCustomer(customerDto)) {
                 Navigation.closePane();
                 CustomerManageFormController.getInstance().allCustomerId();
             }
         }
+    }
+
+    private boolean isUpdatedContactNoValid() throws SQLException {
+        if (previousContactNo.equals(txtContactNo.getText())) return false;
+        return checkContactNoAvailability();
+    }
+
+    private boolean isUpdatedEmailValid() throws SQLException {
+        if (previousEmail.equals(txtCustomerEmail.getText())) return false;
+        return checkEmailAvailability();
+    }
+
+    private boolean checkContactNoAvailability() throws SQLException {
+        ArrayList<String> allCustomerContactNumbers = customerBO.getAllCustomerContactNumbers();
+
+        for (String contactNo : allCustomerContactNumbers) {
+            if (txtContactNo.getText().equals(contactNo)) {
+                lblContactNoAlert.setText("Contact Number Already Exists!!");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkEmailAvailability() throws SQLException {
+        ArrayList<String> allCustomerEmails = customerBO.getAllCustomerEmails();
+
+        for (String email : allCustomerEmails) {
+            if (txtCustomerEmail.getText().equals(email)) {
+                lblCustomerEmailAlert.setText("Email Already Exists!!");
+                return true;
+            }
+        }
+        return false;
     }
 
     public void setData() {
@@ -103,6 +140,9 @@ public class CustomerUpdatePopUpFormController implements Initializable {
             txtCustomerName.setText(customerDto.getName());
             txtContactNo.setText(customerDto.getContact_No());
             txtCustomerEmail.setText(customerDto.getEmail());
+
+            previousContactNo = customerDto.getContact_No();
+            previousEmail = customerDto.getEmail();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -144,7 +184,7 @@ public class CustomerUpdatePopUpFormController implements Initializable {
     }
 
     @FXML
-    void txtContactNoOnKeyPressed(KeyEvent event) {
+    void txtContactNoOnKeyPressed(KeyEvent event) throws SQLException {
         lblContactNoAlert.setText(" ");
 
         if (event.getCode() == KeyCode.ENTER) {
@@ -152,6 +192,7 @@ public class CustomerUpdatePopUpFormController implements Initializable {
                 lblContactNoAlert.setText("Invalid Contact Number!!");
                 event.consume();
             } else {
+                if (isUpdatedContactNoValid()) return;
                 txtCustomerEmail.requestFocus();
             }
         }
@@ -166,6 +207,7 @@ public class CustomerUpdatePopUpFormController implements Initializable {
                 lblCustomerEmailAlert.setText("Invalid Email Address!!");
                 event.consume();
             } else {
+                if (isUpdatedEmailValid()) return;
                 btnUpdateOnAction();
             }
         }

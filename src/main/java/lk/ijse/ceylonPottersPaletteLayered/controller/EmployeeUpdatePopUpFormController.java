@@ -94,6 +94,10 @@ public class EmployeeUpdatePopUpFormController implements Initializable {
     @FXML
     private Label lblStreetAlert;
 
+    private String previousContactNo;
+    private String previousEmail;
+    private String previousNic;
+
     public static String employeeId;
 
     public static EmployeeUpdatePopUpFormController controller;
@@ -122,28 +126,85 @@ public class EmployeeUpdatePopUpFormController implements Initializable {
 
     @FXML
     void btnUpdateOnAction() throws SQLException {
+        if (isUpdatedContactNoValid()) return;
+        if (isUpdatedEmailValid()) return;
+        if (isUpdatedNicValid()) return;
 
         if (validateEmployee()) {
-            EmployeeDto employeeDto = new EmployeeDto();
+            EmployeeDto employeeDto = getEmployeeDto();
 
-            employeeDto.setEmployee_Id(EmployeeUpdatePopUpFormController.employeeId);
-            employeeDto.setFirst_Name(txtFirstName.getText());
-            employeeDto.setLast_Name(txtLastName.getText());
-            employeeDto.setNic(txtNic.getText());
-            employeeDto.setHouse_No(txtHouseNo.getText());
-            employeeDto.setStreet(txtStreet.getText());
-            employeeDto.setCity(txtCity.getText());
-            employeeDto.setContact_No(txtContactNo.getText());
-            employeeDto.setEmail(txtEmail.getText());
-            employeeDto.setRole(getRole());
-
-            boolean updated = employeeBO.updateEmployee(employeeDto);
-
-            if (updated) {
+            if (employeeBO.updateEmployee(employeeDto)) {
                 Navigation.closePane();
                 EmployeeManageFormController.getInstance().allEmployeeId();
             }
         }
+    }
+
+    private EmployeeDto getEmployeeDto() {
+        EmployeeDto employeeDto = new EmployeeDto();
+
+        employeeDto.setEmployee_Id(EmployeeUpdatePopUpFormController.employeeId);
+        employeeDto.setFirst_Name(txtFirstName.getText());
+        employeeDto.setLast_Name(txtLastName.getText());
+        employeeDto.setNic(txtNic.getText());
+        employeeDto.setHouse_No(txtHouseNo.getText());
+        employeeDto.setStreet(txtStreet.getText());
+        employeeDto.setCity(txtCity.getText());
+        employeeDto.setContact_No(txtContactNo.getText());
+        employeeDto.setEmail(txtEmail.getText());
+        employeeDto.setRole(getRole());
+        return employeeDto;
+    }
+
+    private boolean isUpdatedContactNoValid() throws SQLException {
+        if (previousContactNo.equals(txtContactNo.getText())) return false;
+        return checkContactNoAvailability();
+    }
+
+    private boolean isUpdatedEmailValid() throws SQLException {
+        if (previousEmail.equals(txtEmail.getText())) return false;
+        return checkEmailAvailability();
+    }
+
+    private boolean isUpdatedNicValid() throws SQLException {
+        if (previousNic.equals(txtNic.getText())) return false;
+        return checkNicAvailability();
+    }
+
+    private boolean checkContactNoAvailability() throws SQLException {
+        ArrayList<String> allEmployeeContactNumbers = employeeBO.getAllEmployeeContactNumbers();
+
+        for (String contactNo : allEmployeeContactNumbers) {
+            if (txtContactNo.getText().equals(contactNo)) {
+                lblContactNoAlert.setText("Contact Number Already Exists!!");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkEmailAvailability() throws SQLException {
+        ArrayList<String> allEmployeeEmails = employeeBO.getAllEmployeeEmails();
+
+        for (String email : allEmployeeEmails) {
+            if (txtEmail.getText().equals(email)) {
+                lblEmailAlert.setText("Email Already Exists!!");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkNicAvailability() throws SQLException {
+        ArrayList<String> allEmployeeNic = employeeBO.getAllEmployeeNic();
+
+        for (String nic : allEmployeeNic) {
+            if (txtNic.getText().equals(nic)) {
+                lblNicAlert.setText("NIC Already Exists!!");
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean validateEmployee() {
@@ -211,7 +272,7 @@ public class EmployeeUpdatePopUpFormController implements Initializable {
     }
 
     @FXML
-    void txtContactNoOnKeyPressed(KeyEvent event) {
+    void txtContactNoOnKeyPressed(KeyEvent event) throws SQLException {
         lblContactNoAlert.setText(" ");
 
         if (event.getCode() == KeyCode.ENTER) {
@@ -219,13 +280,14 @@ public class EmployeeUpdatePopUpFormController implements Initializable {
                 lblContactNoAlert.setText("Invalid Contact Number!!");
                 event.consume();
             } else {
+                if (isUpdatedContactNoValid()) return;
                 txtEmail.requestFocus();
             }
         }
     }
 
     @FXML
-    void txtEmailOnKeyPressed(KeyEvent event) {
+    void txtEmailOnKeyPressed(KeyEvent event) throws SQLException {
         lblEmailAlert.setText(" ");
 
         if (event.getCode() == KeyCode.ENTER) {
@@ -233,6 +295,7 @@ public class EmployeeUpdatePopUpFormController implements Initializable {
                 lblEmailAlert.setText("Invalid Email!!");
                 event.consume();
             } else {
+                if (isUpdatedEmailValid()) return;
                 txtNic.requestFocus();
             }
         }
@@ -281,7 +344,7 @@ public class EmployeeUpdatePopUpFormController implements Initializable {
     }
 
     @FXML
-    void txtNicOnKeyPressed(KeyEvent event) {
+    void txtNicOnKeyPressed(KeyEvent event) throws SQLException {
         lblNicAlert.setText(" ");
 
         if (event.getCode() == KeyCode.ENTER) {
@@ -289,6 +352,7 @@ public class EmployeeUpdatePopUpFormController implements Initializable {
                 lblNicAlert.setText("Invalid NIC!!");
                 event.consume();
             } else {
+                if (isUpdatedNicValid()) return;
                 cmbRole.requestFocus();
             }
         }
@@ -425,6 +489,10 @@ public class EmployeeUpdatePopUpFormController implements Initializable {
             txtStreet.setText(employeeDto.getStreet());
             txtEmail.setText(employeeDto.getEmail());
             cmbRole.setValue(employeeDto.getRole());
+
+            previousContactNo = employeeDto.getContact_No();
+            previousEmail = employeeDto.getEmail();
+            previousNic = employeeDto.getNic();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -19,6 +19,7 @@ import lk.ijse.ceylonPottersPaletteLayered.util.StyleUtil;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class SupplierUpdatePopUpFormController implements Initializable {
@@ -58,6 +59,9 @@ public class SupplierUpdatePopUpFormController implements Initializable {
 
     public static String supplierId;
 
+    private String previousContactNo;
+    private String previousEmail;
+
     SupplierBO supplierBO =
             (SupplierBO) BOFactory.getBoFactory().
                     getBO(BOFactory.BOTypes.SUPPLIER);
@@ -74,6 +78,8 @@ public class SupplierUpdatePopUpFormController implements Initializable {
 
     @FXML
     void btnUpdateOnAction() throws SQLException {
+        if (isUpdatedContactNoValid()) return;
+        if (isUpdatedEmailValid()) return;
 
         if(validateSupplier()) {
             SupplierDto supplierDto = new SupplierDto();
@@ -90,6 +96,40 @@ public class SupplierUpdatePopUpFormController implements Initializable {
                 SupplierManageFormController.getInstance().allSupplierId();
             }
         }
+    }
+
+    private boolean isUpdatedContactNoValid() throws SQLException {
+        if (previousContactNo.equals(txtContactNo.getText())) return false;
+        return checkContactNoAvailability();
+    }
+
+    private boolean isUpdatedEmailValid() throws SQLException {
+        if (previousEmail.equals(txtSupplierEmail.getText())) return false;
+        return checkEmailAvailability();
+    }
+
+    private boolean checkContactNoAvailability() throws SQLException {
+        ArrayList<String> allSupplierContactNumbers = supplierBO.getAllSupplierContactNumbers();
+
+        for (String contactNo : allSupplierContactNumbers) {
+            if (txtContactNo.getText().equals(contactNo)) {
+                lblContactNoAlert.setText("Contact Number Already Exists!!");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkEmailAvailability() throws SQLException {
+        ArrayList<String> allSupplierEmails = supplierBO.getAllSupplierEmails();
+
+        for (String email : allSupplierEmails) {
+            if (txtSupplierEmail.getText().equals(email)) {
+                lblSupplierEmailAlert.setText("Email Already Exists!!");
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean validateSupplier() {
@@ -128,7 +168,7 @@ public class SupplierUpdatePopUpFormController implements Initializable {
     }
 
     @FXML
-    void txtContactNoOnKeyPressed(KeyEvent event) {
+    void txtContactNoOnKeyPressed(KeyEvent event) throws SQLException {
         lblContactNoAlert.setText(" ");
 
         if (event.getCode() == KeyCode.ENTER) {
@@ -136,6 +176,7 @@ public class SupplierUpdatePopUpFormController implements Initializable {
                 lblContactNoAlert.setText("Invalid Contact Number!!");
                 event.consume();
             } else {
+                if (isUpdatedContactNoValid()) return;
                 txtSupplierEmail.requestFocus();
             }
         }
@@ -150,6 +191,7 @@ public class SupplierUpdatePopUpFormController implements Initializable {
                 lblSupplierEmailAlert.setText("Invalid Email Address!!");
                 event.consume();
             } else {
+                if (isUpdatedEmailValid()) return;
                 btnUpdateOnAction();
             }
         }
@@ -207,6 +249,9 @@ public class SupplierUpdatePopUpFormController implements Initializable {
             txtSupplierName.setText(supplierDto.getName());
             txtContactNo.setText(supplierDto.getContact_No());
             txtSupplierEmail.setText(supplierDto.getEmail());
+
+            previousContactNo = supplierDto.getContact_No();
+            previousEmail = supplierDto.getEmail();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
