@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -31,12 +32,15 @@
             <Font size="10.0" />
          </font>
       </Label>
-      <Label fx:id="lblTime" layoutX="121.0" layoutY="22.0" text="13 : 42" textFill="#885d40">
+      <Label fx:id="lblTime" layoutX="133.0" layoutY="22.0" text="13 : 42" textFill="#885d40">
          <font>
             <Font size="8.0" />
          </font>
       </Label>
-      <JFXButton layoutX="212.0" layoutY="5.0" onAction="#btnCustomerOrdersOnAction" prefHeight="50.0" prefWidth="34.0" style="-fx-background-radius: 12;" text=" " />
+      <JFXButton layoutX="212.0" layoutY="5.0" onAction="#btnCustomerOrdersOnAction" prefHeight="50.0" prefWidth="34.0" style="-fx-background-radius: 12;" text=" ">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
       <Label fx:id="lblTotalPrice" layoutX="145.0" layoutY="37.0" text="1000LKR" textFill="#885d40">
          <font>
             <Font size="10.0" />

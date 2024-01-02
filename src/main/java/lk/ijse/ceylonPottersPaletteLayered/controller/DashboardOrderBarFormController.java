@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import lk.ijse.ceylonPottersPaletteLayered.bo.BOFactory;
 import lk.ijse.ceylonPottersPaletteLayered.bo.custom.DashboardBO;
 import lk.ijse.ceylonPottersPaletteLayered.dto.CustomerOrderDto;
+import lk.ijse.ceylonPottersPaletteLayered.util.Navigation;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -26,8 +27,14 @@ public class DashboardOrderBarFormController {
                     getBO(BOFactory.BOTypes.DASHBOARD);
 
     @FXML
-    void btnCustomerOrdersOnAction(ActionEvent event) throws IOException {
-        GlobalFormController.getInstance().btnSalesOnAction(event);
+    void btnCustomerOrdersOnAction(ActionEvent event) throws IOException, SQLException {
+        CustomerOrderViewPopUpFormController.customerOrderId = lblOrderId.getText();
+        CustomerOrderViewPopUpFormController.customerId = setCustomerNameInPopUp();
+        Navigation.imgPopUpBackground("customerOrderViewPopUpForm.fxml");
+    }
+
+    private String setCustomerNameInPopUp() throws SQLException {
+        return dashboardBO.getCustomerIdForOrder(lblOrderId.getText());
     }
 
     public void setData(String id) {

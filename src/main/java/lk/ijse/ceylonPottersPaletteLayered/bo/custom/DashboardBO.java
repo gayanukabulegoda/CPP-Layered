@@ -30,4 +30,6 @@ public interface DashboardBO extends SuperBO {
     String getSupplierCount() throws SQLException;
 
     CustomerOrderDto getCustomerOrderData(String id) throws SQLException;
+
+    String getCustomerIdForOrder(String id) throws SQLException;
 }

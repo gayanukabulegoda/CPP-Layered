@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -33,7 +34,10 @@
          </children>
       </Pane>
       <Line endX="147.1839599609375" layoutX="290.0" layoutY="325.0" startX="-100.0" stroke="#ae7c5a" />
-      <JFXButton layoutX="519.0" layoutY="54.0" onAction="#btnCloseIconOnAction" onMouseEntered="#btnCloseIconOnMouseEntered" onMouseExited="#btnCloseIconOnMouseExited" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 12;" text=" " />
+      <JFXButton layoutX="519.0" layoutY="54.0" onAction="#btnCloseIconOnAction" onMouseEntered="#btnCloseIconOnMouseEntered" onMouseExited="#btnCloseIconOnMouseExited" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 12;" text=" ">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
       <Text layoutX="80.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Are You Sure ?">
          <font>
             <Font size="24.0" />
@@ -48,7 +52,10 @@
             </Label>
          </children>
       </Pane>
-      <JFXButton layoutX="46.0" layoutY="243.0" onAction="#btnCancelOnAction" onMouseEntered="#btnCancelOnMouseEntered" onMouseExited="#btnCancelOnMouseExited" prefHeight="54.0" prefWidth="259.0" style="-fx-background-radius: 12;" text=" " />
+      <JFXButton layoutX="46.0" layoutY="243.0" onAction="#btnCancelOnAction" onMouseEntered="#btnCancelOnMouseEntered" onMouseExited="#btnCancelOnMouseExited" prefHeight="54.0" prefWidth="259.0" style="-fx-background-radius: 12;" text=" ">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
       <Pane fx:id="confirmBtnPane" layoutX="326.0" layoutY="243.0" prefHeight="54.0" prefWidth="259.0" style="-fx-background-radius: 12; -fx-background-color: C56E33;">
          <children>
             <Label layoutX="88.0" layoutY="17.0" text="CONFIRM" textFill="WHITE">
@@ -58,6 +65,9 @@
             </Label>
          </children>
       </Pane>
-      <JFXButton layoutX="326.0" layoutY="243.0" onAction="#btnConfirmOnAction" onMouseEntered="#btnConfirmOnMouseEntered" onMouseExited="#btnConfirmOnMouseExited" prefHeight="54.0" prefWidth="259.0" style="-fx-background-radius: 12;" text=" " />
+      <JFXButton layoutX="326.0" layoutY="243.0" onAction="#btnConfirmOnAction" onMouseEntered="#btnConfirmOnMouseEntered" onMouseExited="#btnConfirmOnMouseExited" prefHeight="54.0" prefWidth="259.0" style="-fx-background-radius: 12;" text=" ">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
    </children>
 </AnchorPane>

@@ -110,4 +110,9 @@ public class DashboardBOImpl implements DashboardBO {
                 customerOrder.getOrderList()
         );
     }
+
+    @Override
+    public String getCustomerIdForOrder(String id) throws SQLException {
+        return customerOrderDAO.getCustomerIdForOrder(id);
+    }
 }
