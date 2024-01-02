@@ -62,7 +62,7 @@
       </AnchorPane>
       <Pane fx:id="searchBarPane" layoutX="1159.0" layoutY="25.0" prefHeight="46.0" prefWidth="300.0" style="-fx-background-color: white; -fx-background-radius: 12;">
          <children>
-            <TextField fx:id="txtSearch" layoutX="40.0" layoutY="2.0" onAction="#txtSearchOnAction" onMouseClicked="#txtSearchOnMouseClicked" prefHeight="42.0" prefWidth="254.0" promptText="Search by ID / Contact No" style="-fx-background-color: white; -fx-background-radius: 12;">
+            <TextField fx:id="txtSearch" layoutX="40.0" layoutY="2.0" onAction="#txtSearchOnAction" onMouseClicked="#txtSearchOnMouseClicked" prefHeight="42.0" prefWidth="254.0" promptText="Search by ID or Contact No" style="-fx-background-color: white; -fx-background-radius: 12;">
                <font>
                   <Font size="16.0" />
                </font>

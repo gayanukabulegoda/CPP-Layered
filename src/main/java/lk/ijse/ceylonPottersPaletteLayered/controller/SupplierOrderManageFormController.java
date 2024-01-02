@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import lk.ijse.ceylonPottersPaletteLayered.bo.BOFactory;
 import lk.ijse.ceylonPottersPaletteLayered.bo.custom.SupplierOrderBO;
 import lk.ijse.ceylonPottersPaletteLayered.util.Navigation;
+import lk.ijse.ceylonPottersPaletteLayered.util.RegExPatterns;
 import lk.ijse.ceylonPottersPaletteLayered.util.StyleUtil;
 
 import java.io.IOException;
@@ -21,7 +22,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.regex.Pattern;
 
 public class SupplierOrderManageFormController implements Initializable {
 
@@ -109,12 +109,7 @@ public class SupplierOrderManageFormController implements Initializable {
 
     @FXML
     void txtSearchOnAction(ActionEvent event) throws IOException, SQLException {
-
-        if (!(validateId() | validateContactNo())) {
-            lblSearchAlert.setText("Invalid Contact No Or Order ID!!");
-            StyleUtil.searchBarRed(searchBarPane);
-            return;
-        }
+        if (checkValidations()) return;
 
         ArrayList<String> allSupplierOrderId = supplierOrderBO.getAllSupplierOrderId();
 
@@ -145,12 +140,21 @@ public class SupplierOrderManageFormController implements Initializable {
         StyleUtil.searchBarRed(searchBarPane);
     }
 
+    private boolean checkValidations() {
+        if (validateId() & validateContactNo()) {
+            lblSearchAlert.setText("Invalid Contact No Or Order ID!!");
+            StyleUtil.searchBarRed(searchBarPane);
+            return true;
+        }
+        return false;
+    }
+
     private boolean validateId() {
-        return Pattern.matches("(SO-0)\\d+", txtSearch.getText());
+        return RegExPatterns.supplierOrderIdPattern(txtSearch.getText());
     }
 
     private boolean validateContactNo() {
-        return Pattern.matches("[0-9]{10}", txtSearch.getText());
+        return RegExPatterns.contactNoPattern(txtSearch.getText());
     }
 
     public void allSelectedSupplierOrderId(String id) throws SQLException {

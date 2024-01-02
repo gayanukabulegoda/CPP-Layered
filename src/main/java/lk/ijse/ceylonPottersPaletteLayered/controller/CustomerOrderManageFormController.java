@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import lk.ijse.ceylonPottersPaletteLayered.bo.BOFactory;
 import lk.ijse.ceylonPottersPaletteLayered.bo.custom.CustomerOrderBO;
 import lk.ijse.ceylonPottersPaletteLayered.util.Navigation;
+import lk.ijse.ceylonPottersPaletteLayered.util.RegExPatterns;
 import lk.ijse.ceylonPottersPaletteLayered.util.StyleUtil;
 
 import java.io.IOException;
@@ -21,7 +22,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.regex.Pattern;
 
 public class CustomerOrderManageFormController implements Initializable {
 
@@ -109,12 +109,7 @@ public class CustomerOrderManageFormController implements Initializable {
 
     @FXML
     void txtSearchOnAction(ActionEvent event) throws IOException, SQLException {
-
-        if (!(validateId() | validateContactNo())) {
-            lblSearchAlert.setText("Invalid Contact No Or Order ID!!");
-            StyleUtil.searchBarRed(searchBarPane);
-            return;
-        }
+        if (checkValidations()) return;
 
         ArrayList<String> allCustomerOrderId = customerOrderBO.getAllCustomerOrderId();
 
@@ -145,12 +140,21 @@ public class CustomerOrderManageFormController implements Initializable {
         StyleUtil.searchBarRed(searchBarPane);
     }
 
+    private boolean checkValidations() {
+        if (validateId() & validateContactNo()) {
+            lblSearchAlert.setText("Invalid Contact No Or Order ID!!");
+            StyleUtil.searchBarRed(searchBarPane);
+            return true;
+        }
+        return false;
+    }
+
     private boolean validateId() {
-        return Pattern.matches("(CO-0)\\d+", txtSearch.getText());
+        return RegExPatterns.customerOrderIdPattern(txtSearch.getText());
     }
 
     private boolean validateContactNo() {
-        return Pattern.matches("[0-9]{10}", txtSearch.getText());
+        return RegExPatterns.contactNoPattern(txtSearch.getText());
     }
 
     public void allSelectedCustomerOrderId(String id) throws SQLException {
@@ -158,8 +162,8 @@ public class CustomerOrderManageFormController implements Initializable {
         vBoxCustomerOrders.getChildren().clear();
         ArrayList<String> list = customerOrderBO.getSelectedAllCustomerOrderId(id);
 
-        for (int i = 0; i < list.size(); i++) {
-            loadDataTable(list.get(i));
+        for (String customerOrderId : list) {
+            loadDataTable(customerOrderId);
         }
     }
 

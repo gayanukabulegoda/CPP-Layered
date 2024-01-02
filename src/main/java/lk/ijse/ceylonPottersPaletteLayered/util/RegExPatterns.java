@@ -51,4 +51,12 @@ public class RegExPatterns {
     public static boolean employeeIdPattern(String employeeId) {
         return !Pattern.matches("(E-00)\\d+", employeeId);
     }
+
+    public static boolean customerOrderIdPattern(String customerOrderId) {
+        return !Pattern.matches("(CO-0)\\d+", customerOrderId);
+    }
+
+    public static boolean supplierOrderIdPattern(String supplierOrderId) {
+        return !Pattern.matches("(SO-0)\\d+", supplierOrderId);
+    }
 }
