@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import lk.ijse.ceylonPottersPaletteLayered.bo.BOFactory;
 import lk.ijse.ceylonPottersPaletteLayered.bo.custom.EmployeeBO;
 import lk.ijse.ceylonPottersPaletteLayered.util.Navigation;
+import lk.ijse.ceylonPottersPaletteLayered.util.RegExPatterns;
 import lk.ijse.ceylonPottersPaletteLayered.util.StyleUtil;
 
 import java.io.IOException;
@@ -93,31 +94,43 @@ public class EmployeeManageFormController implements Initializable {
 
     @FXML
     void txtSearchOnAction(ActionEvent event) throws IOException, SQLException {
-
-        if (!validateId()) {
-            lblSearchAlert.setText("Invalid Contact No!!");
-            StyleUtil.searchBarRed(searchBarPane);
-            return;
-        }
+        if (checkValidations()) return;
 
         ArrayList<String> allEmployeeId = employeeBO.getAllEmployeeId();
-
         for (String employeeId : allEmployeeId) {
-            if (txtSearch.getText().equals(employeeBO.getEmployeeContactNo(employeeId))) {
-                EmployeeViewPopUpFormController.employeeId = employeeId;
-                lblSearchAlert.setText(" ");
-                StyleUtil.searchBarTransparent(searchBarPane);
-                txtSearch.clear();
-                Navigation.imgPopUpBackground("employeeViewPopUpForm.fxml");
+            if (txtSearch.getText().equals(employeeBO.getEmployeeContactNo(employeeId))
+               || txtSearch.getText().equals(employeeId)) {
+                loadViewPopUpForm(employeeId);
                 return;
             }
         }
-        lblSearchAlert.setText("Invalid Contact No!!");
+        lblSearchAlert.setText("Invalid ID or Contact No!!");
         StyleUtil.searchBarRed(searchBarPane);
     }
 
+    private void loadViewPopUpForm(String employeeId) throws IOException {
+        EmployeeViewPopUpFormController.employeeId = employeeId;
+        lblSearchAlert.setText(" ");
+        StyleUtil.searchBarTransparent(searchBarPane);
+        txtSearch.clear();
+        Navigation.imgPopUpBackground("employeeViewPopUpForm.fxml");
+    }
+
+    private boolean checkValidations() {
+        if (validateId() & validateContactNo()) {
+            lblSearchAlert.setText("Invalid ID or Contact No!!");
+            StyleUtil.searchBarRed(searchBarPane);
+            return true;
+        }
+        return false;
+    }
+
     private boolean validateId() {
-        return Pattern.matches("[0-9]{10}", txtSearch.getText());
+        return RegExPatterns.employeeIdPattern(txtSearch.getText());
+    }
+
+    private boolean validateContactNo() {
+        return RegExPatterns.contactNoPattern(txtSearch.getText());
     }
 
     public void allEmployeeId() {

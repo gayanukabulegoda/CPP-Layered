@@ -5,6 +5,7 @@ import lk.ijse.ceylonPottersPaletteLayered.dto.EmployeeDto;
 import lk.ijse.ceylonPottersPaletteLayered.dto.UserDto;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public interface UserBO extends SuperBO {
     boolean updateUser(UserDto dto) throws SQLException;
@@ -26,4 +27,6 @@ public interface UserBO extends SuperBO {
     String checkUsernameAndPassword(String userName, String password) throws SQLException, ClassNotFoundException;
 
     boolean saveUser(UserDto dto) throws SQLException;
+
+    ArrayList<String> getAllUserNames() throws SQLException;
 }

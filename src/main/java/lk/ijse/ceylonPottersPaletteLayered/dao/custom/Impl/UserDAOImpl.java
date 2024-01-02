@@ -72,12 +72,19 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User getData(String id) throws SQLException {
-        return null;
+    public ArrayList<String> getAllId() throws SQLException {
+        ResultSet resultSet = SQLUtil.execute("SELECT user_Name FROM user");
+
+        ArrayList<String> userNames = new ArrayList<>();
+
+        while (resultSet.next()) {
+            userNames.add(resultSet.getString(1));
+        }
+        return userNames;
     }
 
     @Override
-    public ArrayList<String> getAllId() throws SQLException {
+    public User getData(String id) throws SQLException {
         return null;
     }
 }

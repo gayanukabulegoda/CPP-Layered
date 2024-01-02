@@ -22,6 +22,7 @@ import lk.ijse.ceylonPottersPaletteLayered.util.StyleUtil;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class SignUpFormController {
 
@@ -55,6 +56,8 @@ public class SignUpFormController {
 
     @FXML
     void btnSignUpOnAction(ActionEvent event) throws IOException, SQLException {
+        if (checkUserNamesAvailability()) return;
+
         if (validateCredentials()) {
             UserDto userDto = new UserDto();
 
@@ -62,9 +65,7 @@ public class SignUpFormController {
             userDto.setPassword(txtPassword.getText());
             userDto.setEmployeeId(SignUpOTPVerifyFormController.employeeId);
 
-            boolean saved = userBO.saveUser(userDto);
-
-            if (saved) {
+            if (userBO.saveUser(userDto)) {
                 Navigation.close(event);
                 GlobalFormController.user = txtUsername.getText();
                 Navigation.switchNavigation("globalForm.fxml", event);
@@ -73,6 +74,17 @@ public class SignUpFormController {
                 lblPasswordAlert.setText("Oops! Unable to Save Your Data!!");
             }
         }
+    }
+
+    private boolean checkUserNamesAvailability() throws SQLException {
+        ArrayList<String> allUserNames = userBO.getAllUserNames();
+        for (String userName : allUserNames) {
+            if (txtUsername.getText().equals(userName)) {
+                lblUserNameAlert.setText("UserName Already Exists!!");
+                return true;
+            }
+        }
+        return false;
     }
 
     @FXML
@@ -101,7 +113,7 @@ public class SignUpFormController {
     }
 
     @FXML
-    void txtUsernameOnKeyPressed(KeyEvent event) {
+    void txtUsernameOnKeyPressed(KeyEvent event) throws SQLException {
         lblUserNameAlert.setText(" ");
 
         if (event.getCode() == KeyCode.ENTER) {
@@ -109,6 +121,7 @@ public class SignUpFormController {
                 lblUserNameAlert.setText("Enter a valid Username!!");
                 event.consume();
             } else {
+                if (checkUserNamesAvailability()) return;
                 txtPassword.requestFocus();
             }
         }

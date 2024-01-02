@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import lk.ijse.ceylonPottersPaletteLayered.bo.BOFactory;
 import lk.ijse.ceylonPottersPaletteLayered.bo.custom.SalaryBO;
 import lk.ijse.ceylonPottersPaletteLayered.util.Navigation;
+import lk.ijse.ceylonPottersPaletteLayered.util.RegExPatterns;
 import lk.ijse.ceylonPottersPaletteLayered.util.StyleUtil;
 
 import java.io.IOException;
@@ -21,7 +22,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.regex.Pattern;
 
 public class EmployeeSalaryFormController implements Initializable {
 
@@ -114,17 +114,13 @@ public class EmployeeSalaryFormController implements Initializable {
 
     @FXML
     void txtSearchOnAction(ActionEvent event) throws IOException, SQLException {
-
-        if (!validateId()) {
-            lblSearchAlert.setText("Invalid Contact No!!");
-            StyleUtil.searchBarRed(searchBarPane);
-            return;
-        }
+        if (checkValidations()) return;
 
         ArrayList<String> allEmployeeId = salaryBO.getAllEmployeeId();
-
         for (String employeeId : allEmployeeId) {
-            if (txtSearch.getText().equals(salaryBO.getEmployeeContactNo(employeeId))) {
+            if (txtSearch.getText().equals(salaryBO.getEmployeeContactNo(employeeId))
+                || txtSearch.getText().equals(employeeId)) {
+
                 allSelectedEmployeeSalaryId(employeeId);
                 lblSearchAlert.setText(" ");
                 StyleUtil.searchBarTransparent(searchBarPane);
@@ -132,12 +128,25 @@ public class EmployeeSalaryFormController implements Initializable {
                 return;
             }
         }
-        lblSearchAlert.setText("Invalid Contact No!!");
+        lblSearchAlert.setText("Invalid ID or Contact No!!");
         StyleUtil.searchBarRed(searchBarPane);
     }
 
+    private boolean checkValidations() {
+        if (validateId() & validateContactNo()) {
+            lblSearchAlert.setText("Invalid ID or Contact No!!");
+            StyleUtil.searchBarRed(searchBarPane);
+            return true;
+        }
+        return false;
+    }
+
     private boolean validateId() {
-        return Pattern.matches("[0-9]{10}", txtSearch.getText());
+        return RegExPatterns.employeeIdPattern(txtSearch.getText());
+    }
+
+    private boolean validateContactNo() {
+        return RegExPatterns.contactNoPattern(txtSearch.getText());
     }
 
     public void allSalaryId() {

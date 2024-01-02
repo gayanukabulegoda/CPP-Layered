@@ -10,6 +10,7 @@ import lk.ijse.ceylonPottersPaletteLayered.entity.Employee;
 import lk.ijse.ceylonPottersPaletteLayered.entity.User;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UserBOImpl implements UserBO {
 
@@ -96,5 +97,10 @@ public class UserBOImpl implements UserBO {
                         dto.getEmployeeId()
                 )
         );
+    }
+
+    @Override
+    public ArrayList<String> getAllUserNames() throws SQLException {
+        return userDAO.getAllId();
     }
 }
