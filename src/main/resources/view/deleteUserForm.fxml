@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -53,7 +54,10 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <JFXButton fx:id="btnConfirm" layoutX="362.0" layoutY="11.0" onAction="#confirmBtnOnAction" prefHeight="33.0" prefWidth="86.0" style="-fx-border-color: silver; -fx-border-radius: 12;" text="Confirm" textFill="#727374" />
+            <JFXButton fx:id="btnConfirm" layoutX="362.0" layoutY="11.0" onAction="#confirmBtnOnAction" prefHeight="33.0" prefWidth="86.0" style="-fx-border-color: silver; -fx-border-radius: 12;" text="Confirm" textFill="#727374">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
             <Label fx:id="lblConfirmAlert" layoutX="372.0" layoutY="43.0" textFill="RED">
                <font>
                   <Font size="11.0" />
@@ -99,9 +103,18 @@
             </Label>
          </children>
       </Pane>
-      <JFXButton layoutX="49.0" layoutY="383.0" onAction="#btnCancelOnAction" onMouseEntered="#btnCancelOnMouseEntered" onMouseExited="#btnCancelOnMouseExited" prefHeight="54.0" prefWidth="259.0" style="-fx-background-radius: 12;" text=" " />
-      <JFXButton layoutX="519.0" layoutY="54.0" onAction="#btnCloseIconOnAction" onMouseEntered="#btnCloseIconOnMouseEntered" onMouseExited="#btnCloseIconOnMouseExited" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 12;" text=" " />
-      <JFXButton layoutX="320.0" layoutY="381.0" onAction="#btnDeleteOnAction" onMouseEntered="#btnDeleteOnMouseEntered" onMouseExited="#btnDeleteOnMouseExited" prefHeight="54.0" prefWidth="259.0" style="-fx-background-radius: 12;" text=" " />
+      <JFXButton layoutX="49.0" layoutY="383.0" onAction="#btnCancelOnAction" onMouseEntered="#btnCancelOnMouseEntered" onMouseExited="#btnCancelOnMouseExited" prefHeight="54.0" prefWidth="259.0" style="-fx-background-radius: 12;" text=" ">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
+      <JFXButton layoutX="519.0" layoutY="54.0" onAction="#btnCloseIconOnAction" onMouseEntered="#btnCloseIconOnMouseEntered" onMouseExited="#btnCloseIconOnMouseExited" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 12;" text=" ">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
+      <JFXButton layoutX="320.0" layoutY="381.0" onAction="#btnDeleteOnAction" onMouseEntered="#btnDeleteOnMouseEntered" onMouseExited="#btnDeleteOnMouseExited" prefHeight="54.0" prefWidth="259.0" style="-fx-background-radius: 12;" text=" ">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
       <Label fx:id="lblUnsuccessfulAlert" layoutX="106.0" layoutY="352.0" textFill="RED">
          <font>
             <Font size="11.0" />

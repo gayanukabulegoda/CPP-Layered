@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -41,12 +42,21 @@
             </Label>
          </children>
       </Pane>
-      <JFXButton layoutX="146.0" layoutY="251.0" onAction="#btnRepairedOnAction" onMouseEntered="#btnRepairedOnMouseEntered" onMouseExited="#btnRepairedOnMouseExited" prefHeight="54.0" prefWidth="335.0" style="-fx-background-radius: 12;" text=" " />
-      <JFXButton layoutX="519.0" layoutY="54.0" onAction="#btnCloseIconOnAction" onMouseEntered="#btnCloseIconOnMouseEntered" onMouseExited="#btnCloseIconOnMouseExited" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 12;" text=" " />
+      <JFXButton layoutX="146.0" layoutY="251.0" onAction="#btnRepairedOnAction" onMouseEntered="#btnRepairedOnMouseEntered" onMouseExited="#btnRepairedOnMouseExited" prefHeight="54.0" prefWidth="335.0" style="-fx-background-radius: 12;" text=" ">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
+      <JFXButton layoutX="519.0" layoutY="54.0" onAction="#btnCloseIconOnAction" onMouseEntered="#btnCloseIconOnMouseEntered" onMouseExited="#btnCloseIconOnMouseExited" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 12;" text=" ">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
       <TextField fx:id="txtEnterQuantity" layoutX="94.0" layoutY="171.0" onAction="#txtEnterQuantityOnAction" prefHeight="42.0" prefWidth="441.0" promptText="   Enter Quantity" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: E8E8E8; -fx-border-width: 1; -fx-border-radius: 12;">
          <font>
             <Font size="15.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
       </TextField>
    </children>
 </AnchorPane>

@@ -66,6 +66,9 @@
             <Image url="@../assests/img/backIconImg.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="imgBaCkBtn" layoutX="7.0" layoutY="5.0" minHeight="42.0" onAction="#btnBackIconOnAction" onMouseEntered="#btnBackIconOnMouseEntered" onMouseExited="#btnBackIconOnMouseExited" prefWidth="42.0" style="-fx-background-radius: 100;" text=" " />
+      <JFXButton fx:id="imgBaCkBtn" layoutX="7.0" layoutY="5.0" minHeight="42.0" onAction="#btnBackIconOnAction" onMouseEntered="#btnBackIconOnMouseEntered" onMouseExited="#btnBackIconOnMouseExited" prefWidth="42.0" style="-fx-background-radius: 100;" text=" ">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
    </children>
 </AnchorPane>

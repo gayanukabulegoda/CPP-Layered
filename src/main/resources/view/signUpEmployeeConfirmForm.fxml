@@ -48,7 +48,10 @@
             <Image url="@../assests/img/backIconImg.png" />
          </image>
       </ImageView>
-      <JFXButton layoutX="7.0" layoutY="5.0" minHeight="42.0" onAction="#btnBackOnAction" onMouseEntered="#btnBackOnMouseEntered" onMouseExited="#btnBackOnMouseExited" prefWidth="42.0" style="-fx-background-radius: 100;" text=" " />
+      <JFXButton layoutX="7.0" layoutY="5.0" minHeight="42.0" onAction="#btnBackOnAction" onMouseEntered="#btnBackOnMouseEntered" onMouseExited="#btnBackOnMouseExited" prefWidth="42.0" style="-fx-background-radius: 100;" text=" ">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
       <JFXButton fx:id="btnConfirm" alignment="CENTER" buttonType="RAISED" layoutX="558.0" layoutY="393.0" onAction="#btnConfirmOnAction" onMouseEntered="#btnConfirmOnMouseEntered" onMouseExited="#btnConfirmOnMouseExited" prefHeight="42.0" prefWidth="267.0" style="-fx-background-radius: 12; -fx-background-color: C56E33;" text="CONFIRM" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />

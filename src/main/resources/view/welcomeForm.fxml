@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
@@ -15,7 +16,10 @@
             <Image url="@../assests/img/welcomePageImg.png.png" />
          </image>
       </ImageView>
-      <ProgressBar fx:id="progressBar" layoutX="6.0" layoutY="550.0" prefHeight="22.0" prefWidth="925.0" progress="0.0" />
+      <ProgressBar fx:id="progressBar" layoutX="6.0" layoutY="550.0" prefHeight="22.0" prefWidth="925.0" progress="0.0">
+         <cursor>
+            <Cursor fx:constant="WAIT" />
+         </cursor></ProgressBar>
       <Text fill="WHITE" layoutX="118.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Ceylon Potters' Palette Pvt Ltd, Matara, Sri Lanka, crafting excellence since 2018. From intricately handcrafted clay arts to mass-produced kitchenware, we seamlessly blend tradition with cutting-edge technology. Committed to aesthetics, functionality, and sustainability, our diverse range of products caters to local preferences. Explore the fusion of timeless techniques and modern innovation at Ceylon Potters' Palette, where every piece embodies quality and dedication." wrappingWidth="700.3583374023438">
          <font>
             <Font size="20.0" />

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -35,11 +36,17 @@
                <image>
                   <Image url="@../assests/img/btnRepairedUpdate.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="imgRepaired" fitHeight="39.0" fitWidth="113.0" layoutX="1271.0" layoutY="19.0" onMouseClicked="#imgRepairedOnMouseClicked" onMouseEntered="#imgRepairedOnMouseEntered" onMouseExited="#imgRepairedOnMouseExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/img/btnRepairedProducts.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
       </HBox>

@@ -71,6 +71,9 @@
             <Image url="@../assests/icon/powerOffIcon.png" />
          </image>
       </ImageView>
-      <JFXButton layoutX="7.0" layoutY="5.0" minHeight="42.0" onAction="#btnPowerOffOnAction" onMouseEntered="#btnPowerOffOnMouseEntered" onMouseExited="#btnPowerOffOnMouseExited" prefWidth="42.0" style="-fx-background-radius: 100;" text=" " />
+      <JFXButton layoutX="7.0" layoutY="5.0" minHeight="42.0" onAction="#btnPowerOffOnAction" onMouseEntered="#btnPowerOffOnMouseEntered" onMouseExited="#btnPowerOffOnMouseExited" prefWidth="42.0" style="-fx-background-radius: 100;" text=" ">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
    </children>
 </AnchorPane>

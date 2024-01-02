@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -24,7 +25,10 @@
             <Line endX="100.0" layoutX="129.0" layoutY="139.0" startX="-100.0" stroke="#727374" />
             <Label fx:id="lblSupplierName" layoutX="31.0" layoutY="167.0" text="Supplier Name" textFill="#727374" />
             <Line endX="100.0" layoutX="129.0" layoutY="189.0" startX="-100.0" stroke="#727374" />
-            <JFXComboBox fx:id="cmbSupplierId" focusColor="#e8e8e8" layoutX="17.0" layoutY="205.0" onAction="#cmbSupplierIdOnAction" onKeyPressed="#cmbSupplierIdOnKeyPressed" onMouseClicked="#cmbSupplierIdOnMouseClicked" prefHeight="42.0" prefWidth="214.0" promptText="   Supplier ID" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: E8E8E8; -fx-border-width: 1;" unFocusColor="#e8e8e8" />
+            <JFXComboBox fx:id="cmbSupplierId" focusColor="#e8e8e8" layoutX="17.0" layoutY="205.0" onAction="#cmbSupplierIdOnAction" onKeyPressed="#cmbSupplierIdOnKeyPressed" onMouseClicked="#cmbSupplierIdOnMouseClicked" prefHeight="42.0" prefWidth="214.0" promptText="   Supplier ID" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: E8E8E8; -fx-border-width: 1;" unFocusColor="#e8e8e8">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXComboBox>
             <Pane fx:id="btnAddNewSupplierPane" layoutX="239.0" layoutY="203.0" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: E8E8E8; -fx-border-radius: 12; -fx-border-width: 1;">
                <children>
                   <ImageView fx:id="btnAddNewSupplierIconImg" fitHeight="24.0" fitWidth="24.0" layoutX="11.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
@@ -34,9 +38,15 @@
                   </ImageView>
                </children>
             </Pane>
-            <JFXButton layoutX="239.0" layoutY="203.0" onAction="#btnAddNewSupplierOnAction" onMouseEntered="#btnAddNewSupplierOnMouseEntered" onMouseExited="#btnAddNewSupplierOnMouseExited" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 12;" text=" " />
+            <JFXButton layoutX="239.0" layoutY="203.0" onAction="#btnAddNewSupplierOnAction" onMouseEntered="#btnAddNewSupplierOnMouseEntered" onMouseExited="#btnAddNewSupplierOnMouseExited" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 12;" text=" ">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
             <Label layoutX="24.0" layoutY="272.0" text="ITEM DETAILS" textFill="#151619" />
-            <JFXComboBox fx:id="cmbItemId" focusColor="#e8e8e8" layoutX="17.0" layoutY="315.0" onAction="#cmbItemIdOnAction" onKeyPressed="#cmbCmbItemIdOnKeyPressed" onMouseClicked="#cmbItemIdOnMouseClicked" prefHeight="42.0" prefWidth="260.0" promptText="   Item ID" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: E8E8E8; -fx-border-width: 1;" unFocusColor="#e8e8e8" />
+            <JFXComboBox fx:id="cmbItemId" focusColor="#e8e8e8" layoutX="17.0" layoutY="315.0" onAction="#cmbItemIdOnAction" onKeyPressed="#cmbCmbItemIdOnKeyPressed" onMouseClicked="#cmbItemIdOnMouseClicked" prefHeight="42.0" prefWidth="260.0" promptText="   Item ID" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: E8E8E8; -fx-border-width: 1;" unFocusColor="#e8e8e8">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXComboBox>
             <Label fx:id="lblDescription" layoutX="31.0" layoutY="380.0" text="Description" textFill="#727374" />
             <Line endX="100.0" layoutX="129.0" layoutY="403.0" startX="-100.0" stroke="#727374" />
             <Label fx:id="lblUnitPrice" layoutX="31.0" layoutY="432.0" text="Unit Price" textFill="#727374" />
@@ -47,6 +57,9 @@
                <font>
                   <Font size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
             </TextField>
             <Pane fx:id="AddToCartBtnPane" layoutX="24.0" layoutY="602.0" prefHeight="54.0" prefWidth="259.0" style="-fx-background-color: C56E33; -fx-background-radius: 12;">
                <children>
@@ -57,7 +70,10 @@
                   </Label>
                </children>
             </Pane>
-            <JFXButton layoutX="24.0" layoutY="602.0" onAction="#btnAddToCartOnAction" onMouseEntered="#btnAddToCartOnMouseEntered" onMouseExited="#btnAddToCartOnMouseExited" prefHeight="54.0" prefWidth="259.0" style="-fx-background-radius: 12;" text=" " />
+            <JFXButton layoutX="24.0" layoutY="602.0" onAction="#btnAddToCartOnAction" onMouseEntered="#btnAddToCartOnMouseEntered" onMouseExited="#btnAddToCartOnMouseExited" prefHeight="54.0" prefWidth="259.0" style="-fx-background-radius: 12;" text=" ">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
             <Label fx:id="lblCmbSupplierAlert" layoutX="28.0" layoutY="246.0" textFill="RED">
                <font>
                   <Font size="11.0" />
@@ -137,7 +153,10 @@
                   </Label>
                </children>
             </Pane>
-            <JFXButton layoutX="583.0" layoutY="602.0" onAction="#btnPlaceOrderOnAction" onMouseEntered="#btnPlaceOrderOnMouseEntered" onMouseExited="#btnPlaceOrderOnMouseExited" prefHeight="54.0" prefWidth="240.0" style="-fx-background-radius: 12;" text=" " />
+            <JFXButton layoutX="583.0" layoutY="602.0" onAction="#btnPlaceOrderOnAction" onMouseEntered="#btnPlaceOrderOnMouseEntered" onMouseExited="#btnPlaceOrderOnMouseExited" prefHeight="54.0" prefWidth="240.0" style="-fx-background-radius: 12;" text=" ">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
             <Pane fx:id="cancelBtnPane" layoutX="328.0" layoutY="602.0" prefHeight="54.0" prefWidth="240.0" style="-fx-background-radius: 12;">
                <children>
                   <Label fx:id="lblCancel" layoutX="85.0" layoutY="17.0" text="CANCEL" textFill="#c56e33">
@@ -147,7 +166,10 @@
                   </Label>
                </children>
             </Pane>
-            <JFXButton layoutX="328.0" layoutY="602.0" onAction="#btnCancelOnAction" onMouseEntered="#btnCancelOnMouseEntered" onMouseExited="#btnCancelOnMouseExited" prefHeight="54.0" prefWidth="240.0" style="-fx-background-radius: 12;" text=" " />
+            <JFXButton layoutX="328.0" layoutY="602.0" onAction="#btnCancelOnAction" onMouseEntered="#btnCancelOnMouseEntered" onMouseExited="#btnCancelOnMouseExited" prefHeight="54.0" prefWidth="240.0" style="-fx-background-radius: 12;" text=" ">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
          </children>
       </Pane>
    </children>

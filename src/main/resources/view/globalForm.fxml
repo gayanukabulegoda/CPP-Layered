@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -32,6 +33,9 @@
                <font>
                   <Font size="16.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <Pane fx:id="paneBtnSupplier" layoutX="24.0" layoutY="510.0" prefHeight="48.0" prefWidth="174.0" style="-fx-background-radius: 12;">
                <children>
@@ -51,6 +55,9 @@
                <font>
                   <Font size="16.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <Pane fx:id="paneBtnEmployee" layoutX="24.0" layoutY="444.0" prefHeight="48.0" prefWidth="174.0" style="-fx-background-radius: 12;">
                <children>
@@ -70,6 +77,9 @@
                <font>
                   <Font size="16.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <Pane fx:id="paneBtnCustomer" layoutX="23.0" layoutY="378.0" prefHeight="48.0" prefWidth="174.0" style="-fx-background-radius: 12;">
                <children>
@@ -89,6 +99,9 @@
                <font>
                   <Font size="16.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <Pane fx:id="paneBtnStock" layoutX="23.0" layoutY="312.0" prefHeight="48.0" prefWidth="174.0" style="-fx-background-radius: 12;">
                <children>
@@ -108,6 +121,9 @@
                <font>
                   <Font size="16.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <Pane fx:id="paneBtnSales" layoutX="23.0" layoutY="245.0" prefHeight="48.0" prefWidth="174.0" style="-fx-background-radius: 12;">
                <children>
@@ -127,6 +143,9 @@
                <font>
                   <Font size="16.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <Pane fx:id="paneBtnDashboard" layoutX="23.0" layoutY="179.0" prefHeight="48.0" prefWidth="174.0" style="-fx-background-radius: 12;">
                <children>
@@ -146,6 +165,9 @@
                <font>
                   <Font size="16.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <ImageView fitHeight="105.22" fitWidth="189.0" layoutX="16.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
                <image>

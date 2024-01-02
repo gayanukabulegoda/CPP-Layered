@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -35,11 +36,17 @@
                <image>
                   <Image url="@../assests/icon/editIcon.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="deleteImg" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#deleteOnMouseClick" onMouseEntered="#deleteOnMouseEntered" onMouseExited="#deleteOnMouseExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/icon/deleteIcon.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
       </HBox>
